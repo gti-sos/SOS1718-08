@@ -1,0 +1,25 @@
+{
+  "name": "sos1718-08",
+  "version": "0.0.0",
+  "description": "módulo del grupo 8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gti-sos/SOS1718-08.git"
+  },
+  "keywords": [
+    "módulo"
+  ],
+  "author": "José Enrique Prieto Menacho para grupo 8",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gti-sos/SOS1718-08/issues"
+  },
+  "homepage": "https://github.com/gti-sos/SOS1718-08#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
