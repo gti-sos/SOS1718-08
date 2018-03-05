@@ -11,7 +11,7 @@ var app = express();
 
 app.get("/hello",(req,res)=>{
 
-    res.send("hello!");        
+    res.send("hello world!");        
 });
 
 //Aquí hay que sustituir port por el puerto a usar, cloud9 bloquea algunos
