@@ -26,9 +26,17 @@ var crimes = [
     ];
     
     
+var divorces = [
+   { "province" : "sevilla", "year" : 2016  , "divorce":3973 , "break": 203, "nullity": 1 },
+{ "province" : "cadiz", "year" : 2016  , "divorce":2249 , "break": 138, "nullity": 0 },
+{ "province" : "almeria", "year" : 2016  , "divorce":1405 , "break": 42, "nullity": 1 },
+{ "province" : "cordoba", "year" : 2016  , "divorce":1447 , "break": 115, "nullity": 1 },
+{ "province" : "granada", "year" : 2016  , "divorce":1904 , "break": 104, "nullity": 2 },
+{ "province" : "huelva", "year" : 2016  , "divorce":1036 , "break": 49, "nullity": 3 },
+{ "province" : "jaen", "year" : 2016  , "divorce":1109 , "break": 73, "nullity": 1 },
+{ "province" : "malaga", "year" : 2016  , "divorce":3606 , "break": 171, "nullity": 3 }
     
-    
-    
+    ];
     
     //######################################################JOSE ENRIQUE############################################################//
    /* var db = new DataStore({//base de datos
@@ -121,7 +129,80 @@ var crimes = [
     });
     //###########################################################################################################################//
     
+    //--------------------Jurado--------------------//
     
+     app.get(BASE_API_PATH+"/divorces-an",(req,res)=>{
+        console.log(Date() + " - GET / divorces-an");
+        res.send(divorces);
+    });
+    
+    app.post(BASE_API_PATH+"/divorces-an",(req,res)=>{
+        console.log(Date() + " - POST / divorces-an");
+        var divorces = req.body;
+        divorces.push(divorces);
+        res.sendStatus(201);
+    });
+    
+    //n
+    app.put(BASE_API_PATH+"/divorces-an",(req,res)=>{
+        console.log(Date() + " - PUT / divorces-an");
+        res.sendStatus(405);
+    });
+    //n
+    app.delete(BASE_API_PATH+"/divorces-an",(req,res)=>{
+        console.log(Date() + " - DELETE / divorces-an");
+        divorces = [];
+        res.sendStatus(200);
+    });
+    
+    //n a recurso concreto
+    app.get(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
+        var province = req.params.province;
+        console.log(Date() + " - GET /divorces-an/"+province);
+        
+        res.send(divorces.filter((c)=>{
+            return (c.province==province);
+        })[0]);//
+    });
+    //n a recurso concreto
+    app.delete(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
+        var province = req.params.province;
+        console.log(Date() + " - DELETE /divorces-an/"+province);
+       
+        divorces = divorces.filter((c)=>{
+         return (c.province!=province);    
+        });
+        
+        res.sendStatus(200);
+    });
+    //n a recurso concreto
+    app.post(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
+        var province = req.params.province
+        console.log(Date() + " - POST / divorces-an" + province);
+        res.sendStatus(405);
+    });
+    //n a recurso concreto
+    app.put(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
+        var province = req.params.province;
+        var divorce = req.body;
+        console.log(Date() + " - PUT /divorces-an/"+province);
+        
+       if(province != divorce.province){
+           res.sendStatus(409);
+           console.warn(Date()+ " -Hacking attempt!");
+           return;
+       }
+       
+       divorces = divorces.map((c)=>{
+           if(c.province == divorces.province)
+            return divorces;
+           else
+            return c;
+       });
+       res.sendStatus(200);
+    
+    
+    });
     
     
     app.listen(port,()=>{
