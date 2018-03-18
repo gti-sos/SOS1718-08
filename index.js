@@ -138,8 +138,8 @@ var divorces = [
     
     app.post(BASE_API_PATH+"/divorces-an",(req,res)=>{
         console.log(Date() + " - POST / divorces-an");
-        var divorces = req.body;
-        divorces.push(divorces);
+        var divorce = req.body;
+        divorces.push(divorce);
         res.sendStatus(201);
     });
     
