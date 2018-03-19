@@ -253,8 +253,8 @@ var db = new DataStore({
     autoload: true
 
 });
-
-db.find({}, (err, results) => {
+app.get(BASE_API_PATH + "/loadInitialData", (req, res) => {
+    db.find({}, (err, results) => {
     if (err) {
         console.error("Error accesing DB");
         process.exit(1);
@@ -268,6 +268,8 @@ db.find({}, (err, results) => {
         console.log("DB inicialiced with " + results.length + " students");
     }
 });
+});
+
 
 app.get(BASE_API_PATH + "/studentsan", (req, res) => {
     console.log(Date() + " - GET /studentsan");
