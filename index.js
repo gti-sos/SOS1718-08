@@ -1,12 +1,13 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-//var DataStore = require("nedb");
+var DataStore = require("nedb");
 
 
 
 var port = (process.env.PORT || 1607);
 var BASE_API_PATH = "/api/v1";
 //var dbCrimes = __dirname+"/contacts.db";//base de datos crimes (JOSE ENRIQUE)
+var dbFileName = __dirname + "/students.db";
 
 var dbDivorces = __dirname + "/divorces.db";
 var BASE_API_PATH_DIVORCES = "/api/v1/divorces-an";
@@ -19,6 +20,11 @@ app.use("/",express.static(__dirname+"/public"));
 //Sección ayuda recurso crimes (JOSE ENRIQUE)
 app.get(BASE_API_PATH+"/helpcrimes",(req,res)=>{
     res.redirect("https://documenter.getpostman.com/view/3950150/collection/RVnZgdc1");
+});
+
+//Sección ayuda recurso studentsan (MARÍA)
+app.get(BASE_API_PATH+"/helpcrimes",(req,res)=>{
+    res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-studentsan/RVnZgxrb");
 });
 
 
@@ -39,6 +45,13 @@ var divorces = [
 { "province" : "huelva", "year" : 2016  , "divorce":1036 , "break": 49, "nullity": 3 },
 { "province" : "jaen", "year" : 2016  , "divorce":1109 , "break": 73, "nullity": 1 },
 { "province" : "malaga", "year" : 2016  , "divorce":3606 , "break": 171, "nullity": 3 }
+    
+];
+
+var studentsan = [{"province": "sevilla","year": "2008","gender": "male","pop-illiterate": "16.32","pop-high-education": "182.9","pop-in-university": "30493"},
+    { "province": "cadiz","year": "2008","gender": "female","pop-illiterate": "28.70","pop-high-education": "97.06","pop-in-university": "10766"},
+    { "province": "sevilla","year": "2008","gender": "both","pop-illiterate": "56.53","pop-high-education": "378.78","pop-in-university": "66325"},
+    {"province": "granada","year": "2010","gender": "male","pop-illiterate": "10.02","pop-high-education": "55.85","pop-in-university": "54024"},
     
 ];
 /*
@@ -230,10 +243,235 @@ app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
     });
     
     
-    app.listen(port,()=>{
-        console.log("Server ready on port" +port+"!");
-    }).on("error",(e)=>{
-        console.log("Server NOT READY:"+e);
-    });
+//###########################################################################################################################//
     
-    console.log("Server setting up..");
+    //--------------------Maria--------------------//
+    
+var db = new DataStore({
+
+    filename: dbFileName,
+    autoload: true
+
+});
+
+db.find({}, (err, results) => {
+    if (err) {
+        console.error("Error accesing DB");
+        process.exit(1);
+    }
+
+    if (results.length == 0) {
+        console.log("Empty DB");
+        db.insert(studentsan);
+    }
+    else {
+        console.log("DB inicialiced with " + results.length + " students");
+    }
+});
+
+app.get(BASE_API_PATH + "/studentsan", (req, res) => {
+    console.log(Date() + " - GET /studentsan");
+
+    db.find({}, (err, results) => {
+        if (err) {
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+            return;
+        }
+
+        res.send(results);
+
+    });
+
+
+});
+
+app.post(BASE_API_PATH + "/studentsan", (req, res) => {
+    console.log(Date() + " - POST /studentsan");
+    var student = req.body;
+    db.find({}, (err, results) => {
+        if (err) {
+            console.error("Error accesing DB");
+            process.exit(1);
+        }
+
+        if (results.length == 0) {
+            console.log("Empty DB");
+            db.insert(student);
+        }
+        else {
+            console.log("DB inicialiced with " + results.length + " students");
+        }
+    });
+    res.sendStatus(201);
+});
+
+app.put(BASE_API_PATH + "/studentsan", (req, res) => {
+    console.log(Date() + " - PUT /studentsan");
+    res.sendStatus(405);
+});
+
+app.delete(BASE_API_PATH + "/studentsan", (req, res) => {
+    console.log(Date() + " - DELETE /studentsan");
+
+    db.remove({});
+
+    res.sendStatus(200);
+});
+
+
+app.get(BASE_API_PATH + "/studentsan/:province/", (req, res) => {
+    var province = req.params.province;
+    console.log(Date() + " - GET /studentsan/" + province);
+
+    db.find({ "province": province }, (err, results) => {
+        if (err) {
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+            return;
+        }
+
+        res.send(results);
+
+    });
+});
+
+app.get(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    console.log(Date() + " - GET /studentsan/" + province + "/" + year);
+
+    db.find({ "province": province, "year": year}, (err, results) => {
+        if (err) {
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+            return;
+        }
+
+        res.send(results);
+
+    });
+});
+
+app.get(BASE_API_PATH + "/studentsan/:province/:year/:gender", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    var gender = req.params.gender;
+    console.log(Date() + " - GET /studentsan/" + province + "/" + year + "/" + gender);
+
+    db.find({ "province": province, "year": year, "gender": gender }, (err, results) => {
+        if (err) {
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+            return;
+        }
+
+        res.send(results);
+
+    });
+});
+
+app.delete(BASE_API_PATH + "/studentsan/:province", (req, res) => {
+    var province = req.params.province;
+    console.log(Date() + " - DELETE /studentsan/" + province);
+
+    db.remove({ "province": province });
+
+    res.sendStatus(200);
+});
+
+app.delete(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    console.log(Date() + " - DELETE /studentsan/" + province + "/" + year)
+
+    db.remove({ "province": province, "year": year });
+
+   res.sendStatus(200);
+});
+
+app.delete(BASE_API_PATH + "/studentsan/:province/:year/:gender", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    var gender = req.params.gender;
+    console.log(Date() + " - DELETE /studentsan/" + province + "/" + year + "/" + gender);
+
+    db.remove({ "province": province, "year": year, "gender": gender });
+
+    res.sendStatus(200);
+});
+
+app.post(BASE_API_PATH + "/studentsan/:province", (req, res) => {
+    var province = req.params.province;
+    console.log(Date() + " - POST /studentsan/" + province);
+    res.sendStatus(405);
+});
+
+app.post(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    console.log(Date() + " - POST /studentsan/" + province + "/" + year);
+    res.sendStatus(405);
+});
+
+app.post(BASE_API_PATH + "/studentsan/:province", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    var gender = req.params.gender;
+    console.log(Date() + " - POST /studentsan/" + province + "/" + year + "/" + gender);
+    res.sendStatus(405);
+});
+
+app.put(BASE_API_PATH + "/studentsan/:province", (req, res) => {
+    var province = req.params.province;
+    var student = req.body;
+    console.log(Date() + " - PUT /studentsan/" + province);
+    
+   res.sendStatus(405);
+});
+
+app.put(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year
+    var student = req.body;
+
+    console.log(Date() + " - PUT /studentsan/" + province + "/" + year);
+    
+    res.sendStatus(405);
+});
+
+app.put(BASE_API_PATH + "/studentsan/:province/:year/:gender", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year
+    var gender = req.params.gender
+    var student = req.body;
+
+    console.log(Date() + " - PUT /studentsan/" + province + "/" + year + "/" + gender);
+
+    if (province != student.province || year != student.year || gender != student.gender) {
+        res.sendStatus(409);
+        console.warn(Date() + " - Hacking attempt!");
+        return;
+    }
+
+      db.update({ "province": student.province, "year":year, "gender":gender}, student, (err, numUpdate) => {
+        console.log("Updated: " + numUpdate);
+    });
+
+    if (province != student.province) {
+        res.sendStatus(409);
+        console.warn(Date() + " - Hacking attempt!");
+        return;
+    }
+
+    res.sendStatus(200);
+});
+
+
+app.listen(port, () => {
+    console.log("Server ready on port " + port + "!");
+}).on("error", (e) => {
+    console.log("Server NOT READY:" + e);
+});
+
+console.log("Server setting up...");
