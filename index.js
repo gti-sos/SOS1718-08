@@ -8,6 +8,9 @@ var port = (process.env.PORT || 1607);
 var BASE_API_PATH = "/api/v1";
 //var dbCrimes = __dirname+"/contacts.db";//base de datos crimes (JOSE ENRIQUE)
 
+var dbDivorces = __dirname + "/divorces.db";
+var BASE_API_PATH_DIVORCES = "/api/v1/divorces-an";
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -19,6 +22,7 @@ app.get(BASE_API_PATH+"/helpcrimes",(req,res)=>{
 });
 
 
+
 var crimes = [
         { "province": "almería", "year": 2007, "gender" : "male", "onecrime" : 7.01, "twocrime" : 1.48, "threecrime" : 0.35, "morethreecrime" : 0.15 },
         { "province": "málaga", "year": 2007, "gender" : "female", "onecrime" : 0.48, "twocrime" : 0.05, "threecrime" : 0.00, "morethreecrime" : 0.00 },
@@ -27,7 +31,7 @@ var crimes = [
     
     
 var divorces = [
-   { "province" : "sevilla", "year" : 2016  , "divorce":3973 , "break": 203, "nullity": 1 },
+{ "province" : "sevilla", "year" : 2016  , "divorce":3973 , "break": 203, "nullity": 1 },
 { "province" : "cadiz", "year" : 2016  , "divorce":2249 , "break": 138, "nullity": 0 },
 { "province" : "almeria", "year" : 2016  , "divorce":1405 , "break": 42, "nullity": 1 },
 { "province" : "cordoba", "year" : 2016  , "divorce":1447 , "break": 115, "nullity": 1 },
@@ -36,7 +40,28 @@ var divorces = [
 { "province" : "jaen", "year" : 2016  , "divorce":1109 , "break": 73, "nullity": 1 },
 { "province" : "malaga", "year" : 2016  , "divorce":3606 , "break": 171, "nullity": 3 }
     
-    ];
+];
+/*
+var dbDiv = new DataStore({
+    filename: dbDivorces,
+    autoload: true
+});
+
+app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
+        dbDiv.find({}, (err, div) => {
+        if (err) {
+            console.error("Error accesing DB");
+            process.exit(1);
+        }
+        if (div.length == 0) {
+            console.log("Empty DB");
+            dbDiv.insert(initialsDivorces);
+        }
+        else {
+            console.log("DB initialized with " + div.length + " data");
+        }
+    });
+});*/
     
     //######################################################JOSE ENRIQUE############################################################//
    /* var db = new DataStore({//base de datos
