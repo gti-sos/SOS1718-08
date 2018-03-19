@@ -15,44 +15,44 @@ var BASE_API_PATH_DIVORCES = "/api/v1/divorces-an";
 var app = express();
 
 app.use(bodyParser.json());
-app.use("/",express.static(__dirname+"/public"));
+app.use("/", express.static(__dirname + "/public"));
 
 //Sección ayuda recurso crimes (JOSE ENRIQUE)
-app.get(BASE_API_PATH+"/helpcrimes",(req,res)=>{
+app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/3950150/collection/RVnZgdc1");
 });
 
-//Sección ayuda recurso studentsan (MARÍA)
-app.get(BASE_API_PATH+"/helpcrimes",(req,res)=>{
-    res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-studentsan/RVnZgxrb");
+//Sección ayuda recurso students-an (MARÍA)
+app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
+    res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-students-an/RVnZgxrb");
 });
 
 
 
 var crimes = [
-        { "province": "almería", "year": 2007, "gender" : "male", "onecrime" : 7.01, "twocrime" : 1.48, "threecrime" : 0.35, "morethreecrime" : 0.15 },
-        { "province": "málaga", "year": 2007, "gender" : "female", "onecrime" : 0.48, "twocrime" : 0.05, "threecrime" : 0.00, "morethreecrime" : 0.00 },
-        { "province": "sevilla", "year": 2020, "gender" : "male", "onecrime" : 5.52, "twocrime" : 1.52, "threecrime" : 0.51, "morethreecrime" : 0.33  }
-    ];
-    
-    
-var divorces = [
-{ "province" : "sevilla", "year" : 2016  , "divorce":3973 , "break": 203, "nullity": 1 },
-{ "province" : "cadiz", "year" : 2016  , "divorce":2249 , "break": 138, "nullity": 0 },
-{ "province" : "almeria", "year" : 2016  , "divorce":1405 , "break": 42, "nullity": 1 },
-{ "province" : "cordoba", "year" : 2016  , "divorce":1447 , "break": 115, "nullity": 1 },
-{ "province" : "granada", "year" : 2016  , "divorce":1904 , "break": 104, "nullity": 2 },
-{ "province" : "huelva", "year" : 2016  , "divorce":1036 , "break": 49, "nullity": 3 },
-{ "province" : "jaen", "year" : 2016  , "divorce":1109 , "break": 73, "nullity": 1 },
-{ "province" : "malaga", "year" : 2016  , "divorce":3606 , "break": 171, "nullity": 3 }
-    
+    { "province": "almería", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
+    { "province": "málaga", "year": 2007, "gender": "female", "onecrime": 0.48, "twocrime": 0.05, "threecrime": 0.00, "morethreecrime": 0.00 },
+    { "province": "sevilla", "year": 2020, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 }
 ];
 
-var studentsan = [{"province": "sevilla","year": "2008","gender": "male","pop-illiterate": "16.32","pop-high-education": "182.9","pop-in-university": "30493"},
-    { "province": "cadiz","year": "2008","gender": "female","pop-illiterate": "28.70","pop-high-education": "97.06","pop-in-university": "10766"},
-    { "province": "sevilla","year": "2008","gender": "both","pop-illiterate": "56.53","pop-high-education": "378.78","pop-in-university": "66325"},
-    {"province": "granada","year": "2010","gender": "male","pop-illiterate": "10.02","pop-high-education": "55.85","pop-in-university": "54024"},
-    
+
+var divorces = [
+    { "province": "sevilla", "year": 2016, "divorce": 3973, "break": 203, "nullity": 1 },
+    { "province": "cadiz", "year": 2016, "divorce": 2249, "break": 138, "nullity": 0 },
+    { "province": "almeria", "year": 2016, "divorce": 1405, "break": 42, "nullity": 1 },
+    { "province": "cordoba", "year": 2016, "divorce": 1447, "break": 115, "nullity": 1 },
+    { "province": "granada", "year": 2016, "divorce": 1904, "break": 104, "nullity": 2 },
+    { "province": "huelva", "year": 2016, "divorce": 1036, "break": 49, "nullity": 3 },
+    { "province": "jaen", "year": 2016, "divorce": 1109, "break": 73, "nullity": 1 },
+    { "province": "malaga", "year": 2016, "divorce": 3606, "break": 171, "nullity": 3 }
+
+];
+
+var initialStudents = [{ "province": "sevilla", "year": "2008", "gender": "male", "pop-illiterate": "16.32", "pop-high-education": "182.9", "pop-in-university": "30493" },
+    { "province": "cadiz", "year": "2008", "gender": "female", "pop-illiterate": "28.70", "pop-high-education": "97.06", "pop-in-university": "10766" },
+    { "province": "sevilla", "year": "2008", "gender": "both", "pop-illiterate": "56.53", "pop-high-education": "378.78", "pop-in-university": "66325" },
+    { "province": "granada", "year": "2010", "gender": "male", "pop-illiterate": "10.02", "pop-high-education": "55.85", "pop-in-university": "54024" },
+
 ];
 /*
 var dbDiv = new DataStore({
@@ -75,186 +75,186 @@ app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
         }
     });
 });*/
-    
-    //######################################################JOSE ENRIQUE############################################################//
-   /* var db = new DataStore({//base de datos
-     filename: dbFileName,
-     autoload: true
+
+//######################################################JOSE ENRIQUE############################################################//
+/* var db = new DataStore({//base de datos
+  filename: dbFileName,
+  autoload: true
+ });
+ 
+ db.find({},(err,contacts)=>{
+     if(err){
+         console.error(" Error accesing DB");
+         process.exit(1);
+     }
+     if(contacts.length==0){
+         console.log("Empty DB");
+         db.insert(initialContacts);
+     }else{
+         console.log("DB initialized with "+contacts.length+" contacts");
+     }
+ });*/
+
+app.get(BASE_API_PATH + "/crimes-an", (req, res) => {
+    console.log(Date() + " - GET / crimes-an");
+    res.send(crimes);
+});
+
+app.post(BASE_API_PATH + "/crimes-an", (req, res) => {
+    console.log(Date() + " - POST / crimes-an");
+    var crime = req.body;
+    crimes.push(crime);
+    res.sendStatus(201);
+});
+
+//n
+app.put(BASE_API_PATH + "/crimes-an", (req, res) => {
+    console.log(Date() + " - PUT / crimes-an");
+    res.sendStatus(405);
+});
+//n
+app.delete(BASE_API_PATH + "/crimes-an", (req, res) => {
+    console.log(Date() + " - DELETE / crimes-an");
+    crimes = [];
+    res.sendStatus(200);
+});
+
+//n a recurso concreto
+app.get(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
+    var province = req.params.province;
+    console.log(Date() + " - GET /crimes-an/" + province);
+
+    res.send(crimes.filter((c) => {
+        return (c.province == province);
+    })[0]); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
+});
+//n a recurso concreto
+app.delete(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
+    var province = req.params.province;
+    console.log(Date() + " - DELETE /crimes-an/" + province);
+
+    crimes = crimes.filter((c) => {
+        return (c.province != province);
     });
-    
-    db.find({},(err,contacts)=>{
-        if(err){
-            console.error(" Error accesing DB");
-            process.exit(1);
-        }
-        if(contacts.length==0){
-            console.log("Empty DB");
-            db.insert(initialContacts);
-        }else{
-            console.log("DB initialized with "+contacts.length+" contacts");
-        }
-    });*/
-    
-    app.get(BASE_API_PATH+"/crimes-an",(req,res)=>{
-        console.log(Date() + " - GET / crimes-an");
-        res.send(crimes);
-    });
-    
-    app.post(BASE_API_PATH+"/crimes-an",(req,res)=>{
-        console.log(Date() + " - POST / crimes-an");
-        var crime = req.body;
-        crimes.push(crime);
-        res.sendStatus(201);
-    });
-    
-    //n
-    app.put(BASE_API_PATH+"/crimes-an",(req,res)=>{
-        console.log(Date() + " - PUT / crimes-an");
-        res.sendStatus(405);
-    });
-    //n
-    app.delete(BASE_API_PATH+"/crimes-an",(req,res)=>{
-        console.log(Date() + " - DELETE / crimes-an");
-        crimes = [];
-        res.sendStatus(200);
-    });
-    
-    //n a recurso concreto
-    app.get(BASE_API_PATH+"/crimes-an/:province",(req,res)=>{
-        var province = req.params.province;
-        console.log(Date() + " - GET /crimes-an/"+province);
-        
-        res.send(crimes.filter((c)=>{
-            return (c.province==province);
-        })[0]);//el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
-    });
-    //n a recurso concreto
-    app.delete(BASE_API_PATH+"/crimes-an/:province",(req,res)=>{
-        var province = req.params.province;
-        console.log(Date() + " - DELETE /crimes-an/"+province);
-       
-        crimes = crimes.filter((c)=>{
-         return (c.province!=province);    
-        });
-        
-        res.sendStatus(200);
-    });
-    //n a recurso concreto
-    app.post(BASE_API_PATH+"/crimes-an/:province",(req,res)=>{
-        var province = req.params.province
-        console.log(Date() + " - POST / crimes-an" + province);
-        res.sendStatus(405);
-    });
-    //n a recurso concreto
-    app.put(BASE_API_PATH+"/crimes-an/:province",(req,res)=>{
-        var province = req.params.province;
-        var crime = req.body;
-        console.log(Date() + " - PUT /crimes-an/"+province);
-        
-       if(province != crime.province){
-           res.sendStatus(409);
-           console.warn(Date()+ " -Hacking attempt!");
-           return;
-       }
-       
-       crimes = crimes.map((c)=>{
-           if(c.province == crime.province)
+
+    res.sendStatus(200);
+});
+//n a recurso concreto
+app.post(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
+    var province = req.params.province
+    console.log(Date() + " - POST / crimes-an" + province);
+    res.sendStatus(405);
+});
+//n a recurso concreto
+app.put(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
+    var province = req.params.province;
+    var crime = req.body;
+    console.log(Date() + " - PUT /crimes-an/" + province);
+
+    if (province != crime.province) {
+        res.sendStatus(409);
+        console.warn(Date() + " -Hacking attempt!");
+        return;
+    }
+
+    crimes = crimes.map((c) => {
+        if (c.province == crime.province)
             return crime;
-           else
+        else
             return c;
-       });
-       res.sendStatus(200);
     });
-    //###########################################################################################################################//
-    
-    //--------------------Jurado--------------------//
-    
-     app.get(BASE_API_PATH+"/divorces-an",(req,res)=>{
-        console.log(Date() + " - GET / divorces-an");
-        res.send(divorces);
-    });
-    
-    app.post(BASE_API_PATH+"/divorces-an",(req,res)=>{
-        console.log(Date() + " - POST / divorces-an");
-        var divorce = req.body;
-        divorces.push(divorce);
-        res.sendStatus(201);
-    });
-    
-    //n
-    app.put(BASE_API_PATH+"/divorces-an",(req,res)=>{
-        console.log(Date() + " - PUT / divorces-an");
-        res.sendStatus(405);
-    });
-    //n
-    app.delete(BASE_API_PATH+"/divorces-an",(req,res)=>{
-        console.log(Date() + " - DELETE / divorces-an");
-        divorces = [];
-        res.sendStatus(200);
-    });
-    
-    //n a recurso concreto
-    app.get(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
-        var province = req.params.province;
-        console.log(Date() + " - GET /divorces-an/"+province);
-        
-        res.send(divorces.filter((c)=>{
-            return (c.province==province);
-        })[0]);//
-    });
-    //n a recurso concreto
-    app.delete(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
-        var province = req.params.province;
-        console.log(Date() + " - DELETE /divorces-an/"+province);
-       
-        divorces = divorces.filter((c)=>{
-         return (c.province!=province);    
-        });
-        
-        res.sendStatus(200);
-    });
-    //n a recurso concreto
-    app.post(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
-        var province = req.params.province
-        console.log(Date() + " - POST / divorces-an" + province);
-        res.sendStatus(405);
-    });
-    //n a recurso concreto
-    app.put(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
-        var province = req.params.province;
-        var divorce = req.body;
-        console.log(Date() + " - PUT /divorces-an/"+province);
-        
-       if(province != divorce.province){
-           res.sendStatus(409);
-           console.warn(Date()+ " -Hacking attempt!");
-           return;
-       }
-       
-       divorces = divorces.map((c)=>{
-           if(c.province == divorces.province)
-            return divorces;
-           else
-            return c;
-       });
-       res.sendStatus(200);
-    
-    
-    });
-    
-    
+    res.sendStatus(200);
+});
 //###########################################################################################################################//
-    
-    //--------------------Maria--------------------//
-    
+
+//--------------------Jurado--------------------//
+
+app.get(BASE_API_PATH + "/divorces-an", (req, res) => {
+    console.log(Date() + " - GET / divorces-an");
+    res.send(divorces);
+});
+
+app.post(BASE_API_PATH + "/divorces-an", (req, res) => {
+    console.log(Date() + " - POST / divorces-an");
+    var divorce = req.body;
+    divorces.push(divorce);
+    res.sendStatus(201);
+});
+
+//n
+app.put(BASE_API_PATH + "/divorces-an", (req, res) => {
+    console.log(Date() + " - PUT / divorces-an");
+    res.sendStatus(405);
+});
+//n
+app.delete(BASE_API_PATH + "/divorces-an", (req, res) => {
+    console.log(Date() + " - DELETE / divorces-an");
+    divorces = [];
+    res.sendStatus(200);
+});
+
+//n a recurso concreto
+app.get(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
+    var province = req.params.province;
+    console.log(Date() + " - GET /divorces-an/" + province);
+
+    res.send(divorces.filter((c) => {
+        return (c.province == province);
+    })[0]); //
+});
+//n a recurso concreto
+app.delete(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
+    var province = req.params.province;
+    console.log(Date() + " - DELETE /divorces-an/" + province);
+
+    divorces = divorces.filter((c) => {
+        return (c.province != province);
+    });
+
+    res.sendStatus(200);
+});
+//n a recurso concreto
+app.post(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
+    var province = req.params.province
+    console.log(Date() + " - POST / divorces-an" + province);
+    res.sendStatus(405);
+});
+//n a recurso concreto
+app.put(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
+    var province = req.params.province;
+    var divorce = req.body;
+    console.log(Date() + " - PUT /divorces-an/" + province);
+
+    if (province != divorce.province) {
+        res.sendStatus(409);
+        console.warn(Date() + " -Hacking attempt!");
+        return;
+    }
+
+    divorces = divorces.map((c) => {
+        if (c.province == divorces.province)
+            return divorces;
+        else
+            return c;
+    });
+    res.sendStatus(200);
+
+
+});
+
+
+//###########################################################################################################################//
+
+//--------------------Maria--------------------//
+
 var db = new DataStore({
 
     filename: dbFileName,
     autoload: true
 
 });
-app.get(BASE_API_PATH + "/loadInitialData", (req, res) => {
-    db.find({}, (err, results) => {
+
+/*   db.find({}, (err, results) => {
     if (err) {
         console.error("Error accesing DB");
         process.exit(1);
@@ -262,17 +262,37 @@ app.get(BASE_API_PATH + "/loadInitialData", (req, res) => {
 
     if (results.length == 0) {
         console.log("Empty DB");
-        db.insert(studentsan);
+        db.insert(students-an);
     }
     else {
         console.log("DB inicialiced with " + results.length + " students");
     }
-});
+});*/
+
+app.get(BASE_API_PATH + "/students-an/loadInitialData", (req, res) => {
+    db.find({}, (err, students) => {
+        if (err) {
+            console.error(" Error accesing DB");
+            process.exit(1);
+            return;
+        }
+        if (students.length == 0) {
+            console.log("Empty DB");
+            db.insert(initialStudents);
+            res.sendStatus(201);
+            
+        }
+        else {
+            console.log("DB initialized with " + students.length + " students");
+            res.sendStatus(200);
+        }
+        
+    });
 });
 
 
-app.get(BASE_API_PATH + "/studentsan", (req, res) => {
-    console.log(Date() + " - GET /studentsan");
+app.get(BASE_API_PATH + "/students-an", (req, res) => {
+    console.log(Date() + " - GET /students-an");
 
     db.find({}, (err, results) => {
         if (err) {
@@ -288,8 +308,8 @@ app.get(BASE_API_PATH + "/studentsan", (req, res) => {
 
 });
 
-app.post(BASE_API_PATH + "/studentsan", (req, res) => {
-    console.log(Date() + " - POST /studentsan");
+app.post(BASE_API_PATH + "/students-an", (req, res) => {
+    console.log(Date() + " - POST /students-an");
     var student = req.body;
     db.find({}, (err, results) => {
         if (err) {
@@ -308,23 +328,23 @@ app.post(BASE_API_PATH + "/studentsan", (req, res) => {
     res.sendStatus(201);
 });
 
-app.put(BASE_API_PATH + "/studentsan", (req, res) => {
-    console.log(Date() + " - PUT /studentsan");
+app.put(BASE_API_PATH + "/students-an", (req, res) => {
+    console.log(Date() + " - PUT /students-an");
     res.sendStatus(405);
 });
 
-app.delete(BASE_API_PATH + "/studentsan", (req, res) => {
-    console.log(Date() + " - DELETE /studentsan");
+app.delete(BASE_API_PATH + "/students-an", (req, res) => {
+    console.log(Date() + " - DELETE /students-an");
 
-    db.remove({});
+    db.remove({},{multi:true});
 
     res.sendStatus(200);
 });
 
 
-app.get(BASE_API_PATH + "/studentsan/:province/", (req, res) => {
+app.get(BASE_API_PATH + "/students-an/:province/", (req, res) => {
     var province = req.params.province;
-    console.log(Date() + " - GET /studentsan/" + province);
+    console.log(Date() + " - GET /students-an/" + province);
 
     db.find({ "province": province }, (err, results) => {
         if (err) {
@@ -338,12 +358,12 @@ app.get(BASE_API_PATH + "/studentsan/:province/", (req, res) => {
     });
 });
 
-app.get(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
+app.get(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
     var province = req.params.province;
     var year = req.params.year;
-    console.log(Date() + " - GET /studentsan/" + province + "/" + year);
+    console.log(Date() + " - GET /students-an/" + province + "/" + year);
 
-    db.find({ "province": province, "year": year}, (err, results) => {
+    db.find({ "province": province, "year": year }, (err, results) => {
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -355,11 +375,11 @@ app.get(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
     });
 });
 
-app.get(BASE_API_PATH + "/studentsan/:province/:year/:gender", (req, res) => {
+app.get(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
     var province = req.params.province;
     var year = req.params.year;
     var gender = req.params.gender;
-    console.log(Date() + " - GET /studentsan/" + province + "/" + year + "/" + gender);
+    console.log(Date() + " - GET /students-an/" + province + "/" + year + "/" + gender);
 
     db.find({ "province": province, "year": year, "gender": gender }, (err, results) => {
         if (err) {
@@ -373,82 +393,82 @@ app.get(BASE_API_PATH + "/studentsan/:province/:year/:gender", (req, res) => {
     });
 });
 
-app.delete(BASE_API_PATH + "/studentsan/:province", (req, res) => {
+app.delete(BASE_API_PATH + "/students-an/:province", (req, res) => {
     var province = req.params.province;
-    console.log(Date() + " - DELETE /studentsan/" + province);
+    console.log(Date() + " - DELETE /students-an/" + province);
 
-    db.remove({ "province": province });
+    db.remove({ "province": province },{multi:true});
 
     res.sendStatus(200);
 });
 
-app.delete(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
+app.delete(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
     var province = req.params.province;
     var year = req.params.year;
-    console.log(Date() + " - DELETE /studentsan/" + province + "/" + year)
+    console.log(Date() + " - DELETE /students-an/" + province + "/" + year)
 
-    db.remove({ "province": province, "year": year });
+    db.remove({ "province": province, "year": year },{multi:true});
 
-   res.sendStatus(200);
+    res.sendStatus(200);
 });
 
-app.delete(BASE_API_PATH + "/studentsan/:province/:year/:gender", (req, res) => {
+app.delete(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
     var province = req.params.province;
     var year = req.params.year;
     var gender = req.params.gender;
-    console.log(Date() + " - DELETE /studentsan/" + province + "/" + year + "/" + gender);
+    console.log(Date() + " - DELETE /students-an/" + province + "/" + year + "/" + gender);
 
     db.remove({ "province": province, "year": year, "gender": gender });
 
     res.sendStatus(200);
 });
 
-app.post(BASE_API_PATH + "/studentsan/:province", (req, res) => {
+app.post(BASE_API_PATH + "/students-an/:province", (req, res) => {
     var province = req.params.province;
-    console.log(Date() + " - POST /studentsan/" + province);
+    console.log(Date() + " - POST /students-an/" + province);
     res.sendStatus(405);
 });
 
-app.post(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
+app.post(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
     var province = req.params.province;
     var year = req.params.year;
-    console.log(Date() + " - POST /studentsan/" + province + "/" + year);
+    console.log(Date() + " - POST /students-an/" + province + "/" + year);
     res.sendStatus(405);
 });
 
-app.post(BASE_API_PATH + "/studentsan/:province", (req, res) => {
+app.post(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
     var province = req.params.province;
     var year = req.params.year;
     var gender = req.params.gender;
-    console.log(Date() + " - POST /studentsan/" + province + "/" + year + "/" + gender);
+    console.log(Date() + " - POST /students-an/" + province + "/" + year + "/" + gender);
     res.sendStatus(405);
 });
 
-app.put(BASE_API_PATH + "/studentsan/:province", (req, res) => {
+app.put(BASE_API_PATH + "/students-an/:province", (req, res) => {
     var province = req.params.province;
     var student = req.body;
-    console.log(Date() + " - PUT /studentsan/" + province);
-    
-   res.sendStatus(405);
+    console.log(Date() + " - PUT /students-an/" + province);
+
+    res.sendStatus(405);
 });
 
-app.put(BASE_API_PATH + "/studentsan/:province/:year", (req, res) => {
+app.put(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
     var province = req.params.province;
     var year = req.params.year
     var student = req.body;
 
-    console.log(Date() + " - PUT /studentsan/" + province + "/" + year);
-    
+    console.log(Date() + " - PUT /students-an/" + province + "/" + year);
+
     res.sendStatus(405);
 });
 
-app.put(BASE_API_PATH + "/studentsan/:province/:year/:gender", (req, res) => {
+app.put(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
     var province = req.params.province;
     var year = req.params.year
     var gender = req.params.gender
     var student = req.body;
 
-    console.log(Date() + " - PUT /studentsan/" + province + "/" + year + "/" + gender);
+    console.log(Date() + " - PUT /students-an/" + province + "/" + year + "/" + gender);
 
     if (province != student.province || year != student.year || gender != student.gender) {
         res.sendStatus(409);
@@ -456,7 +476,7 @@ app.put(BASE_API_PATH + "/studentsan/:province/:year/:gender", (req, res) => {
         return;
     }
 
-      db.update({ "province": student.province, "year":year, "gender":gender}, student, (err, numUpdate) => {
+    db.update({ "province": student.province, "year": year, "gender": gender }, student, (err, numUpdate) => {
         console.log("Updated: " + numUpdate);
     });
 
