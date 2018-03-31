@@ -27,6 +27,11 @@ app.get(BASE_API_PATH+"/helpcrimes",(req,res)=>{
     res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-studentsan/RVnZgxrb");
 });
 
+//Sección ayuda recurso studentsan (JURADO)
+app.get(BASE_API_PATH+"/helpdivorces",(req,res)=>{
+    res.redirect("https://documenter.getpostman.com/view/3897840/divorces-an/RVu1Gq8B");
+});
+
 
 
 var crimes = [
@@ -54,7 +59,9 @@ var studentsan = [{"province": "sevilla","year": "2008","gender": "male","pop-il
     {"province": "granada","year": "2010","gender": "male","pop-illiterate": "10.02","pop-high-education": "55.85","pop-in-university": "54024"},
     
 ];
-/*
+
+//---------JURADO........
+
 var dbDiv = new DataStore({
     filename: dbDivorces,
     autoload: true
@@ -68,13 +75,13 @@ app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
         }
         if (div.length == 0) {
             console.log("Empty DB");
-            dbDiv.insert(initialsDivorces);
+            dbDiv.insert(divorces);
         }
         else {
             console.log("DB initialized with " + div.length + " data");
         }
     });
-});*/
+});
     
     //######################################################JOSE ENRIQUE############################################################//
    /* var db = new DataStore({//base de datos
@@ -220,10 +227,11 @@ app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
         res.sendStatus(405);
     });
     //n a recurso concreto
-    app.put(BASE_API_PATH+"/divorces-an/:province",(req,res)=>{
+ app.put(BASE_API_PATH+"/divorces-an/:province:/year",(req,res)=>{
         var province = req.params.province;
+        var year = req.params.year;
         var divorce = req.body;
-        console.log(Date() + " - PUT /divorces-an/"+province);
+        console.log(Date() + " - PUT /divorces-an/province"+province);
         
        if(province != divorce.province){
            res.sendStatus(409);
@@ -231,15 +239,19 @@ app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
            return;
        }
        
+       if(year != divorce.year){
+           res.sendStatus(409);
+           console.warn(Date()+ " -Hacking attempt!");
+           return;
+       }
+       
        divorces = divorces.map((c)=>{
-           if(c.province == divorces.province)
-            return divorces;
+           if(c.province == divorce.province && c.year ==divorce.year)
+            return divorce;
            else
             return c;
        });
        res.sendStatus(200);
-    
-    
     });
     
     
