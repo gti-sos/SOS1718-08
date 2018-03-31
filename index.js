@@ -142,6 +142,31 @@ app.get(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
         return (c.province == province);
     })[0]); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
 });
+
+
+app.get(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    console.log(Date() + " - GET /crimes-an/" + province + "/" + year);
+
+    res.send(crimes.filter((c) => {
+        return (c.province == province && c.year == year);
+    })[0]); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
+});
+
+
+app.get(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    var gender = req.params.gender;
+    console.log(Date() + " - GET /crimes-an/" + province + "/" + year + "/" + gender);
+
+    res.send(crimes.filter((c) => {
+        return (c.province == province && c.year == year && c.gender == gender);
+    })[0]); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
+});
+
+
 //n a recurso concreto
 app.delete(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
     var province = req.params.province;
@@ -153,12 +178,62 @@ app.delete(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
 
     res.sendStatus(200);
 });
+
+
+app.delete(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year);
+
+    crimes = crimes.filter((c) => {
+        return (c.province != province && c.year!= year);
+    });
+
+    res.sendStatus(200);
+});
+
+
+
+app.delete(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    var gender = req.params.gender;
+    console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year + "/" + gender);
+
+    crimes = crimes.filter((c) => {
+        return (c.province != province && c.year!= year && c.gender != gender);
+    });
+
+    res.sendStatus(200);
+});
+
+
+
 //n a recurso concreto
 app.post(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
-    var province = req.params.province
+    var province = req.params.province;
     console.log(Date() + " - POST / crimes-an" + province);
     res.sendStatus(405);
 });
+
+
+app.post(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    console.log(Date() + " - POST / crimes-an" + province + "/" + year);
+    res.sendStatus(405);
+});
+
+
+app.post(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    var gender = req.params.gender;
+    console.log(Date() + " - POST / crimes-an" + province + "/" + year + "/" + gender);
+    res.sendStatus(405);
+});
+
+
 //n a recurso concreto
 app.put(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
     var province = req.params.province;
@@ -179,6 +254,56 @@ app.put(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
     });
     res.sendStatus(200);
 });
+
+
+
+app.put(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    var crime = req.body;
+    console.log(Date() + " - PUT /crimes-an/" + province + "/" + year);
+
+    if (province != crime.province || year != crime.year) {
+        res.sendStatus(409);
+        console.warn(Date() + " -Hacking attempt!");
+        return;
+    }
+
+    crimes = crimes.map((c) => {
+        if (c.province == crime.province && c.year == crime.year)
+            return crime;
+        else
+            return c;
+    });
+    res.sendStatus(200);
+});
+
+
+
+app.put(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
+    var province = req.params.province;
+    var year = req.params.year;
+    var gender = req.params.gender;
+    var crime = req.body;
+    console.log(Date() + " - PUT /crimes-an/" + province + "/" + year + "/" + gender);
+
+    if (province != crime.province || year != crime.year || gender != crime.gender) {
+        res.sendStatus(409);
+        console.warn(Date() + " -Hacking attempt!");
+        return;
+    }
+
+    crimes = crimes.map((c) => {
+        if (c.province == crime.province && c.year == crime.year && c.gender == crime.gender)
+            return crime;
+        else
+            return c;
+    });
+    res.sendStatus(200);
+});
+
+
+
 //###########################################################################################################################//
 
 //--------------------Jurado--------------------//
