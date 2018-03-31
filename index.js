@@ -26,9 +26,8 @@ app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
 app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-students-an/RVnZgxrb");
 });
-
-//Sección ayuda recurso studentsan (JURADO)
-app.get(BASE_API_PATH+"/helpdivorces",(req,res)=>{
+//Sección ayuda recurso students-an (MARÍA)
+app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/3897840/divorces-an/RVu1Gq8B");
 });
 
@@ -59,9 +58,7 @@ var initialStudents = [{ "province": "sevilla", "year": "2008", "gender": "male"
     { "province": "granada", "year": "2010", "gender": "male", "pop-illiterate": "10.02", "pop-high-education": "55.85", "pop-in-university": "54024" },
 
 ];
-
-//---------JURADO........
-
+/*
 var dbDiv = new DataStore({
     filename: dbDivorces,
     autoload: true
@@ -75,36 +72,12 @@ app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
         }
         if (div.length == 0) {
             console.log("Empty DB");
-            dbDiv.insert(divorces);
+            dbDiv.insert(initialsDivorces);
         }
         else {
             console.log("DB initialized with " + div.length + " data");
         }
     });
-<<<<<<< HEAD
-});
-    
-    //######################################################JOSE ENRIQUE############################################################//
-   /* var db = new DataStore({//base de datos
-     filename: dbFileName,
-     autoload: true
-    });
-    
-    db.find({},(err,contacts)=>{
-        if(err){
-            console.error(" Error accesing DB");
-            process.exit(1);
-        }
-        if(contacts.length==0){
-            console.log("Empty DB");
-            db.insert(initialContacts);
-        }else{
-            console.log("DB initialized with "+contacts.length+" contacts");
-        }
-    });*/
-    
-    app.get(BASE_API_PATH+"/crimes-an",(req,res)=>{
-=======
 });*/
 
 //######################################################JOSE ENRIQUE############################################################//
@@ -133,7 +106,6 @@ app.get(BASE_API_PATH + "/crimes-an", (req, res) => {
 
 
  app.get(BASE_API_PATH+"/crimes-an/loadInitialData",(req,res)=>{
->>>>>>> 092111a031fb873d535c2fb356029a7c06f848dc
         console.log(Date() + " - GET / crimes-an");
         if(crimes.length == 0){
             crimes = [
@@ -381,34 +353,6 @@ app.delete(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
     divorces = divorces.filter((c) => {
         return (c.province != province);
     });
-<<<<<<< HEAD
-    //n a recurso concreto
- app.put(BASE_API_PATH+"/divorces-an/:province:/year",(req,res)=>{
-        var province = req.params.province;
-        var year = req.params.year;
-        var divorce = req.body;
-        console.log(Date() + " - PUT /divorces-an/province"+province);
-        
-       if(province != divorce.province){
-           res.sendStatus(409);
-           console.warn(Date()+ " -Hacking attempt!");
-           return;
-       }
-       
-       if(year != divorce.year){
-           res.sendStatus(409);
-           console.warn(Date()+ " -Hacking attempt!");
-           return;
-       }
-       
-       divorces = divorces.map((c)=>{
-           if(c.province == divorce.province && c.year ==divorce.year)
-            return divorce;
-           else
-            return c;
-       });
-       res.sendStatus(200);
-=======
 
     res.sendStatus(200);
 });
@@ -435,7 +379,6 @@ app.put(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
             return divorces;
         else
             return c;
->>>>>>> 092111a031fb873d535c2fb356029a7c06f848dc
     });
     res.sendStatus(200);
 
