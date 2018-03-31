@@ -1,7 +1,11 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var DataStore = require("nedb");
+var MongoClient = require("mongodb").MongoClient;
 
+var students = require("./studentsApi");
+
+var mdbURL = "mongodb://usuario:usuario@ds129939.mlab.com:29939/sos1718-08"
 
 
 var port = (process.env.PORT || 1607);
@@ -48,12 +52,14 @@ var divorces = [
 
 ];
 
-var initialStudents = [{ "province": "sevilla", "year": "2008", "gender": "male", "pop-illiterate": "16.32", "pop-high-education": "182.9", "pop-in-university": "30493" },
+var initialStudents = [ { "province": "sevilla", "year": "2008", "gender": "male", "pop-illiterate": "16.32", "pop-high-education": "182.9", "pop-in-university": "30493" },
     { "province": "cadiz", "year": "2008", "gender": "female", "pop-illiterate": "28.70", "pop-high-education": "97.06", "pop-in-university": "10766" },
     { "province": "sevilla", "year": "2008", "gender": "both", "pop-illiterate": "56.53", "pop-high-education": "378.78", "pop-in-university": "66325" },
-    { "province": "granada", "year": "2010", "gender": "male", "pop-illiterate": "10.02", "pop-high-education": "55.85", "pop-in-university": "54024" },
+    { "province": "granada", "year": "2010", "gender": "male", "pop-illiterate": "10.02", "pop-high-education": "81.99", "pop-in-university": "54024" },
+    { "province": "granada", "year": "2011", "gender": "female", "pop-illiterate": "23.86", "pop-high-education": "91.26", "pop-in-university": "22905" }
 
 ];
+
 /*
 var dbDiv = new DataStore({
     filename: dbDivorces,
@@ -247,12 +253,45 @@ app.put(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
 
 //--------------------Maria--------------------//
 
-var db = new DataStore({
+/*var db = new DataStore({
 
     filename: dbFileName,
     autoload: true
 
 });
+*/
+MongoClient.connect(mdbURL, { native_parser: true }, (err, mlabs) => {
+    if (err) {
+        console.error("Error accesing DB" + err);
+        process.exit(1)
+    }
+    else {
+        console.log("Connected to DB");
+
+        var database = mlabs.db("sos1718-08");
+        var db = database.collection("students");
+    }
+
+    db.find({}).toArray((err, students) => {
+        if (students.length == 0) {
+            console.log("Empty DB");
+            db.insert(initialStudents);
+
+        }
+
+        else {
+            console.log("DB initialized with " + students.length + " students")
+        }
+    });
+    students.register(app, db);
+
+    app.listen(port, () => {
+        console.log("Server ready on port " + port + "!");
+    }).on("error", (e) => {
+        console.log("Server NOT READY:" + e);
+    });
+});
+
 
 /*   db.find({}, (err, results) => {
     if (err) {
@@ -269,231 +308,7 @@ var db = new DataStore({
     }
 });*/
 
-app.get(BASE_API_PATH + "/students-an/loadInitialData", (req, res) => {
-    db.find({}, (err, students) => {
-        if (err) {
-            console.error(" Error accesing DB");
-            process.exit(1);
-            return;
-        }
-        if (students.length == 0) {
-            console.log("Empty DB");
-            db.insert(initialStudents);
-            res.sendStatus(201);
-            
-        }
-        else {
-            console.log("DB initialized with " + students.length + " students");
-            res.sendStatus(200);
-        }
-        
-    });
-});
-
-
-app.get(BASE_API_PATH + "/students-an", (req, res) => {
-    console.log(Date() + " - GET /students-an");
-
-    db.find({}, (err, results) => {
-        if (err) {
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-            return;
-        }
-
-        res.send(results);
-
-    });
-
-
-});
-
-app.post(BASE_API_PATH + "/students-an", (req, res) => {
-    console.log(Date() + " - POST /students-an");
-    var student = req.body;
-    db.find({}, (err, results) => {
-        if (err) {
-            console.error("Error accesing DB");
-            process.exit(1);
-        }
-
-        if (results.length == 0) {
-            console.log("Empty DB");
-            db.insert(student);
-        }
-        else {
-            console.log("DB inicialiced with " + results.length + " students");
-        }
-    });
-    res.sendStatus(201);
-});
-
-app.put(BASE_API_PATH + "/students-an", (req, res) => {
-    console.log(Date() + " - PUT /students-an");
-    res.sendStatus(405);
-});
-
-app.delete(BASE_API_PATH + "/students-an", (req, res) => {
-    console.log(Date() + " - DELETE /students-an");
-
-    db.remove({},{multi:true});
-
-    res.sendStatus(200);
-});
-
-
-app.get(BASE_API_PATH + "/students-an/:province/", (req, res) => {
-    var province = req.params.province;
-    console.log(Date() + " - GET /students-an/" + province);
-
-    db.find({ "province": province }, (err, results) => {
-        if (err) {
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-            return;
-        }
-
-        res.send(results);
-
-    });
-});
-
-app.get(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
-    var province = req.params.province;
-    var year = req.params.year;
-    console.log(Date() + " - GET /students-an/" + province + "/" + year);
-
-    db.find({ "province": province, "year": year }, (err, results) => {
-        if (err) {
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-            return;
-        }
-
-        res.send(results);
-
-    });
-});
-
-app.get(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
-    var province = req.params.province;
-    var year = req.params.year;
-    var gender = req.params.gender;
-    console.log(Date() + " - GET /students-an/" + province + "/" + year + "/" + gender);
-
-    db.find({ "province": province, "year": year, "gender": gender }, (err, results) => {
-        if (err) {
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-            return;
-        }
-
-        res.send(results);
-
-    });
-});
-
-app.delete(BASE_API_PATH + "/students-an/:province", (req, res) => {
-    var province = req.params.province;
-    console.log(Date() + " - DELETE /students-an/" + province);
-
-    db.remove({ "province": province },{multi:true});
-
-    res.sendStatus(200);
-});
-
-app.delete(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
-    var province = req.params.province;
-    var year = req.params.year;
-    console.log(Date() + " - DELETE /students-an/" + province + "/" + year)
-
-    db.remove({ "province": province, "year": year },{multi:true});
-
-    res.sendStatus(200);
-});
-
-app.delete(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
-    var province = req.params.province;
-    var year = req.params.year;
-    var gender = req.params.gender;
-    console.log(Date() + " - DELETE /students-an/" + province + "/" + year + "/" + gender);
-
-    db.remove({ "province": province, "year": year, "gender": gender });
-
-    res.sendStatus(200);
-});
-
-app.post(BASE_API_PATH + "/students-an/:province", (req, res) => {
-    var province = req.params.province;
-    console.log(Date() + " - POST /students-an/" + province);
-    res.sendStatus(405);
-});
-
-app.post(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
-    var province = req.params.province;
-    var year = req.params.year;
-    console.log(Date() + " - POST /students-an/" + province + "/" + year);
-    res.sendStatus(405);
-});
-
-app.post(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
-    var province = req.params.province;
-    var year = req.params.year;
-    var gender = req.params.gender;
-    console.log(Date() + " - POST /students-an/" + province + "/" + year + "/" + gender);
-    res.sendStatus(405);
-});
-
-app.put(BASE_API_PATH + "/students-an/:province", (req, res) => {
-    var province = req.params.province;
-    var student = req.body;
-    console.log(Date() + " - PUT /students-an/" + province);
-
-    res.sendStatus(405);
-});
-
-app.put(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
-    var province = req.params.province;
-    var year = req.params.year
-    var student = req.body;
-
-    console.log(Date() + " - PUT /students-an/" + province + "/" + year);
-
-    res.sendStatus(405);
-});
-
-app.put(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
-    var province = req.params.province;
-    var year = req.params.year
-    var gender = req.params.gender
-    var student = req.body;
-
-    console.log(Date() + " - PUT /students-an/" + province + "/" + year + "/" + gender);
-
-    if (province != student.province || year != student.year || gender != student.gender) {
-        res.sendStatus(409);
-        console.warn(Date() + " - Hacking attempt!");
-        return;
-    }
-
-    db.update({ "province": student.province, "year": year, "gender": gender }, student, (err, numUpdate) => {
-        console.log("Updated: " + numUpdate);
-    });
-
-    if (province != student.province) {
-        res.sendStatus(409);
-        console.warn(Date() + " - Hacking attempt!");
-        return;
-    }
-
-    res.sendStatus(200);
-});
-
-
-app.listen(port, () => {
-    console.log("Server ready on port " + port + "!");
-}).on("error", (e) => {
-    console.log("Server NOT READY:" + e);
-});
+/*
+ */
 
 console.log("Server setting up...");
