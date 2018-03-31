@@ -140,7 +140,7 @@ app.get(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
 
     res.send(crimes.filter((c) => {
         return (c.province == province);
-    })[0]); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
+    })); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
 });
 
 
@@ -151,7 +151,7 @@ app.get(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
 
     res.send(crimes.filter((c) => {
         return (c.province == province && c.year == year);
-    })[0]); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
+    })); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
 });
 
 
