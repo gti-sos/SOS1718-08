@@ -83,7 +83,37 @@ app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
 
 
 //Modularizado
-
+MongoClient.connect(mdbcrimes,{native_parser:true},(err,mlabs)=>{
+    
+    if(err){
+        console.error("Error al acceder a la base de datos mongo" + err);
+        process.exit(1);
+    }
+        
+    console.log("Conectado a mongoDB");
+    var database = mlabs.db("sos1718-jepm-sandbox");
+    var db = database.collection("crimes-an");
+    
+    db.find({}).toArray((err, crimes) => {
+        if (crimes.length == 0) {
+            console.log("Empty DB");
+            db.insert(initialCrimes);
+        }
+        else {
+            console.log("DB tiene " + crimes.length + " crimes");
+        }
+    });
+    
+    
+    crimesAPI.register(app, BASE_API_PATH, db);//le pasamos lo del express que esta en app al codigo que hemos movido a crimesAPI y el BASE_API_PATH
+    
+    app.listen(port, () => {
+        console.log("Server ready on port " + port + "!");
+    }).on("error", (e) => {
+        console.log("Server NOT READY:" + e);
+    });
+    
+});
 
 
 //###########################################################################################################################//

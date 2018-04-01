@@ -6,7 +6,7 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
     console.log("Llamada al objeto crimes-an");
 
 
-    var crimes = [
+    var initialCrimes = [
     { "province": "almeria", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
     { "province": "malaga", "year": 2007, "gender": "female", "onecrime": 0.48, "twocrime": 0.05, "threecrime": 0.00, "morethreecrime": 0.00 },
     { "province": "sevilla", "year": 2020, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 }
@@ -37,21 +37,31 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
 
     app.get(BASE_API_PATH + "/crimes-an/loadInitialData", (req, res) => {
         console.log(Date() + " - GET / crimes-an");
-        if (crimes.length == 0) {
-            crimes = [
-                { "province": "almería", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
-                { "province": "málaga", "year": 2007, "gender": "female", "onecrime": 0.48, "twocrime": 0.05, "threecrime": 0.00, "morethreecrime": 0.00 },
-                { "province": "sevilla", "year": 2020, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 }
-            ];
-        }
-        res.send(crimes);
+    
+        db.find({}).toArray((crimes) => {
+            if (crimes.length == 0) {
+                console.log("Empty DB");
+                db.insert(initialCrimes);
+            }
+            else {
+                console.log("DB tiene " + crimes.length + " crimes gracias a initialData");
+            }
+        });
     });
 
 
     app.post(BASE_API_PATH + "/crimes-an", (req, res) => {
         console.log(Date() + " - POST / crimes-an");
         var crime = req.body;
-        crimes.push(crime);
+        db.find({}).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                process.exit(1);
+            }
+
+            db.insert(crime);
+
+        });
         res.sendStatus(201);
     });
 
@@ -63,7 +73,6 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
     //n
     app.delete(BASE_API_PATH + "/crimes-an", (req, res) => {
         console.log(Date() + " - DELETE / crimes-an");
-        crimes = [];
         
         db.remove({});
         
@@ -94,9 +103,17 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
         var year = req.params.year;
         console.log(Date() + " - GET /crimes-an/" + province + "/" + year);
 
-        res.send(crimes.filter((c) => {
-            return (c.province == province && c.year == year);
-        })); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
+         db.find({"province":province, "year":year}).toArray((err, crimes) => {
+            if (err) {
+                console.log("Error al acceder a la base de datos mongo");
+                res.sendStatus(500);
+                return;
+            }
+            res.send(crimes.map((c)=>{
+                delete c._id;
+                return c;
+            }));
+        });
     });
 
 
@@ -106,9 +123,17 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
         var gender = req.params.gender;
         console.log(Date() + " - GET /crimes-an/" + province + "/" + year + "/" + gender);
 
-        res.send(crimes.filter((c) => {
-            return (c.province == province && c.year == year && c.gender == gender);
-        })[0]); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
+         db.find({"province":province, "year":year, "gender":gender}).toArray((err, crimes) => {
+            if (err) {
+                console.log("Error al acceder a la base de datos mongo");
+                res.sendStatus(500);
+                return;
+            }
+            res.send(crimes.map((c)=>{
+                delete c._id;
+                return c;
+            })[0]);
+        });
     });
 
 
@@ -117,9 +142,7 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
         var province = req.params.province;
         console.log(Date() + " - DELETE /crimes-an/" + province);
 
-        crimes = crimes.filter((c) => {
-            return (c.province != province);
-        });
+        db.remove({"province":province});
 
         res.sendStatus(200);
     });
@@ -130,9 +153,7 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
         var year = req.params.year;
         console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year);
 
-        crimes = crimes.filter((c) => {
-            return (c.province != province && c.year != year);
-        });
+         db.remove({"province":province, "year":year});
 
         res.sendStatus(200);
     });
@@ -145,9 +166,7 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
         var gender = req.params.gender;
         console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year + "/" + gender);
 
-        crimes = crimes.filter((c) => {
-            return (c.province != province && c.year != year && c.gender != gender);
-        });
+        db.remove({"province":province, "year":year, "gender":gender});
 
         res.sendStatus(200);
     });
@@ -182,22 +201,8 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
     //n a recurso concreto
     app.put(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
         var province = req.params.province;
-        var crime = req.body;
-        console.log(Date() + " - PUT /crimes-an/" + province);
-
-        if (province != crime.province) {
-            res.sendStatus(409);
-            console.warn(Date() + " -Hacking attempt!");
-            return;
-        }
-
-        crimes = crimes.map((c) => {
-            if (c.province == crime.province)
-                return crime;
-            else
-                return c;
-        });
-        res.sendStatus(200);
+        console.log(Date() + " - PUT / crimes-an" + province);
+        res.sendStatus(405);
     });
 
 
@@ -205,22 +210,8 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
     app.put(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
         var year = req.params.year;
-        var crime = req.body;
-        console.log(Date() + " - PUT /crimes-an/" + province + "/" + year);
-
-        if (province != crime.province || year != crime.year) {
-            res.sendStatus(409);
-            console.warn(Date() + " -Hacking attempt!");
-            return;
-        }
-
-        crimes = crimes.map((c) => {
-            if (c.province == crime.province && c.year == crime.year)
-                return crime;
-            else
-                return c;
-        });
-        res.sendStatus(200);
+       console.log(Date() + " - PUT / crimes-an" + province + "/" + year );
+        res.sendStatus(405);
     });
 
 
@@ -230,21 +221,39 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
         var year = req.params.year;
         var gender = req.params.gender;
         var crime = req.body;
+        var id = crime._id;
         console.log(Date() + " - PUT /crimes-an/" + province + "/" + year + "/" + gender);
 
         if (province != crime.province || year != crime.year || gender != crime.gender) {
             res.sendStatus(409);
-            console.warn(Date() + " -Hacking attempt!");
+            console.warn(Date() + " - Hacking attempt!");
             return;
         }
+        db.find({ "province": crime.province, "year": crime.year, "gender": crime.gender }).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            console.log(results[0]._id)
 
-        crimes = crimes.map((c) => {
-            if (c.province == crime.province && c.year == crime.year && c.gender == crime.gender)
-                return crime;
-            else
-                return c;
+            if (results[0]._id != id) {
+                console.error("ID no coincide")
+                res.sendStatus(400);
+                return;
+            }
+            else {
+                delete crime._id;
+                db.update({ "province": crime.province, "year": crime.year, "gender": crime.gender }, crime, function(err, numUpdate) {
+                    if (err) throw err;
+                    console.log("Updated: " + numUpdate);
+                });
+                res.sendStatus(200);
+            }
+
         });
-        res.sendStatus(200);
+
+
     });
 
 
