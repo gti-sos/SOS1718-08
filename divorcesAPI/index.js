@@ -59,7 +59,10 @@ DivorcesAPI.register = function(app,db) {
                 return;
             }
 
-            res.send(results);
+            res.send(results.map((c)=>{
+                delete c._id;
+                return c;
+            }));
 
         });
 
