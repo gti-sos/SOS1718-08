@@ -27,21 +27,6 @@ crimesAPI.register(app, BASE_API_PATH);//le pasamos lo del express que esta en a
 app.use(bodyParser.json());
 app.use("/", express.static(__dirname + "/public"));
 
-//Sección ayuda recurso crimes (JOSE ENRIQUE)
-app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
-    res.redirect("https://documenter.getpostman.com/view/3950150/collection/RVnZgdc1");
-});
-
-//Sección ayuda recurso students-an (MARÍA)
-app.get(BASE_API_PATH + "/helpstudents", (req, res) => {
-    res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-students-an/RVnZgxrb");
-});
-//Sección ayuda recurso students-an (MARÍA)
-app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
-    res.redirect("https://documenter.getpostman.com/view/3897840/divorces-an/RVu1Gq8B");
-});
-
-
 
 /*var crimes = [
     { "province": "almería", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
