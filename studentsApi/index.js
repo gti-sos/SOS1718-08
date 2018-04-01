@@ -30,7 +30,7 @@ var initialStudents = [{ "province": "sevilla", "year": "2008", "gender": "male"
 studentsApi.register = function(app, db) {
 
     console.log("Registering router for students API...")
-    app.get(BASE_API_PATH + "/docs", (req, res) => {
+    app.get(BASE_API_PATH + "/students-an/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-studentsan/RVu1HAue");
     });
 
