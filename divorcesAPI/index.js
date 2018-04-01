@@ -21,7 +21,7 @@ DivorcesAPI.register = function(app,db) {
 
     console.log("Registering router for divorces API...")
     app.get(BASE_API_PATH + "/divorces-an/help", (req, res) => {
-        res.redirect("https://documenter.getpostman.com/view/3897840/divorces-an/RVu1Gq8B");
+        res.redirect("https://documenter.getpostman.com/view/3897840/herokujmja/RVu1HAqF");
     });
 
 
