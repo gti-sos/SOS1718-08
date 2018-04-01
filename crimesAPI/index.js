@@ -1,7 +1,7 @@
 var objCrimes = {};
 module.exports = objCrimes;
 
-objCrimes.register = function(app, BASE_API_PATH) {
+objCrimes.register = function(app, BASE_API_PATH, db) {
 
     console.log("Llamada al objeto crimes-an");
 
@@ -20,9 +20,20 @@ objCrimes.register = function(app, BASE_API_PATH) {
 
     app.get(BASE_API_PATH + "/crimes-an", (req, res) => {
         console.log(Date() + " - GET / crimes-an");
-        res.send(crimes);
-    });
 
+        db.find({}).toArray((err, crimes) => {
+            if (err) {
+                console.log("Error al acceder a la base de datos mongo");
+                res.sendStatus(500);
+                return;
+            }
+            res.send(crimes.map((c)=>{
+                delete c._id;
+                return c;
+            }));
+        });
+    });
+    
 
     app.get(BASE_API_PATH + "/crimes-an/loadInitialData", (req, res) => {
         console.log(Date() + " - GET / crimes-an");
@@ -53,6 +64,9 @@ objCrimes.register = function(app, BASE_API_PATH) {
     app.delete(BASE_API_PATH + "/crimes-an", (req, res) => {
         console.log(Date() + " - DELETE / crimes-an");
         crimes = [];
+        
+        db.remove({});
+        
         res.sendStatus(200);
     });
 
@@ -61,9 +75,17 @@ objCrimes.register = function(app, BASE_API_PATH) {
         var province = req.params.province;
         console.log(Date() + " - GET /crimes-an/" + province);
 
-        res.send(crimes.filter((c) => {
-            return (c.province == province);
-        })); //el [0] es para devolver solo el primer elemento, aunque debería haber solo uno
+        db.find({"province":province}).toArray((err, crimes) => {
+            if (err) {
+                console.log("Error al acceder a la base de datos mongo");
+                res.sendStatus(500);
+                return;
+            }
+            res.send(crimes.map((c)=>{
+                delete c._id;
+                return c;
+            }));
+        });
     });
 
 
