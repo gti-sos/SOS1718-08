@@ -27,7 +27,7 @@ app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
 });
 
 //Sección ayuda recurso students-an (MARÍA)
-app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
+app.get(BASE_API_PATH + "/helpstudents", (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-students-an/RVnZgxrb");
 });
 //Sección ayuda recurso students-an (MARÍA)
@@ -56,11 +56,12 @@ var divorces = [
 
 ];
 
-var initialStudents = [ { "province": "sevilla", "year": "2008", "gender": "male", "pop-illiterate": "16.32", "pop-high-education": "182.9", "pop-in-university": "30493" },
+var initialStudents = [{ "province": "sevilla", "year": "2008", "gender": "male", "pop-illiterate": "16.32", "pop-high-education": "182.9", "pop-in-university": "30493" },
     { "province": "cadiz", "year": "2008", "gender": "female", "pop-illiterate": "28.70", "pop-high-education": "97.06", "pop-in-university": "10766" },
     { "province": "sevilla", "year": "2008", "gender": "both", "pop-illiterate": "56.53", "pop-high-education": "378.78", "pop-in-university": "66325" },
     { "province": "granada", "year": "2010", "gender": "male", "pop-illiterate": "10.02", "pop-high-education": "81.99", "pop-in-university": "54024" },
-    { "province": "granada", "year": "2011", "gender": "female", "pop-illiterate": "23.86", "pop-high-education": "91.26", "pop-in-university": "22905" }
+    { "province": "granada", "year": "2011", "gender": "female", "pop-illiterate": "23.86", "pop-high-education": "91.26", "pop-in-university": "22905" },
+    { "province": "granada", "year": "2011", "gender": "both", "pop-illiterate": "53.86", "pop-high-education": "191.26", "pop-in-university": "44405" }
 
 ];
 
@@ -111,17 +112,17 @@ app.get(BASE_API_PATH + "/crimes-an", (req, res) => {
 });
 
 
- app.get(BASE_API_PATH+"/crimes-an/loadInitialData",(req,res)=>{
-        console.log(Date() + " - GET / crimes-an");
-        if(crimes.length == 0){
-            crimes = [
-        { "province": "almería", "year": 2007, "gender" : "male", "onecrime" : 7.01, "twocrime" : 1.48, "threecrime" : 0.35, "morethreecrime" : 0.15 },
-        { "province": "málaga", "year": 2007, "gender" : "female", "onecrime" : 0.48, "twocrime" : 0.05, "threecrime" : 0.00, "morethreecrime" : 0.00 },
-        { "province": "sevilla", "year": 2020, "gender" : "male", "onecrime" : 5.52, "twocrime" : 1.52, "threecrime" : 0.51, "morethreecrime" : 0.33  }
-    ]; 
-        }
-        res.send(crimes);
-    });
+app.get(BASE_API_PATH + "/crimes-an/loadInitialData", (req, res) => {
+    console.log(Date() + " - GET / crimes-an");
+    if (crimes.length == 0) {
+        crimes = [
+            { "province": "almería", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
+            { "province": "málaga", "year": 2007, "gender": "female", "onecrime": 0.48, "twocrime": 0.05, "threecrime": 0.00, "morethreecrime": 0.00 },
+            { "province": "sevilla", "year": 2020, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 }
+        ];
+    }
+    res.send(crimes);
+});
 
 
 app.post(BASE_API_PATH + "/crimes-an", (req, res) => {
@@ -196,7 +197,7 @@ app.delete(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
     console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year);
 
     crimes = crimes.filter((c) => {
-        return (c.province != province && c.year!= year);
+        return (c.province != province && c.year != year);
     });
 
     res.sendStatus(200);
@@ -211,7 +212,7 @@ app.delete(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
     console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year + "/" + gender);
 
     crimes = crimes.filter((c) => {
-        return (c.province != province && c.year!= year && c.gender != gender);
+        return (c.province != province && c.year != year && c.gender != gender);
     });
 
     res.sendStatus(200);
@@ -415,17 +416,6 @@ MongoClient.connect(mdbURL, { native_parser: true }, (err, mlabs) => {
         var db = database.collection("students");
     }
 
-    db.find({}).toArray((err, students) => {
-        if (students.length == 0) {
-            console.log("Empty DB");
-            db.insert(initialStudents);
-
-        }
-
-        else {
-            console.log("DB initialized with " + students.length + " students")
-        }
-    });
     students.register(app, db);
 
     app.listen(port, () => {
@@ -435,6 +425,17 @@ MongoClient.connect(mdbURL, { native_parser: true }, (err, mlabs) => {
     });
 });
 
+/*db.find({}).toArray((err, students) => {
+    if (students.length == 0) {
+        console.log("Empty DB");
+        db.insert(initialStudents);
+
+    }
+
+    else {
+        console.log("DB initialized with " + students.length + " students")
+    }
+});*/
 
 /*   db.find({}, (err, results) => {
     if (err) {
