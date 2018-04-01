@@ -4,6 +4,8 @@ var DataStore = require("nedb");
 var MongoClient = require("mongodb").MongoClient;
 
 var students = require("./studentsApi");
+var crimesAPI = require("./crimesAPI");
+
 
 var mdbURL = "mongodb://usuario:usuario@ds129939.mlab.com:29939/sos1718-08"
 
@@ -17,6 +19,10 @@ var dbDivorces = __dirname + "/divorces.db";
 var BASE_API_PATH_DIVORCES = "/api/v1/divorces-an";
 
 var app = express();
+
+crimesAPI.register(app, BASE_API_PATH);//le pasamos lo del express que esta en app al codigo que hemos movido a crimesAPI y el BASE_API_PATH
+
+
 
 app.use(bodyParser.json());
 app.use("/", express.static(__dirname + "/public"));
@@ -37,11 +43,11 @@ app.get(BASE_API_PATH + "/helpcrimes", (req, res) => {
 
 
 
-var crimes = [
+/*var crimes = [
     { "province": "almería", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
     { "province": "málaga", "year": 2007, "gender": "female", "onecrime": 0.48, "twocrime": 0.05, "threecrime": 0.00, "morethreecrime": 0.00 },
     { "province": "sevilla", "year": 2020, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 }
-];
+];*/
 
 
 var divorces = [
