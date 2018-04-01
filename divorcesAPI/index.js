@@ -19,9 +19,9 @@ objDivorces.register = function(app, BASE_API_PATH) {
 ];
 
 
-    //Sección ayuda recurso divorces (JOSE ENRIQUE)
+    //Sección ayuda recurso divorces (JURADO)
     app.get(BASE_API_PATH + "/helpdivorces", (req, res) => {
-        res.redirect("https://documenter.getpostman.com/view/3950150/collection/RVnZgdc1");
+        res.redirect("");
     });
 
     app.get(BASE_API_PATH + "/divorces-an", (req, res) => {
