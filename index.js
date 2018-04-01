@@ -5,6 +5,7 @@ var MongoClient = require("mongodb").MongoClient;
 
 var students = require("./studentsApi");
 var crimesAPI = require("./crimesAPI");
+var divorcesAPI = require("./divorcesAPI");
 
 
 var mdbURL = "mongodb://usuario:usuario@ds129939.mlab.com:29939/sos1718-08"
@@ -21,7 +22,7 @@ var BASE_API_PATH_DIVORCES = "/api/v1/divorces-an";
 var app = express();
 
 crimesAPI.register(app, BASE_API_PATH);//le pasamos lo del express que esta en app al codigo que hemos movido a crimesAPI y el BASE_API_PATH
-
+divorcesAPI.register(app, BASE_API_PATH);
 
 
 app.use(bodyParser.json());
@@ -309,6 +310,7 @@ app.put(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
 //###########################################################################################################################//
 
 //--------------------Jurado--------------------//
+/*
 
 app.get(BASE_API_PATH + "/divorces-an", (req, res) => {
     console.log(Date() + " - GET / divorces-an");
@@ -382,7 +384,7 @@ app.put(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
 
 
 });
-
+/*
 
 //###########################################################################################################################//
 
