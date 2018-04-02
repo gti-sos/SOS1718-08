@@ -9,7 +9,9 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
     var initialCrimes = [
     { "province": "almeria", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
     { "province": "malaga", "year": 2007, "gender": "female", "onecrime": 0.48, "twocrime": 0.05, "threecrime": 0.00, "morethreecrime": 0.00 },
-    { "province": "sevilla", "year": 2020, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 }
+    { "province": "sevilla", "year": 2020, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 },
+    { "province": "sevilla", "year": 2005, "gender": "male", "onecrime": 3.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 },
+    { "province": "sevilla", "year": 2012, "gender": "male", "onecrime": 4.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 }
 ];
 
 
