@@ -237,19 +237,19 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
             }
             console.log(results[0]._id)
 
-            if (results[0]._id != id) {
+            /*if (results[0]._id != id) {
                 console.error("ID no coincide")
                 res.sendStatus(400);
                 return;
-            }
-            else {
+            }*/
+            //else {
                 delete crime._id;
                 db.update({ "province": crime.province, "year": crime.year, "gender": crime.gender }, crime, function(err, numUpdate) {
                     if (err) throw err;
                     console.log("Updated: " + numUpdate);
                 });
                 res.sendStatus(200);
-            }
+           // }
 
         });
 

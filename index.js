@@ -18,7 +18,6 @@ var port = (process.env.PORT || 1607);
 var BASE_API_PATH = "/api/v1";
 //var dbCrimes = __dirname+"/contacts.db";//base de datos crimes (JOSE ENRIQUE)
 var dbFileName = __dirname + "/students.db";
-
 var dbDivorces = __dirname + "/divorces.db";
 var BASE_API_PATH_DIVORCES = "/api/v1/divorces-an";
 
