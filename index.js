@@ -30,9 +30,12 @@ app.use("/", express.static(__dirname + "/public"));
 
 var initialCrimes = [
     { "province": "almeria", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
-    { "province": "malaga", "year": 2007, "gender": "female", "onecrime": 0.48, "twocrime": 0.05, "threecrime": 0.00, "morethreecrime": 0.00 },
-    { "province": "sevilla", "year": 2020, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 },
-    { "province": "sevilla", "year": 2000, "gender": "male", "onecrime": 5.52, "twocrime": 1.52, "threecrime": 0.51, "morethreecrime": 0.33 },
+    { "province": "malaga", "year": 2012, "gender": "male", "onecrime": 8.60, "twocrime": 1.36, "threecrime": 0.31, "morethreecrime": 0.14 },
+    { "province": "cadiz", "year": 2009, "gender": "male", "onecrime": 1.44, "twocrime": 0.18, "threecrime": 0.01, "morethreecrime": 0.00 },
+    { "province": "jaen", "year": 2013, "gender": "female", "onecrime": 0.91, "twocrime": 0.07, "threecrime": 0.02, "morethreecrime": 0.01 },
+    { "province": "sevilla", "year": 2010, "gender": "male", "onecrime": 6.07, "twocrime": 1.05, "threecrime": 0.24, "morethreecrime": 0.15 },
+    { "province": "huelva", "year": 2014, "gender": "female", "onecrime": 1.02, "twocrime": 0.10, "threecrime": 0.01, "morethreecrime": 0.02 }
+
 ];
 
 
@@ -57,27 +60,6 @@ var initialStudents = [{ "province": "sevilla", "year": "2008", "gender": "male"
 
 ];
 
-/*
-var dbDiv = new DataStore({
-    filename: dbDivorces,
-    autoload: true
-});
-
-app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
-        dbDiv.find({}, (err, div) => {
-        if (err) {
-            console.error("Error accesing DB");
-            process.exit(1);
-        }
-        if (div.length == 0) {
-            console.log("Empty DB");
-            dbDiv.insert(initialsDivorces);
-        }
-        else {
-            console.log("DB initialized with " + div.length + " data");
-        }
-    });
-});*/
 
 //######################################################JOSE ENRIQUE############################################################//
 
