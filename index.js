@@ -85,16 +85,15 @@ app.get(BASE_API_PATH +"/divorces-an/loadInitialData", (req, res) => {
 //Modularizado
 MongoClient.connect(mdbcrimes,{native_parser:true},(err,mlabs)=>{
     
-    if (err) {
-        console.error("Error accesing DB" + err);
-        process.exit(1)
+    if(err){
+        console.error("Error al acceder a la base de datos mongo" + err);
+        process.exit(1);
     }
-    else {
-        console.log("Connected to DB");
-
-        var database = mlabs.db("sos1718-08");
-        var db = database.collection("crimes");
-    }
+        
+    console.log("Conectado a mongoDB");
+    var database = mlabs.db("sos1718-jepm-sandbox");
+    var db = database.collection("crimes-an");
+    
     
     crimesAPI.register(app, BASE_API_PATH, db);//le pasamos lo del express que esta en app al codigo que hemos movido a crimesAPI y el BASE_API_PATH
     
