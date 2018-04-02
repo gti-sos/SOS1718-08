@@ -35,7 +35,7 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
     });
     
 
-     app.get(BASE_API_PATH + "/divorces-an/loadInitialData", (req, res) => {
+     app.get(BASE_API_PATH + "/crimes-an/loadInitialData", (req, res) => {
         db.find({}, (err, crimes) => {
             if (err) {
                 console.error(" Error accesing DB");
