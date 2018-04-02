@@ -199,8 +199,7 @@ studentsApi.register = function(app, db) {
         var year = req.params.year
         var gender = req.params.gender
         var student = req.body;
-        var id = student._id;
-        
+
         console.log(Date() + " - PUT /students-an/" + province + "/" + year + "/" + gender);
 
         if (province != student.province || year != student.year || gender != student.gender) {
@@ -208,28 +207,11 @@ studentsApi.register = function(app, db) {
             console.warn(Date() + "Invalid fields");
             return;
         }
-        db.find({ "province": student.province, "year": student.year, "gender": student.gender }).toArray((err, results) => {
-            if (err) {
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-                return;
-            }
-
-            if (results[0]._id != id) {
-                console.error("The ID does not match")
-                res.sendStatus(400);
-                return;
-            }
-            else {
-                delete student._id;
-                db.update({ "province": student.province, "year": student.year, "gender": student.gender }, student, function(err, numUpdate) {
-                    if (err) throw err;
-                    console.log("Updated: " + numUpdate);
-                });
-                res.sendStatus(200);
-            }
-
+        db.update({ "province": student.province, "year": student.year, "gender": student.gender }, student, function(err, numUpdate) {
+            if (err) throw err;
+            console.log("Updated: " + numUpdate);
         });
+        res.sendStatus(200);
     });
 
     /*#DE------------------------------DELETES---------------------------*/
