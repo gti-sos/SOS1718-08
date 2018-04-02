@@ -38,13 +38,12 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
     
 
      app.get(BASE_API_PATH + "/crimes-an/loadInitialData", (req, res) => {
-        db.find({}, (err, crimes) => {
+        db.find({}).toArray((err, crimes) => {
             if (err) {
                 console.error(" Error accesing DB");
                 process.exit(1);
                 return;
-            }
-                if (crimes.length == 0) {
+            }else if (crimes.length == 0) {
                     console.log("Empty DB");
                     db.insert(initialCrimes);
                     res.sendStatus(201);
