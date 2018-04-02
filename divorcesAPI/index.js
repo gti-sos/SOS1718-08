@@ -185,7 +185,7 @@ DivorcesAPI.register = function(app,db) {
         res.sendStatus(405);
     });
 
-    app.put(BASE_API_PATH + "/divorces-an/:province/:year", (req, res) => {
+  /*  app.put(BASE_API_PATH + "/divorces-an/:province/:year", (req, res) => {
         var province = req.params.province;
         var year = req.params.year
         var divorce = req.body;
@@ -193,7 +193,46 @@ DivorcesAPI.register = function(app,db) {
         console.log(Date() + " - PUT /divorces-an/" + province + "/" + year);
 
         res.sendStatus(405);
+    });*/
+    
+     app.put(BASE_API_PATH + "/divorces-an/:province/:year/", (req, res) => {
+        var province = req.params.province;
+        var year = req.params.year
+        var divorce = req.body;
+        var id = divorce._id;
+        
+        console.log(Date() + " - PUT /divorces-an/" + province + "/" + year);
+
+        if (province != divorce.province || year != divorce.year) {
+            res.sendStatus(400);
+            console.warn(Date() + "Invalid fields");
+            return;
+        }
+        db.find({ "province": divorce.province, "year": divorce.year}).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+
+            if (results[0]._id != id) {
+                console.error("The ID does not match")
+                res.sendStatus(400);
+                return;
+            }
+            else {
+                delete divorce._id;
+                db.update({ "province": divorce.province, "year": divorce.year}, divorce, function(err, numUpdate) {
+                    if (err) throw err;
+                    console.log("Updated: " + numUpdate);
+                });
+                res.sendStatus(200);
+            }
+
+        });
     });
+    
+    
 
     
     app.get(BASE_API_PATH + "/secure/divorces-an", (req, res) => {
@@ -260,5 +299,5 @@ DivorcesAPI.register = function(app,db) {
         });
     });
 
-    
+    //
 }
