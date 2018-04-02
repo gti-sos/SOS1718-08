@@ -44,7 +44,6 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
                 process.exit(1);
                 return;
             }
-            db.find({}).toArray((err, crimes) => {
                 if (crimes.length == 0) {
                     console.log("Empty DB");
                     db.insert(initialCrimes);
@@ -52,12 +51,11 @@ objCrimes.register = function(app, BASE_API_PATH, db) {
 
                 }
                 else {
-                    console.log("DB initialized with " + crimes.length + " crimes");
                     res.sendStatus(200);
                 }
 
             });
-        });
+
     });
 
 
