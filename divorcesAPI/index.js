@@ -1,6 +1,10 @@
 var DivorcesAPI = {};
 module.exports = DivorcesAPI;
 var BASE_API_PATH = "/api/v1";
+var MongoClient = require('mongodb').MongoClient;
+
+var juradomdbURL="mongodb://jurado:jurado@ds231549.mlab.com:31549/sos1718-jmja-sandbox"
+
 
 DivorcesAPI.register = function(app,db) {
 
@@ -189,6 +193,71 @@ DivorcesAPI.register = function(app,db) {
         console.log(Date() + " - PUT /divorces-an/" + province + "/" + year);
 
         res.sendStatus(405);
+    });
+
+    
+    app.get(BASE_API_PATH + "/secure/divorces-an", (req, res) => {
+        
+        var apikey= req.headers.apikey;
+        if (apikey == "jurado") {
+            MongoClient.connect(juradomdbURL, function(err, db) {
+                if (err) throw err;
+                var dbo = db.db("sos1718-jmja-sandbox");
+                dbo.collection("divorces").find().toArray(function(err, result) {
+                    if (!err && !result.length) {
+                        console.log("Not found");
+                        res.sendStatus(404);
+                    }
+                    else {
+                        res.send(result.map((c) => {
+                            delete c._id;
+                            return c;
+                        }));
+                    }
+                    db.close();
+                });
+            });
+        }
+        else {
+            console.log("Unauthorized");
+            res.sendStatus(401);
+        }
+    });
+
+    
+    
+    
+    app.get(BASE_API_PATH + "/province?", (req, res) => {
+        var query = req.query;
+        if (req.query.year) {
+            query.year = Number(req.query.year);
+        }
+        if (req.query.divorce) {
+            query.divorce = Number(req.query.divorce);
+        }
+        if (req.query.break) {
+            query.break = Number(req.query.break);
+        }
+        if (req.query.nullity) {
+            query.nullity = Number(req.query.nullity);
+        }
+        MongoClient.connect(juradomdbURL, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("sos1718-jmja-sandbox");
+            dbo.collection("divorces").find(req.query).toArray(function(err, result) {
+                if (!err && !result.length) {
+                    console.log("Not found");
+                    res.sendStatus(404);
+                }
+                else {
+                    res.send(result.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                }
+                db.close();
+            });
+        });
     });
 
     
