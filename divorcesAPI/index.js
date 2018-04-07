@@ -72,31 +72,41 @@ DivorcesAPI.register = function(app,db) {
 
 
     });
-
+ //-----------------POST Permitido
     app.post(BASE_API_PATH + "/divorces-an", (req, res) => {
-        console.log(Date() + " - POST /divorces-an");
-        var divorce = req.body;
-        db.find({}).toArray((err, results) => {
-            if (err) {
-                console.error("Error accesing DB");
-                process.exit(1);
-            }
-
-            if (results.length == 0) {
-                console.log("Empty DB");
-                db.insert(divorce);
-            }
-            else {
-                console.log("DB inicialiced with " + results.length + " divorces");
-            }
-        });
-        res.sendStatus(201);
-    });
-
+         console.log(Date() + " - POST / divorces-an");
+         var crime = req.body;
+         if (crime.province == null || crime.year == null) {
+             console.error("Campos no validos");
+             res.sendStatus(400);
+             return;
+         }
+     
+         db.find({ "province": crime.province, "year": crime.year}).toArray((err, crimes) => {
+             if (err) {
+                 console.error("Error accediendo a la BD mongo");
+                 process.exit(1);
+             }
+     
+             if (crimes.length == 0) {
+                 db.insert(crime);
+                 console.log("Elemento insertado");
+                 res.sendStatus(201);
+             }
+             else {
+                 console.log("El elemento ya existe");
+                 res.sendStatus(409);
+             }
+     
+         });
+     });
+    //--------PUT no permitido
     app.put(BASE_API_PATH + "/divorces-an", (req, res) => {
         console.log(Date() + " - PUT /divorces-an");
         res.sendStatus(405);
     });
+    
+    //---------DELETE permitido
 
     app.delete(BASE_API_PATH + "/divorces-an", (req, res) => {
         console.log(Date() + " - DELETE /divorces-an");
@@ -162,13 +172,14 @@ DivorcesAPI.register = function(app,db) {
     });
 
 
-
+    //----- POST NO PERMITIDO
     app.post(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
         var province = req.params.province;
         console.log(Date() + " - POST /divorces-an/" + province);
         res.sendStatus(405);
     });
 
+    //------ POST NO PERMITIDO
     app.post(BASE_API_PATH + "/divorces-an/:province/:year", (req, res) => {
         var province = req.params.province;
         var year = req.params.year;
@@ -176,7 +187,7 @@ DivorcesAPI.register = function(app,db) {
         res.sendStatus(405);
     });
 
-
+    //------PUT NO PERMITIDO
     app.put(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
         var province = req.params.province;
         var divorce = req.body;
@@ -189,11 +200,11 @@ DivorcesAPI.register = function(app,db) {
         var province = req.params.province;
         var year = req.params.year
         var divorce = req.body;
-
         console.log(Date() + " - PUT /divorces-an/" + province + "/" + year);
-
         res.sendStatus(405);
     });*/
+    
+    //----PUT PERMITIDO
     
      app.put(BASE_API_PATH + "/divorces-an/:province/:year/", (req, res) => {
         var province = req.params.province;
@@ -267,23 +278,23 @@ DivorcesAPI.register = function(app,db) {
     
     
     app.get(BASE_API_PATH + "/province?", (req, res) => {
-        var query = req.query;
-        if (req.query.year) {
-            query.year = Number(req.query.year);
-        }
-        if (req.query.divorce) {
-            query.divorce = Number(req.query.divorce);
-        }
-        if (req.query.break) {
-            query.break = Number(req.query.break);
-        }
-        if (req.query.nullity) {
-            query.nullity = Number(req.query.nullity);
-        }
         MongoClient.connect(juradomdbURL, function(err, db) {
             if (err) throw err;
             var dbo = db.db("sos1718-jmja-sandbox");
-            dbo.collection("divorces").find(req.query).toArray(function(err, result) {
+            var query = req.query;
+            if (req.query.year) {
+                query.year = Number(req.query.year);
+            }
+            if (req.query.divorce) {
+                query.divorce = Number(req.query.divorce);
+            }
+            if (req.query.break) {
+                query.break = Number(req.query.break);
+            }
+            if (req.query.nullity) {
+                query.nullity = Number(req.query.nullity);
+            }
+            dbo.collection("divorces").find(query).toArray(function(err, result) {
                 if (!err && !result.length) {
                     console.log("Not found");
                     res.sendStatus(404);
