@@ -174,7 +174,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
              return;
          }
      
-         db.find({ "province": crime.province, "year": crime.year, "gender": crime.year }).toArray((err, crimes) => {
+         db.find({ "province": crime.province, "year": crime.year, "gender": crime.gender }).toArray((err, crimes) => {
              if (err) {
                  console.error("Error accediendo a la BD mongo");
                  process.exit(1);
