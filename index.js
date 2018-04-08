@@ -176,7 +176,7 @@ MongoClient.connect(juradomdbURL, { native_parser: true }, (err, mlabs) => {
         console.log("Connected to DB");
 
         var database = mlabs.db("sos1718-jmja-sandbox");
-        var db = database.collection("divorces");
+        var db = database.collection("divorces2");
     }
 
     divorcesAPI.register(app, db);

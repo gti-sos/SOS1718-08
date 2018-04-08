@@ -19,7 +19,20 @@ DivorcesAPI.register = function(app,db) {
     { "province": "granada", "year": 2016, "divorce": 1904, "break": 104, "nullity": 2 },
     { "province": "huelva", "year": 2016, "divorce": 1036, "break": 49, "nullity": 3 },
     { "province": "jaen", "year": 2016, "divorce": 1109, "break": 73, "nullity": 1 },
-    { "province": "malaga", "year": 2016, "divorce": 3606, "break": 171, "nullity": 3 }
+    { "province": "malaga", "year": 2016, "divorce": 3606, "break": 171, "nullity": 3 },
+    { "province": "malaga", "year": 2015, "divorce": 3606, "break": 171, "nullity": 3 }
+/*
+ { "province": "sevilla", "year": "2016", "divorce": "3973", "break": "203", "nullity": "1" },
+    { "province": "cadiz", "year": "2016", "divorce": "2249", "break": "138", "nullity": "0" },
+    { "province": "almeria", "year": "2016", "divorce": "1405", "break": "42", "nullity": "1" },
+    { "province": "cordoba", "year": "2016", "divorce": "1447", "break": "115", "nullity": "1" },
+    { "province": "granada", "year": "2016", "divorce": "1904", "break": "104", "nullity": "2" },
+    { "province": "huelva", "year": "2016", "divorce": "1036", "break": "49", "nullity": "3" },
+    { "province": "jaen", "year": "2016", "divorce": "1109", "break": "73", "nullity": "1" },
+    { "province": "malaga", "year": "2016", "divorce": "3606", "break": "171", "nullity": "3" },
+    { "province": "malaga", "year": "2015", "divorce": "366", "break": "171", "nullity": "3" }
+*/
+
 
 ];
 
@@ -75,21 +88,21 @@ DivorcesAPI.register = function(app,db) {
  //-----------------POST Permitido
     app.post(BASE_API_PATH + "/divorces-an", (req, res) => {
          console.log(Date() + " - POST / divorces-an");
-         var crime = req.body;
-         if (crime.province == null || crime.year == null) {
+         var divorce = req.body;
+         if (divorce.province == null || divorce.year == null) {
              console.error("Campos no validos");
              res.sendStatus(400);
              return;
          }
      
-         db.find({ "province": crime.province, "year": crime.year}).toArray((err, crimes) => {
+         db.find({ "province": divorce.province, "year": divorce.year}).toArray((err, divorces) => {
              if (err) {
                  console.error("Error accediendo a la BD mongo");
                  process.exit(1);
              }
      
-             if (crimes.length == 0) {
-                 db.insert(crime);
+             if (divorces.length == 0) {
+                 db.insert(divorce);
                  console.log("Elemento insertado");
                  res.sendStatus(201);
              }
@@ -133,20 +146,27 @@ DivorcesAPI.register = function(app,db) {
         });
     });
 
-    app.get(BASE_API_PATH + "/divorces-an/:province/:year", (req, res) => {
+   app.get(BASE_API_PATH + "/divorces-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - GET /divorces-an/" + province + "/" + year);
 
-        db.find({ "province": province, "year": year }).toArray((err, results) => {
+        db.find({ "province": province, "year": year }).toArray((err, divorces) => {
             if (err) {
-                console.error("Error accesing DB");
+                console.log("Error al acceder a la base de datos mongo");
                 res.sendStatus(500);
                 return;
             }
-
-            res.send(results);
-
+             if (divorces.length == 0){
+                console.log("Not found");
+                res.sendStatus(404);
+                return;
+            }
+            
+            res.send(divorces.map((c) => {
+                delete c._id;
+                return c;
+            }));
         });
     });
 
@@ -208,7 +228,7 @@ DivorcesAPI.register = function(app,db) {
     
      app.put(BASE_API_PATH + "/divorces-an/:province/:year/", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year
+        var year = req.params.year;
         var divorce = req.body;
         var id = divorce._id;
         
@@ -277,7 +297,7 @@ DivorcesAPI.register = function(app,db) {
     
     
     
-    app.get(BASE_API_PATH + "/province?", (req, res) => {
+    app.get(BASE_API_PATH + "divorces-an/province?", (req, res) => {
         MongoClient.connect(juradomdbURL, function(err, db) {
             if (err) throw err;
             var dbo = db.db("sos1718-jmja-sandbox");
@@ -294,7 +314,7 @@ DivorcesAPI.register = function(app,db) {
             if (req.query.nullity) {
                 query.nullity = Number(req.query.nullity);
             }
-            dbo.collection("divorces").find(query).toArray(function(err, result) {
+            dbo.collection("divorces2").find(query).toArray(function(err, result) {
                 if (!err && !result.length) {
                     console.log("Not found");
                     res.sendStatus(404);
