@@ -303,4 +303,113 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
         console.log(Date() + " - POST / crimes-an" + province + "/" + year + "/" + gender);
         res.sendStatus(405);
     });
+    
+    //Búsqueda y Paginación
+    
+    
+    //Búsqueda
+     app.get(BASE_API_PATH + "/crimes-an?", (req, res) => {
+            var dbo = db.db("sos1718-jepm-sandbox");
+            var query = req.query;
+            if (req.query.year) {
+                query.year = Number(req.query.year);
+            }
+            if (req.query.gender) {
+                query.gender = req.query.gender;
+            }
+            if (req.query.onecrime) {
+                query.onecrime = Number(req.query.onecrime);
+            }
+            if (req.query.twocrime) {
+                query.twocrime = Number(req.query.twocrime);
+            }
+            if (req.query.threecrimecrime) {
+                query.threecrimecrime = Number(req.query.threecrimecrime);
+            }
+            if (req.query.morethreecrimecrime) {
+                query.morethreecrimecrime = Number(req.query.morethreecrimecrime);
+            }
+            dbo.collection("crimes-an").find(query).toArray(function(err, result) {
+                if (!err && !result.length) {
+                    console.log("Not found");
+                    res.sendStatus(404);
+                }
+                else {
+                    res.send(result.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                }
+                db.close();
+            });
+    
+    });
+    
+    
+    
+    
+    
+    
+    
+    //Paginación
+    
+   /* app.get(BASE_API_PATH + "crimes-an/:dato", (req, res) => {
+
+        var limit = parseInt(req.query.limit);
+        var offset = parseInt(req.query.offset);
+        var from = req.query.yearFund;
+        var to = req.query.yearFund;
+        var anyo = req.query.year;
+        var province = req.query.province;
+        var gender = req.query.gender;
+
+        var aux = [];
+        var aux2 = [];
+        var dato = req.params.dato
+
+        if (limit || offset >= 0) {
+            db.find({ $or: [{ "province": dato }, { "year": dato }, { "gender": dato }] }).skip(offset).limit(limit).toArray(function(err, crimes) {
+                if (err) {
+                    console.log("Error al acceder a la base de datos mongo");
+                    res.sendStatus(500);
+                    return;
+                }
+                else {
+
+                    if (crimes.length == 0) {
+                        console.log("Not found");
+                        res.sendStatus(404);
+                        return;
+                    }
+
+                    if (from || to || anyo || province || gender) {
+                        aux = busqueda(crimes, aux, from, to, anyo, province, gender);
+                        if (aux.length > 0) {
+                            aux2 = aux.slice(offset, offset + limit);
+                            res.send(aux2);
+                        }
+                        else {
+                            res.sendStatus(404);
+                        }
+                    }
+                    else {
+                        res.send(crimes);
+                    }
+                }
+
+
+            });
+        }
+
+
+    });*/
+    
+    
+    
+    
+    
+    
+    
+    
+    
 };
