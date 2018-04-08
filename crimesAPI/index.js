@@ -15,12 +15,12 @@ module.exports = crimesAPI;
 */
 
 var initialCrimes = [
-    { "province": "almeria", "year": "2007", "gender": "male", "onecrime": "7.01", "twocrime": "1.48", "threecrime": "0.35", "morethreecrime": "0.15" },
-    { "province": "malaga", "year": "2012", "gender": "male", "onecrime": "8.60", "twocrime": "1.36", "threecrime": "0.31", "morethreecrime": "0.14" },
-    { "province": "cadiz", "year": "2009", "gender": "male", "onecrime": "1.44", "twocrime": "0.18", "threecrime": "0.01", "morethreecrime": "0.00" },
-    { "province": "jaen", "year": "2013", "gender": "female", "onecrime": "0.91", "twocrime": "0.07", "threecrime": "0.02", "morethreecrime": "0.01" },
-    { "province": "sevilla", "year": "2010", "gender": "male", "onecrime": "6.07", "twocrime": "1.05", "threecrime": "0.24", "morethreecrime": "0.15" },
-    { "province": "huelva", "year": "2014", "gender": "female", "onecrime": "1.02", "twocrime": "0.10", "threecrime": "0.01", "morethreecrime": "0.02" }
+    { "province": "almeria", "year": 2007, "gender": "male", "onecrime": 7.01, "twocrime": 1.48, "threecrime": 0.35, "morethreecrime": 0.15 },
+    { "province": "malaga", "year": 2012, "gender": "male", "onecrime": 8.60, "twocrime": 1.36, "threecrime": 0.31, "morethreecrime": 0.14 },
+    { "province": "cadiz", "year": 2009, "gender": "male", "onecrime": 1.44, "twocrime": 0.18, "threecrime": 0.01, "morethreecrime": 0.00 },
+    { "province": "jaen", "year": 2013, "gender": "female", "onecrime": 0.91, "twocrime": 0.07, "threecrime": 0.02, "morethreecrime": 0.01 },
+    { "province": "sevilla", "year": 2010, "gender": "male", "onecrime": 6.07, "twocrime": 1.05, "threecrime": 0.24, "morethreecrime": 0.15 },
+    { "province": "huelva", "year": 2014, "gender": "female", "onecrime": 1.02, "twocrime": 0.10, "threecrime": 0.01, "morethreecrime": 0.02 }
 
 ];
 
@@ -114,7 +114,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     //GET A UN SUBCONJUNTO DE RECURSOS
      app.get(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - GET /crimes-an/" + province + "/" + year);
 
         db.find({ "province": province, "year": year }).toArray((err, crimes) => {
@@ -139,7 +139,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     //GET A UN RECURSO CONCRETO
     app.get(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         var gender = req.params.gender;
         console.log(Date() + " - GET /crimes-an/" + province + "/" + year + "/" + gender);
 
