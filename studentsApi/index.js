@@ -76,79 +76,178 @@ studentsApi.register = function(app, db) {
         var gender = req.query.gender
         var query = ""
 
-        if (afrom && ato) {
+        if (afrom && ato && province && gender) {
+            db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (results.length == 0) {
+                    console.log("Empty DB")
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(results.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+            });
 
-            db.find({ "year": { "$gte": afrom, "$lte": ato } }).skip(offset).limit(limit).toArray((err, results) => {
-                if (err) {
-                    console.error("Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                if (results.length == 0) {
-                    console.log("Empty DB")
-                    res.sendStatus(404);
-                    return;
-                }
-                res.send(results.map((c) => {
-                    delete c._id;
-                    return c;
-                }));
-            });
-        } if (province) {
-            db.find({ "province": province }).skip(offset).limit(limit).toArray((err, results) => {
-                if (err) {
-                    console.error("Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                if (results.length == 0) {
-                    console.log("Empty DB")
-                    res.sendStatus(404);
-                    return;
-                }
-                res.send(results.map((c) => {
-                    delete c._id;
-                    return c;
-                }));
-            });
-            
-            }if(gender) {
-                db.find({ "gender": gender}).skip(offset).limit(limit).toArray((err, results) => {
-                if (err) {
-                    console.error("Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                if (results.length == 0) {
-                    console.log("Empty DB")
-                    res.sendStatus(404);
-                    return;
-                }
-                res.send(results.map((c) => {
-                    delete c._id;
-                    return c;
-                }));
-            });
-                
-            }
-            else{
-            db.find({}).skip(offset).limit(limit).toArray((err, results) => {
-                if (err) {
-                    console.error("Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                }
-                if (results.length == 0) {
-                    console.log("Empty DB")
-                    res.sendStatus(404);
-                    return;
-                }
-                res.send(results.map((c) => {
-                    delete c._id;
-                    return c;
-                }));
-            });
         }
+        else {
+
+            if (afrom && ato && gender) {
+                db.find({ "year": { "$gte": afrom, "$lte": ato }, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (results.length == 0) {
+                        console.log("Empty DB")
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(results.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                });
+
+            }
+            else {
+                if (afrom && ato && province) {
+                    db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province }).skip(offset).limit(limit).toArray((err, results) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (results.length == 0) {
+                            console.log("Empty DB")
+                            res.sendStatus(404);
+                            return;
+                        }
+                        res.send(results.map((c) => {
+                            delete c._id;
+                            return c;
+                        }));
+                    });
+
+                }
+                else {
+
+                    if (province && gender) {
+                        db.find({ "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                            if (err) {
+                                console.error("Error accesing DB");
+                                res.sendStatus(500);
+                                return;
+                            }
+                            if (results.length == 0) {
+                                console.log("Empty DB")
+                                res.sendStatus(404);
+                                return;
+                            }
+                            res.send(results.map((c) => {
+                                delete c._id;
+                                return c;
+                            }));
+                        });
+
+                    }
+                    else {
+
+
+                        if (afrom && ato) {
+
+                            db.find({ "year": { "$gte": afrom, "$lte": ato } }).skip(offset).limit(limit).toArray((err, results) => {
+                                if (err) {
+                                    console.error("Error accesing DB");
+                                    res.sendStatus(500);
+                                    return;
+                                }
+                                if (results.length == 0) {
+                                    console.log("Empty DB")
+                                    res.sendStatus(404);
+                                    return;
+                                }
+                                res.send(results.map((c) => {
+                                    delete c._id;
+                                    return c;
+                                }));
+                            });
+                        }
+                        else {
+
+
+                            if (province) {
+                                db.find({ "province": province }).skip(offset).limit(limit).toArray((err, results) => {
+                                    if (err) {
+                                        console.error("Error accesing DB");
+                                        res.sendStatus(500);
+                                        return;
+                                    }
+                                    if (results.length == 0) {
+                                        console.log("Empty DB")
+                                        res.sendStatus(404);
+                                        return;
+                                    }
+                                    res.send(results.map((c) => {
+                                        delete c._id;
+                                        return c;
+                                    }));
+                                });
+                            }
+                            else {
+
+                                if (gender) {
+                                    db.find({ "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+
+                                }
+                                else {
+                                    db.find({}).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
     });
 
     //GET A UN SUBCONJUNTO DE RECURSOS
@@ -233,39 +332,39 @@ studentsApi.register = function(app, db) {
         });
     });
     /*#I2------------------------------BUSQUEDAS---------------------------*/
-    app.get(BASE_API_PATH + "/students-an?", (req, res) => {
-        var query = req.query
-        console.log(Date() + " - BUSQUEDA /students-an/");
-        /* if (req.query.province) {
-             query.province = Number(req.query.province);
-         }
-         if (req.query.year) {
-             query.year = Number(req.query.year);
-         }
-         if (req.query.gender) {
-             query.gender = Number(req.query.gender);
-         }*/
+    /*  app.get(BASE_API_PATH + "/students-an?", (req, res) => {
+          var query = req.query
+          console.log(Date() + " - BUSQUEDA /students-an/");
+           if (req.query.province) {
+               query.province = Number(req.query.province);
+           }
+           if (req.query.year) {
+               query.year = Number(req.query.year);
+           }
+           if (req.query.gender) {
+               query.gender = Number(req.query.gender);
+           }
 
-        db.find(query).toArray((err, results) => {
-            if (err) {
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-                return;
-            }
+          db.find(query).toArray((err, results) => {
+              if (err) {
+                  console.error("Error accesing DB");
+                  res.sendStatus(500);
+                  return;
+              }
 
-            if (results.length == 0) {
-                console.log("Not found")
-                res.sendStatus(404);
-                return;
-            }
+              if (results.length == 0) {
+                  console.log("Not found")
+                  res.sendStatus(404);
+                  return;
+              }
 
-            res.send(results.map((c) => {
-                delete c._id;
-                return c;
-            }));
+              res.send(results.map((c) => {
+                  delete c._id;
+                  return c;
+              }));
 
-        });
-    });
+          });
+      });*/
 
     /*#PP------------------------------POST Y PUT PERMITIDOS---------------------------*/
 
