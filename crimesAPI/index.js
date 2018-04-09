@@ -77,6 +77,10 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
         var year = Number(req.query.year);
         var gender = req.query.gender;
         var query = "";
+        var onecrime = Number(req.query.onecrime);
+        var twocrime = Number(req.query.twocrime);
+        var threecrime = Number(req.query.threecrime);
+        var morethreecrime = Number(req.query.morethreecrime);
 
         if (afrom && ato && province && gender) {
             db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
@@ -244,8 +248,27 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
 
                                 }
                                 else{
-                    
-                                    db.find({}).skip(offset).limit(limit).toArray((err, results) => {
+                                    if (onecrime && twocrime && threecrime && morethreecrime) {
+                                        db.find({ "onecrime": onecrime, "twocrime": twocrime, "threecrime": threecrime, "morethreecrime": morethreecrime }).skip(offset).limit(limit).toArray((err, results) => {
+                                            if (err) {
+                                                console.error("Error accesing DB");
+                                                res.sendStatus(500);
+                                                return;
+                                            }
+                                            if (results.length == 0) {
+                                                console.log("Empty DB")
+                                                res.sendStatus(404);
+                                                return;
+                                            }
+                                            res.send(results.map((c) => {
+                                                delete c._id;
+                                                return c;
+                                            }));
+                                        });
+                                    }
+                                    else{
+                                        
+                                        db.find({}).skip(offset).limit(limit).toArray((err, results) => {
                                         if (err) {
                                             console.error("Error accesing DB");
                                             res.sendStatus(500);
@@ -261,6 +284,9 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
                                             return c;
                                         }));
                                     });
+                                        
+                                    }
+                    
                                 
                                     }
                                 }
@@ -596,7 +622,221 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     
     
     
+    /*
     
+    //GET A TODOS LOS RECURSOS
+    app.get(BASE_API_PATH + "/crimes-an", (req, res) => {
+        console.log(Date() + " - GET /crimes-an");
+        var limit = parseInt(req.query.limit);
+        var offset = parseInt(req.query.offset);
+
+        //BUSQUEDA
+        var afrom = Number(req.query.from);
+        var ato = Number(req.query.to);
+        var province = req.query.province;
+        var year = Number(req.query.year);
+        var gender = req.query.gender;
+        var query = "";
+
+        if (afrom && ato && province && gender) {
+            db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (results.length == 0) {
+                    console.log("Empty DB")
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(results.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+            });
+
+        }
+        else {
+
+            if (afrom && ato && gender) {
+                db.find({ "year": { "$gte": afrom, "$lte": ato }, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (results.length == 0) {
+                        console.log("Empty DB")
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(results.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                });
+
+            }
+            else {
+                if (afrom && ato && province) {
+                    db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province }).skip(offset).limit(limit).toArray((err, results) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (results.length == 0) {
+                            console.log("Empty DB")
+                            res.sendStatus(404);
+                            return;
+                        }
+                        res.send(results.map((c) => {
+                            delete c._id;
+                            return c;
+                        }));
+                    });
+
+                }
+                else {
+
+                    if (province && gender) {
+                        db.find({ "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                            if (err) {
+                                console.error("Error accesing DB");
+                                res.sendStatus(500);
+                                return;
+                            }
+                            if (results.length == 0) {
+                                console.log("Empty DB")
+                                res.sendStatus(404);
+                                return;
+                            }
+                            res.send(results.map((c) => {
+                                delete c._id;
+                                return c;
+                            }));
+                        });
+
+                    }
+                    else {
+
+
+                        if (afrom && ato) {
+
+                            db.find({ "year": { "$gte": afrom, "$lte": ato } }).skip(offset).limit(limit).toArray((err, results) => {
+                                if (err) {
+                                    console.error("Error accesing DB");
+                                    res.sendStatus(500);
+                                    return;
+                                }
+                                if (results.length == 0) {
+                                    console.log("Empty DB")
+                                    res.sendStatus(404);
+                                    return;
+                                }
+                                res.send(results.map((c) => {
+                                    delete c._id;
+                                    return c;
+                                }));
+                            });
+                        }
+                        else {
+
+
+                            if (province) {
+                                db.find({ "province": province }).skip(offset).limit(limit).toArray((err, results) => {
+                                    if (err) {
+                                        console.error("Error accesing DB");
+                                        res.sendStatus(500);
+                                        return;
+                                    }
+                                    if (results.length == 0) {
+                                        console.log("Empty DB")
+                                        res.sendStatus(404);
+                                        return;
+                                    }
+                                    res.send(results.map((c) => {
+                                        delete c._id;
+                                        return c;
+                                    }));
+                                });
+                            }
+                            else {
+
+                                if (gender) {
+                                    db.find({ "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+
+                                }
+                                else{
+                                    if (year) {
+                                    db.find({ "year": year }).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+
+                                }
+                                else{
+                    
+                                    db.find({}).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+                                
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+    });
+    
+    */
     
     
     
