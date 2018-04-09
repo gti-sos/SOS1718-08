@@ -73,10 +73,10 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
         //BUSQUEDA
         var afrom = Number(req.query.from);
         var ato = Number(req.query.to);
-        var province = req.query.province
+        var province = req.query.province;
         var year = Number(req.query.year);
-        var gender = req.query.gender
-        var query = ""
+        var gender = req.query.gender;
+        var query = "";
 
         if (afrom && ato && province && gender) {
             db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {

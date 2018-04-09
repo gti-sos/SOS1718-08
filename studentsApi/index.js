@@ -72,9 +72,10 @@ studentsApi.register = function(app, db) {
         //BUSQUEDA
         var afrom = Number(req.query.from);
         var ato = Number(req.query.to);
-        var province = req.query.province
-        var gender = req.query.gender
-        var query = ""
+        var year = Number(req.query.year);
+        var province = req.query.province;
+        var gender = req.query.gender;
+        var query = "";
 
         if (afrom && ato && province && gender) {
             db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
@@ -220,6 +221,25 @@ studentsApi.register = function(app, db) {
                                         }));
                                     });
 
+                                }else{
+                                    if (year) {
+                                    db.find({ "year": year }).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+
                                 }
                                 else {
                                     db.find({}).skip(offset).limit(limit).toArray((err, results) => {
@@ -238,7 +258,9 @@ studentsApi.register = function(app, db) {
                                             return c;
                                         }));
                                     });
+                                    }
                                 }
+                                
                             }
                         }
                     }
