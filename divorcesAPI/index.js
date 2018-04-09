@@ -159,21 +159,92 @@ divorcesAPI.register = function(app,db) {
     });
 
 
-    app.get(BASE_API_PATH + "/divorces-an/:province/", (req, res) => {
+    
+    app.get(BASE_API_PATH + "/divorces-an/:province?", (req, res) => {
         var province = req.params.province;
+        var query = req.query;
         console.log(Date() + " - GET /divorces-an/" + province);
-
-        db.find({ "province": province }).toArray((err, results) => {
+            if (req.query.year) {
+                query.year = Number(req.query.year);
+            }
+            if (req.query.divorce) {
+                query.divorce = Number(req.query.divorce);
+            }
+            if (req.query.break) {
+                query.break = Number(req.query.break);
+            }
+            if (req.query.nullity) {
+                query.nullity = Number(req.query.nullity);
+            }
+            
+            if(query.year==null){
+        db.find({ "province": province}).toArray((err, results) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
             }
 
-            res.send(results);
+            res.send(results.map((c) => {
+                
+                            delete c._id;
+                            return c;
+                
+                        }));
 
         });
+            }else{
+                db.find({ "province": province,"year":query.year}).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+
+            res.send(results.map((c) => {
+                
+                            delete c._id;
+                            return c;
+                
+                        }));
+                });
+            }
     });
+    //------------ get busqueda
+     app.get(BASE_API_PATH + "/province?", (req, res) => {
+        MongoClient.connect(urljurado, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("sos1718-jmja-sandbox");
+            var query = req.query;
+            if (req.query.year) {
+                query.year = Number(req.query.year);
+            }
+            if (req.query.divorce) {
+                query.divorce = Number(req.query.divorce);
+            }
+            if (req.query.break) {
+                query.break = Number(req.query.break);
+            }
+            if (req.query.nullity) {
+                query.nullity = Number(req.query.nullity);
+            }
+            dbo.collection("divorces").find(query).toArray(function(err, result) {
+                if (!err && !result.length) {
+                    console.log("Not found");
+                    res.sendStatus(404);
+                }
+                else {
+                    res.send(result.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                }
+                db.close();
+            });
+        });
+    });
+    
+    //-----------------------
 
    app.get(BASE_API_PATH + "/divorces-an/:province/:year", (req, res) => {
         var province = req.params.province;
