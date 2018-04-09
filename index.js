@@ -14,6 +14,9 @@ var mdbcrimes = "mongodb://josprimen:josprimen@ds231549.mlab.com:31549/sos1718-j
 
 
 
+
+
+
 var port = (process.env.PORT || 1607);
 var BASE_API_PATH = "/api/v1";
 //var dbCrimes = __dirname+"/contacts.db";//base de datos crimes (JOSE ENRIQUE)
@@ -165,7 +168,11 @@ app.put(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
 
 
 });
+
+
 */
+
+
 console.log("Intentando conectar a Divorces");
 MongoClient.connect(juradomdbURL, { native_parser: true }, (err, mlabs) => {
     if (err) {
@@ -187,9 +194,6 @@ MongoClient.connect(juradomdbURL, { native_parser: true }, (err, mlabs) => {
         console.log("Server NOT READY:" + e);
     });
 });
-
-
-
 
 //###########################################################################################################################//
 
