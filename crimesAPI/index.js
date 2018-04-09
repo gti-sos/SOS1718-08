@@ -227,29 +227,9 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
                                     });
 
                                 }
-                                else{
+                                else {
                                     if (year) {
-                                    db.find({ "year": year }).skip(offset).limit(limit).toArray((err, results) => {
-                                        if (err) {
-                                            console.error("Error accesing DB");
-                                            res.sendStatus(500);
-                                            return;
-                                        }
-                                        if (results.length == 0) {
-                                            console.log("Empty DB")
-                                            res.sendStatus(404);
-                                            return;
-                                        }
-                                        res.send(results.map((c) => {
-                                            delete c._id;
-                                            return c;
-                                        }));
-                                    });
-
-                                }
-                                else{
-                                    if (onecrime && twocrime && threecrime && morethreecrime) {
-                                        db.find({ "onecrime": onecrime, "twocrime": twocrime, "threecrime": threecrime, "morethreecrime": morethreecrime }).skip(offset).limit(limit).toArray((err, results) => {
+                                        db.find({ "year": year }).skip(offset).limit(limit).toArray((err, results) => {
                                             if (err) {
                                                 console.error("Error accesing DB");
                                                 res.sendStatus(500);
@@ -265,40 +245,147 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
                                                 return c;
                                             }));
                                         });
+
                                     }
-                                    else{
-                                        
-                                        db.find({}).skip(offset).limit(limit).toArray((err, results) => {
-                                        if (err) {
-                                            console.error("Error accesing DB");
-                                            res.sendStatus(500);
-                                            return;
+                                    else {
+                                        if (onecrime && twocrime && threecrime && morethreecrime) {
+                                            db.find({ "onecrime": onecrime, "twocrime": twocrime, "threecrime": threecrime, "morethreecrime": morethreecrime }).skip(offset).limit(limit).toArray((err, results) => {
+                                                if (err) {
+                                                    console.error("Error accesing DB");
+                                                    res.sendStatus(500);
+                                                    return;
+                                                }
+                                                if (results.length == 0) {
+                                                    console.log("Empty DB")
+                                                    res.sendStatus(404);
+                                                    return;
+                                                }
+                                                res.send(results.map((c) => {
+                                                    delete c._id;
+                                                    return c;
+                                                }));
+                                            });
                                         }
-                                        if (results.length == 0) {
-                                            console.log("Empty DB")
-                                            res.sendStatus(404);
-                                            return;
+                                        else {
+                                            if (onecrime) {
+
+                                                db.find({ "onecrime": onecrime }).skip(offset).limit(limit).toArray((err, results) => {
+                                                    if (err) {
+                                                        console.error("Error accesing DB");
+                                                        res.sendStatus(500);
+                                                        return;
+                                                    }
+                                                    if (results.length == 0) {
+                                                        console.log("Empty DB")
+                                                        res.sendStatus(404);
+                                                        return;
+                                                    }
+                                                    res.send(results.map((c) => {
+                                                        delete c._id;
+                                                        return c;
+                                                    }));
+                                                });
+
+                                            }
+                                            else {
+                                                if (twocrime) {
+
+                                                    db.find({ "twocrime": twocrime }).skip(offset).limit(limit).toArray((err, results) => {
+                                                        if (err) {
+                                                            console.error("Error accesing DB");
+                                                            res.sendStatus(500);
+                                                            return;
+                                                        }
+                                                        if (results.length == 0) {
+                                                            console.log("Empty DB")
+                                                            res.sendStatus(404);
+                                                            return;
+                                                        }
+                                                        res.send(results.map((c) => {
+                                                            delete c._id;
+                                                            return c;
+                                                        }));
+                                                    });
+
+                                                }
+                                                else {
+                                                    if (threecrime) {
+                                                        db.find({ "threecrime": threecrime }).skip(offset).limit(limit).toArray((err, results) => {
+                                                            if (err) {
+                                                                console.error("Error accesing DB");
+                                                                res.sendStatus(500);
+                                                                return;
+                                                            }
+                                                            if (results.length == 0) {
+                                                                console.log("Empty DB")
+                                                                res.sendStatus(404);
+                                                                return;
+                                                            }
+                                                            res.send(results.map((c) => {
+                                                                delete c._id;
+                                                                return c;
+                                                            }));
+                                                        });
+                                                    }
+                                                    else {
+                                                        if (morethreecrime) {
+
+                                                            db.find({ "morethreecrime": morethreecrime }).skip(offset).limit(limit).toArray((err, results) => {
+                                                                if (err) {
+                                                                    console.error("Error accesing DB");
+                                                                    res.sendStatus(500);
+                                                                    return;
+                                                                }
+                                                                if (results.length == 0) {
+                                                                    console.log("Empty DB")
+                                                                    res.sendStatus(404);
+                                                                    return;
+                                                                }
+                                                                res.send(results.map((c) => {
+                                                                    delete c._id;
+                                                                    return c;
+                                                                }));
+                                                            });
+
+                                                        }
+                                                        else {
+
+                                                            db.find({}).skip(offset).limit(limit).toArray((err, results) => {
+                                                                if (err) {
+                                                                    console.error("Error accesing DB");
+                                                                    res.sendStatus(500);
+                                                                    return;
+                                                                }
+                                                                if (results.length == 0) {
+                                                                    console.log("Empty DB")
+                                                                    res.sendStatus(404);
+                                                                    return;
+                                                                }
+                                                                res.send(results.map((c) => {
+                                                                    delete c._id;
+                                                                    return c;
+                                                                }));
+                                                            });
+
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                            }
+
                                         }
-                                        res.send(results.map((c) => {
-                                            delete c._id;
-                                            return c;
-                                        }));
-                                    });
-                                        
-                                    }
-                    
-                                
+
                                     }
                                 }
-                                
+
                             }
                         }
                     }
                 }
             }
         }
-
-
 
     });
 
