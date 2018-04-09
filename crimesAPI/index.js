@@ -74,6 +74,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
         var afrom = Number(req.query.from);
         var ato = Number(req.query.to);
         var province = req.query.province
+        var year = Number(req.query.year);
         var gender = req.query.gender
         var query = ""
 
@@ -222,7 +223,28 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
                                     });
 
                                 }
-                                else {
+                                else{
+                                    if (year) {
+                                    db.find({ "year": year }).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+
+                                }
+                                else{
+                    
                                     db.find({}).skip(offset).limit(limit).toArray((err, results) => {
                                         if (err) {
                                             console.error("Error accesing DB");
@@ -239,7 +261,10 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
                                             return c;
                                         }));
                                     });
+                                
+                                    }
                                 }
+                                
                             }
                         }
                     }
