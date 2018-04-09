@@ -66,24 +66,189 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
 
     //GET A TODOS LOS RECURSOS
     app.get(BASE_API_PATH + "/crimes-an", (req, res) => {
-        console.log(Date() + " - GET / crimes-an");
+        console.log(Date() + " - GET /crimes-an");
+        var limit = parseInt(req.query.limit);
+        var offset = parseInt(req.query.offset);
 
-        db.find({}).toArray((err, crimes) => {
-            if (err) {
-                console.log("Error al acceder a la base de datos mongo");
-                res.sendStatus(500);
-                return;
+        //BUSQUEDA
+        var afrom = Number(req.query.from);
+        var ato = Number(req.query.to);
+        var province = req.query.province
+        var gender = req.query.gender
+        var query = ""
+
+        if (afrom && ato && province && gender) {
+            db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (results.length == 0) {
+                    console.log("Empty DB")
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(results.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+            });
+
+        }
+        else {
+
+            if (afrom && ato && gender) {
+                db.find({ "year": { "$gte": afrom, "$lte": ato }, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    if (results.length == 0) {
+                        console.log("Empty DB")
+                        res.sendStatus(404);
+                        return;
+                    }
+                    res.send(results.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                });
+
             }
-            if (crimes.length == 0){
-                console.log("BD vacia");
-                res.sendStatus(404);
-                return;
+            else {
+                if (afrom && ato && province) {
+                    db.find({ "year": { "$gte": afrom, "$lte": ato }, "province": province }).skip(offset).limit(limit).toArray((err, results) => {
+                        if (err) {
+                            console.error("Error accesing DB");
+                            res.sendStatus(500);
+                            return;
+                        }
+                        if (results.length == 0) {
+                            console.log("Empty DB")
+                            res.sendStatus(404);
+                            return;
+                        }
+                        res.send(results.map((c) => {
+                            delete c._id;
+                            return c;
+                        }));
+                    });
+
+                }
+                else {
+
+                    if (province && gender) {
+                        db.find({ "province": province, "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                            if (err) {
+                                console.error("Error accesing DB");
+                                res.sendStatus(500);
+                                return;
+                            }
+                            if (results.length == 0) {
+                                console.log("Empty DB")
+                                res.sendStatus(404);
+                                return;
+                            }
+                            res.send(results.map((c) => {
+                                delete c._id;
+                                return c;
+                            }));
+                        });
+
+                    }
+                    else {
+
+
+                        if (afrom && ato) {
+
+                            db.find({ "year": { "$gte": afrom, "$lte": ato } }).skip(offset).limit(limit).toArray((err, results) => {
+                                if (err) {
+                                    console.error("Error accesing DB");
+                                    res.sendStatus(500);
+                                    return;
+                                }
+                                if (results.length == 0) {
+                                    console.log("Empty DB")
+                                    res.sendStatus(404);
+                                    return;
+                                }
+                                res.send(results.map((c) => {
+                                    delete c._id;
+                                    return c;
+                                }));
+                            });
+                        }
+                        else {
+
+
+                            if (province) {
+                                db.find({ "province": province }).skip(offset).limit(limit).toArray((err, results) => {
+                                    if (err) {
+                                        console.error("Error accesing DB");
+                                        res.sendStatus(500);
+                                        return;
+                                    }
+                                    if (results.length == 0) {
+                                        console.log("Empty DB")
+                                        res.sendStatus(404);
+                                        return;
+                                    }
+                                    res.send(results.map((c) => {
+                                        delete c._id;
+                                        return c;
+                                    }));
+                                });
+                            }
+                            else {
+
+                                if (gender) {
+                                    db.find({ "gender": gender }).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+
+                                }
+                                else {
+                                    db.find({}).skip(offset).limit(limit).toArray((err, results) => {
+                                        if (err) {
+                                            console.error("Error accesing DB");
+                                            res.sendStatus(500);
+                                            return;
+                                        }
+                                        if (results.length == 0) {
+                                            console.log("Empty DB")
+                                            res.sendStatus(404);
+                                            return;
+                                        }
+                                        res.send(results.map((c) => {
+                                            delete c._id;
+                                            return c;
+                                        }));
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            res.send(crimes.map((c) => {
-                delete c._id;
-                return c;
-            }));
-        });
+        }
+
+
+
     });
 
 
@@ -306,7 +471,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     
     //Búsqueda y Paginación
     
-    
+    /*
     //Búsqueda
      app.get(BASE_API_PATH + "/crimes-an?", (req, res) => {
             var dbo = db.db("sos1718-jepm-sandbox");
@@ -347,7 +512,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     
     
     
-    
+    */
     
     
     
