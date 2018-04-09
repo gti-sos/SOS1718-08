@@ -8,6 +8,7 @@ module.exports = studentsApi;
 #I2 -----> INICIALIZADOR 
 #MP -----> METODOS PERMITIDOS
 #GE -----> GETTERS
+#BU -----> BÚSQUEDAS
 #PP -----> POST Y PUT PERMITIDOS
 #DE -----> DELETES
 #MN -----> METODOS NO PERMITIDOS
@@ -16,12 +17,12 @@ module.exports = studentsApi;
 */
 
 /*#I1------------------------------INSERCION INICIAL---------------------------*/
-var initialStudents = [{ "province": "sevilla", "year": "2008", "gender": "male", "pop-illiterate": "16.32", "pop-high-education": "182.9", "pop-in-university": "30493" },
-    { "province": "cadiz", "year": "2008", "gender": "female", "pop-illiterate": "28.70", "pop-high-education": "97.06", "pop-in-university": "10766" },
-    { "province": "sevilla", "year": "2008", "gender": "both", "pop-illiterate": "56.53", "pop-high-education": "378.78", "pop-in-university": "66325" },
-    { "province": "granada", "year": "2010", "gender": "male", "pop-illiterate": "10.02", "pop-high-education": "81.99", "pop-in-university": "54024" },
-    { "province": "granada", "year": "2011", "gender": "female", "pop-illiterate": "23.86", "pop-high-education": "91.26", "pop-in-university": "22905" },
-    { "province": "granada", "year": "2011", "gender": "both", "pop-illiterate": "53.86", "pop-high-education": "191.26", "pop-in-university": "44405" }
+var initialStudents = [{ "province": "sevilla", "year": 2008, "gender": "male", "pop-illiterate": 16.32, "pop-high-education": 182.9, "pop-in-university": 30493 },
+    { "province": "cadiz", "year": 2008, "gender": "female", "pop-illiterate": 28.70, "pop-high-education": 97.06, "pop-in-university": 10766 },
+    { "province": "sevilla", "year": 2008, "gender": "both", "pop-illiterate": 56.53, "pop-high-education": 378.78, "pop-in-university": 66325 },
+    { "province": "granada", "year": 2010, "gender": "male", "pop-illiterate": 10.02, "pop-high-education": 81.99, "pop-in-university": 54024 },
+    { "province": "granada", "year": 2011, "gender": "female", "pop-illiterate": 23.86, "pop-high-education": 91.26, "pop-in-university": 22905 },
+    { "province": "granada", "year": 2011, "gender": "both", "pop-illiterate": 53.86, "pop-high-education": 191.26, "pop-in-university": 44405 }
 
 ];
 
@@ -65,31 +66,100 @@ studentsApi.register = function(app, db) {
     //GET A TODOS LOS RECURSOS
     app.get(BASE_API_PATH + "/students-an", (req, res) => {
         console.log(Date() + " - GET /students-an");
+        var limit = parseInt(req.query.limit);
+        var offset = parseInt(req.query.offset);
 
-        db.find({}).toArray((err, results) => {
-            if (err) {
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-                return;
+        //BUSQUEDA
+        var afrom = Number(req.query.from);
+        var ato = Number(req.query.to);
+        var province = req.query.province
+        var gender = req.query.gender
+        var query = ""
+
+        if (afrom && ato) {
+
+            db.find({ "year": { "$gte": afrom, "$lte": ato } }).skip(offset).limit(limit).toArray((err, results) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (results.length == 0) {
+                    console.log("Empty DB")
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(results.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+            });
+        } if (province) {
+            db.find({ "province": province }).skip(offset).limit(limit).toArray((err, results) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (results.length == 0) {
+                    console.log("Empty DB")
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(results.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+            });
+            
+            }if(gender) {
+                db.find({ "gender": gender}).skip(offset).limit(limit).toArray((err, results) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (results.length == 0) {
+                    console.log("Empty DB")
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(results.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+            });
+                
             }
-            if (results.length == 0) {
-                console.log("Empty DB")
-                res.sendStatus(404);
-                return;
-            }
-            res.send(results.map((c) => {
-                delete c._id;
-                return c;
-            }));
-        });
+            else{
+            db.find({}).skip(offset).limit(limit).toArray((err, results) => {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                if (results.length == 0) {
+                    console.log("Empty DB")
+                    res.sendStatus(404);
+                    return;
+                }
+                res.send(results.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+            });
+        }
     });
 
     //GET A UN SUBCONJUNTO DE RECURSOS
-    app.get(BASE_API_PATH + "/students-an/:province/", (req, res) => {
+    app.get(BASE_API_PATH + "/students-an/:province", (req, res) => {
         var province = req.params.province;
         console.log(Date() + " - GET /students-an/" + province);
+        //PAGINACION
+        var limit = parseInt(req.query.limit);
+        var offset = parseInt(req.query.offset);
 
-        db.find({ "province": province }).toArray((err, results) => {
+        db.find({ "province": province }).skip(offset).limit(limit).toArray((err, results) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -111,10 +181,12 @@ studentsApi.register = function(app, db) {
     //GET A UN SUBCONJUNTO DE RECURSOS
     app.get(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - GET /students-an/" + province + "/" + year);
+        var limit = parseInt(req.query.limit);
+        var offset = parseInt(req.query.offset);
 
-        db.find({ "province": province, "year": year }).toArray((err, results) => {
+        db.find({ "province": province, "year": year }).skip(offset).limit(limit).toArray((err, results) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -136,7 +208,7 @@ studentsApi.register = function(app, db) {
     //GET A UN RECURSO CONCRETO
     app.get(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         var gender = req.params.gender;
         console.log(Date() + " - GET /students-an/" + province + "/" + year + "/" + gender);
 
@@ -160,6 +232,41 @@ studentsApi.register = function(app, db) {
 
         });
     });
+    /*#I2------------------------------BUSQUEDAS---------------------------*/
+    app.get(BASE_API_PATH + "/students-an?", (req, res) => {
+        var query = req.query
+        console.log(Date() + " - BUSQUEDA /students-an/");
+        /* if (req.query.province) {
+             query.province = Number(req.query.province);
+         }
+         if (req.query.year) {
+             query.year = Number(req.query.year);
+         }
+         if (req.query.gender) {
+             query.gender = Number(req.query.gender);
+         }*/
+
+        db.find(query).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+
+            if (results.length == 0) {
+                console.log("Not found")
+                res.sendStatus(404);
+                return;
+            }
+
+            res.send(results.map((c) => {
+                delete c._id;
+                return c;
+            }));
+
+        });
+    });
+
     /*#PP------------------------------POST Y PUT PERMITIDOS---------------------------*/
 
     //CREAR UN NUEVO RECURSO
