@@ -1,0 +1,21 @@
+<h1>Edit Student</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{updatedStudent.name}}</td>
+            <td><input class="form-control" ng-model="updatedStudent.phone" /></td>
+            <td><button class="button btn-primary" ng-click="updateStudent()">
+                Update
+            </button></td>
+        </tr>
+    </tbody>
+</table>
+<hr/>
+<h8><i>{{status}}</i></h8>

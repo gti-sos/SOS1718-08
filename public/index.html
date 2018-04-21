@@ -1,37 +1,19 @@
+<html ng-app="ManagerApp">
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>SOS1718-08</title>
-    </head>
-    <body>
-        <h1>SOS1718-08</h1>
-        <h2>Team</h2>
-        
-        <a href="https://github.com/josprimen">Jose Enrique Prieto Menacho</a>
-        <p>
-        <a href="https://github.com/jura2alvarez">Jose Manuel Jurado Alvarez</a>
-        </p>
-        <a href= "https://github.com/unpezllamadomiki">Maria Solis Diago</a>
-        
-        <h3>Project description: </h3>
-        <a>Study of relationship between divorces, crimes and schoolar failure</a>
-        
-        <h3>Repository: </h3>
-        <a href="https://github.com/gti-sos/SOS1718-08">SOS1718-08</a>
-        
-        <h3>URL: </h3>
-        <a href="https://sos1718-08.herokuapp.com/">Heroku</a>
-        <a href="https://sos1718-08.herokuapp.com/api/v1/crimes-an/">Crimes</a> Jose Enrique Prieto Menacho
-        <a href="https://sos1718-08.herokuapp.com/api/v1/divorces-an/">Divorces</a> Jose Manuel Jurado Alvarez
-        <a href="https://sos1718-08.herokuapp.com/api/v1/students-an/">Students</a> Maria Solis Diago
-        
-        <h4>API: </h4>
-        <a href="https://sos1718-08.herokuapp.com/api/v1/crimes-an/docs">Crimes</a> Developed by Jose Enrique Prieto Menacho
-        <a href="https://sos1718-08.herokuapp.com/api/v1/divorces-an/docs">Divorces</a> Developed by Jose Manuel Jurado Alvarez
-        <a href="https://sos1718-08.herokuapp.com/api/v1/students-an/docs">Students</a> Developed by Maria Solis Diago
-        
-        
-        
-    </body>
+<head>
+    <title>Student Manager</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="ManagerApp.js"></script>
+    <script src="studentListCtrl.js"></script>
+    <script src="studentEditCtrl.js"></script>
+</head>
+
+<body >
+    <div ng-view>
+    </div>
+</body>
+
 </html>
