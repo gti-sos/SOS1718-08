@@ -12,14 +12,13 @@ angular
                 console.log(response.data[0])
         });
         
-        $scope.updatedDivorce = function successCallback(){
+         $scope.updateDivorce = function successCallback(){
             $http.put(divorceURL,$scope.updatedDivorce).then(function (response){
                 $scope.status = "Status: " + response.status;
                 console.log($scope.status)
                 $location.path("/divorces-an");
                 $scope.error=""
             }, function errorCallback(response){
-                console.log("error")
                 console.log(response.status);
                 $scope.status = "Status: " + response.status;
                  switch (response.status) {
