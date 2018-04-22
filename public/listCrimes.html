@@ -1,0 +1,40 @@
+{{crimes}}
+      <h1>Crimes List</h1>
+       <table class="table table-striped">
+            <thread>
+                <tr>
+                <th>Provincia</th>
+                <th>Año</th>
+                <th>Género</th>
+                <th>Un crimen</th>
+                <th>Dos crímenes</th>
+                <th>Tres crímenes</th>
+                <th>Más de tres crímenes</th>
+            </tr>
+            </thread>
+            <tbody>
+                <tr>
+                    <td><input class="form-control" ng-model="newCrime.province" /></td>
+                    <td><input class="form-control" ng-model="newCrime.year" /></td>
+                    <td><input class="form-control" ng-model="newCrime.gender" /></td>
+                    <td><input class="form-control" ng-model="newCrime.onecrime" /></td>
+                    <td><input class="form-control" ng-model="newCrime.twocrime" /></td>
+                    <td><input class="form-control" ng-model="newCrime.threecrime" /></td>
+                    <td><input class="form-control" ng-model="newCrime.morethreecrime" /></td>
+                    <td><button class="button btn-primary" ng-click="addCrime()">Add</button></td>
+                </tr>
+                <tr ng-repeat="a in crimes">
+                    <td><a href="/#!/crimes-an/{{a.province}}">{{a.province}}</a></td>
+                    <td>{{a.year}}</td> 
+                    <td>{{a.gender}}</td>
+                    <td>{{a.onecrime}}</td>
+                    <td>{{a.twocrime}}</td>
+                    <td>{{a.threecrime}}</td>
+                    <td>{{a.morethreecrime}}</td>
+                    <td><button class="button btn-warning" ng-click="deleteCrime(a.province, a.year, a.gender)">Delete</button></td>
+                </tr>
+            </tbody>
+            
+        </table>
+        
+        <div> <b>STATUS: </b>{{status}} </div>
