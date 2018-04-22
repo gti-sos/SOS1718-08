@@ -325,9 +325,9 @@ divorcesAPI.register = function(app,db) {
         res.sendStatus(200);
     });
 
-    app.delete(BASE_API_PATH + "/divorces-an/:province/:year", (req, res) => {
+  app.delete(BASE_API_PATH + "/divorces-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - DELETE /divorces-an/" + province + "/" + year)
 
         db.remove({ "province": province, "year": year });
@@ -390,11 +390,7 @@ divorcesAPI.register = function(app,db) {
                 return;
             }
 
-            if (results[0]._id != id) {
-                console.error("The ID does not match")
-                res.sendStatus(400);
-                return;
-            }
+            
             else {
                 delete divorce._id;
                 db.update({ "province": divorce.province, "year": divorce.year}, divorce, function(err, numUpdate) {

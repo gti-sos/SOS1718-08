@@ -19,6 +19,7 @@ angular
                 $location.path("/divorces-an");
                 $scope.error=""
             }, function errorCallback(response){
+                console.log("error")
                 console.log(response.status);
                 $scope.status = "Status: " + response.status;
                  switch (response.status) {
