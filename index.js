@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var DataStore = require("nedb");
 var MongoClient = require("mongodb").MongoClient;
+var path = require("path");
 
 var students = require("./studentsApi");
 var crimesAPI = require("./crimesAPI");
@@ -28,7 +29,7 @@ var app = express();
 
 
 app.use(bodyParser.json());
-app.use("/", express.static(__dirname + "/public"));
+app.use("/", express.static(path.join(__dirname + "/public")));
 
 
 var initialCrimes = [
