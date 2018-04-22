@@ -20,7 +20,7 @@ divorcesAPI.register = function(app,db) {
     { "province": "huelva", "year": 2016, "divorce": 1036, "break": 49, "nullity": 3 },
     { "province": "jaen", "year": 2016, "divorce": 1109, "break": 73, "nullity": 1 },
     { "province": "malaga", "year": 2016, "divorce": 3606, "break": 171, "nullity": 3 },
-    { "province": "malaga", "year": 2015, "divorce": 3606, "break": 171, "nullity": 3 }
+    { "province": "malaga", "year": 2015, "divorce": 36, "break": 17, "nullity": 3 }
 /*
  { "province": "sevilla", "year": "2016", "divorce": "3973", "break": "203", "nullity": "1" },
     { "province": "cadiz", "year": "2016", "divorce": "2249", "break": "138", "nullity": "0" },
@@ -177,7 +177,7 @@ divorcesAPI.register = function(app,db) {
                 query.nullity = Number(req.query.nullity);
             }
             
-            if(query.year==null){
+            if(query.year==null && query.divorce==null && query.break==null && query.nullity==null){
         db.find({ "province": province}).toArray((err, results) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -194,6 +194,8 @@ divorcesAPI.register = function(app,db) {
 
         });
             }else{
+                //--------- AÑOS
+                if(query.year!=null && query.divorce==null && query.break==null && query.nullity==null){
                 db.find({ "province": province,"year":query.year}).toArray((err, results) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -209,40 +211,82 @@ divorcesAPI.register = function(app,db) {
                         }));
                 });
             }
+            //-----DIVORCES
+            if(query.divorce!=null && query.year==null && query.break==null && query.nullity==null){
+                db.find({ "province": province,"divorce":query.divorce}).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+
+            res.send(results.map((c) => {
+                
+                            delete c._id;
+                            return c;
+                
+                        }));
+                });
+            }
+            //---- BREAK
+            if(query.break!=null && query.year==null && query.divorce==null && query.nullity==null){
+                db.find({ "province": province, "break": query.break}).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+
+            res.send(results.map((c) => {
+                
+                            delete c._id;
+                            return c;
+                
+                        }));
+                });
+            }
+            //---- NULLITY
+        if(query.nullity!=null && query.divorce==null && query.break==null && query.year==null){
+                db.find({ "province": province, "nullity": query.nullity}).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+
+            res.send(results.map((c) => {
+                
+                            delete c._id;
+                            return c;
+                
+                        }));
+                });
+            } 
+             if(query.year!=null && query.divorce==!null && query.break==null && query.nullity==null){
+                db.find({ "province": province, "year": query.year, "divorce": query.divorce}).toArray((err, results) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+
+            res.send(results.map((c) => {
+                
+                            delete c._id;
+                            return c;
+                
+                        }));
+                });
+            } 
+            
+            
+            
+            
+        }
+        
+        
     });
-    //------------ get busqueda
-     app.get(BASE_API_PATH + "/province?", (req, res) => {
-        MongoClient.connect(urljurado, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db("sos1718-jmja-sandbox");
-            var query = req.query;
-            if (req.query.year) {
-                query.year = Number(req.query.year);
-            }
-            if (req.query.divorce) {
-                query.divorce = Number(req.query.divorce);
-            }
-            if (req.query.break) {
-                query.break = Number(req.query.break);
-            }
-            if (req.query.nullity) {
-                query.nullity = Number(req.query.nullity);
-            }
-            dbo.collection("divorces").find(query).toArray(function(err, result) {
-                if (!err && !result.length) {
-                    console.log("Not found");
-                    res.sendStatus(404);
-                }
-                else {
-                    res.send(result.map((c) => {
-                        delete c._id;
-                        return c;
-                    }));
-                }
-                db.close();
-            });
-        });
-    });
+    
     
     //-----------------------
 
