@@ -18,7 +18,7 @@ var mdbcrimes = "mongodb://josprimen:josprimen@ds231549.mlab.com:31549/sos1718-j
 
 
 var port = (process.env.PORT || 1607);
-var BASE_API_PATH = "/api/v1";
+var BASE_API_PATH = "/api/v2";
 //var dbCrimes = __dirname+"/contacts.db";//base de datos crimes (JOSE ENRIQUE)
 var dbFileName = __dirname + "/students.db";
 var dbDivorces = __dirname + "/divorces.db";
@@ -54,12 +54,12 @@ var divorces = [
 
 ];
 
-var initialStudents = [{ "province": "sevilla", "year": 2008, "gender": "male", "pop-illiterate": 16.32, "pop-high-education": 182.9, "pop-in-university": 30493 },
-    { "province": "cadiz", "year": 2008, "gender": "female", "pop-illiterate": 28.70, "pop-high-education": 97.06, "pop-in-university": 10766 },
-    { "province": "sevilla", "year": 2008, "gender": "both", "pop-illiterate": 56.53, "pop-high-education": 378.78, "pop-in-university": 66325 },
-    { "province": "granada", "year": 2010, "gender": "male", "pop-illiterate": 10.02, "pop-high-education": 81.99, "pop-in-university": 54024 },
-    { "province": "granada", "year": 2011, "gender": "female", "pop-illiterate": 23.86, "pop-high-education": 91.26, "pop-in-university": 22905 },
-    { "province": "granada", "year": 2011, "gender": "both", "pop-illiterate": 53.86, "pop-high-education": 191.26, "pop-in-university": 44405 }
+var initialStudents = [{ "province": "sevilla", "year": 2008, "gender": "male", "popilliterate": 16.32, "pophigheducation": 182.9, "popinuniversity": 30493 },
+    { "province": "cadiz", "year": 2008, "gender": "female", "popilliterate": 28.70, "pophigheducation": 97.06, "popinuniversity": 10766 },
+    { "province": "sevilla", "year": 2008, "gender": "both", "popilliterate": 56.53, "pophigheducation": 378.78, "popinuniversity": 66325 },
+    { "province": "granada", "year": 2010, "gender": "male", "popilliterate": 10.02, "pophigheducation": 81.99, "popinuniversity": 54024 },
+    { "province": "granada", "year": 2011, "gender": "female", "popilliterate": 23.86, "pophigheducation": 91.26, "popinuniversity": 22905 },
+    { "province": "granada", "year": 2011, "gender": "both", "popilliterate": 53.86, "pophigheducation": 191.26, "popinuniversity": 44405 }
 
 ];
 

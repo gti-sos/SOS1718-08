@@ -1,5 +1,5 @@
 var studentsApi = {}
-var BASE_API_PATH = "/api/v1";
+var BASE_API_PATH = "/api/v2";
 module.exports = studentsApi;
 
 /*INDICE PARA EL BUSCADOR. PULSAR CTR + F Y ESCRIBIR EL DIMINUTIVO A LA IZQUIERDA*/
@@ -17,12 +17,12 @@ module.exports = studentsApi;
 */
 
 /*#I1------------------------------INSERCION INICIAL---------------------------*/
-var initialStudents = [{ "province": "sevilla", "year": 2008, "gender": "male", "pop-illiterate": 16.32, "pop-high-education": 182.9, "pop-in-university": 30493 },
-    { "province": "cadiz", "year": 2008, "gender": "female", "pop-illiterate": 28.70, "pop-high-education": 97.06, "pop-in-university": 10766 },
-    { "province": "sevilla", "year": 2008, "gender": "both", "pop-illiterate": 56.53, "pop-high-education": 378.78, "pop-in-university": 66325 },
-    { "province": "granada", "year": 2010, "gender": "male", "pop-illiterate": 10.02, "pop-high-education": 81.99, "pop-in-university": 54024 },
-    { "province": "granada", "year": 2011, "gender": "female", "pop-illiterate": 23.86, "pop-high-education": 91.26, "pop-in-university": 22905 },
-    { "province": "granada", "year": 2011, "gender": "both", "pop-illiterate": 53.86, "pop-high-education": 191.26, "pop-in-university": 44405 }
+var initialStudents = [{ "province": "sevilla", "year": 2008, "gender": "male", "popilliterate": 16.32, "pophigheducation": 182.9, "popinuniversity": 30493 },
+    { "province": "cadiz", "year": 2008, "gender": "female", "popilliterate": 28.70, "pophigheducation": 97.06, "popinuniversity": 10766 },
+    { "province": "sevilla", "year": 2008, "gender": "both", "popilliterate": 56.53, "pophigheducation": 378.78, "popinuniversity": 66325 },
+    { "province": "granada", "year": 2010, "gender": "male", "popilliterate": 10.02, "pophigheducation": 81.99, "popinuniversity": 54024 },
+    { "province": "granada", "year": 2011, "gender": "female", "popilliterate": 23.86, "pophigheducation": 91.26, "popinuniversity": 22905 },
+    { "province": "granada", "year": 2011, "gender": "both", "popilliterate": 53.86, "pophigheducation": 191.26, "popinuniversity": 44405 }
 
 ];
 
@@ -80,7 +80,7 @@ studentsApi.register = function(app, db) {
         var popinuniversity = Number(req.query.popinuniversity);
 
         if (popilliterate && pophigheducation && popinuniversity) {
-            db.find({ "pop-illiterate": popilliterate, "pop-high-education": pophigheducation, "pop-in-university": popinuniversity }).skip(offset).limit(limit).toArray((err, results) => {
+            db.find({ "popilliterate": popilliterate, "pophigheducation": pophigheducation, "popinuniversity": popinuniversity }).skip(offset).limit(limit).toArray((err, results) => {
                 if (err) {
                     console.error("Error accesing DB");
                     res.sendStatus(500);
@@ -264,25 +264,89 @@ studentsApi.register = function(app, db) {
 
                                         }
                                         else {
-                                            db.find({}).skip(offset).limit(limit).toArray((err, results) => {
-                                                if (err) {
-                                                    console.error("Error accesing DB");
-                                                    res.sendStatus(500);
-                                                    return;
+                                            if (popilliterate) {
+                                                db.find({ "popilliterate": popilliterate }).skip(offset).limit(limit).toArray((err, results) => {
+                                                    if (err) {
+                                                        console.error("Error accesing DB");
+                                                        res.sendStatus(500);
+                                                        return;
+                                                    }
+                                                    if (results.length == 0) {
+                                                        console.log("Empty DB")
+                                                        res.sendStatus(404);
+                                                        return;
+                                                    }
+                                                    res.send(results.map((c) => {
+                                                        delete c._id;
+                                                        return c;
+                                                    }));
+                                                });
+
+                                            }
+                                            else {
+                                                if (pophigheducation) {
+                                                    db.find({ "pophigheducation": pophigheducation }).skip(offset).limit(limit).toArray((err, results) => {
+                                                        if (err) {
+                                                            console.error("Error accesing DB");
+                                                            res.sendStatus(500);
+                                                            return;
+                                                        }
+                                                        if (results.length == 0) {
+                                                            console.log("Empty DB")
+                                                            res.sendStatus(404);
+                                                            return;
+                                                        }
+                                                        res.send(results.map((c) => {
+                                                            delete c._id;
+                                                            return c;
+                                                        }));
+                                                    });
+
                                                 }
-                                                if (results.length == 0) {
-                                                    console.log("Empty DB")
-                                                    res.sendStatus(404);
-                                                    return;
+                                                else {
+                                                    if (popinuniversity) {
+                                                        db.find({ "popinuniversity": popinuniversity }).skip(offset).limit(limit).toArray((err, results) => {
+                                                            if (err) {
+                                                                console.error("Error accesing DB");
+                                                                res.sendStatus(500);
+                                                                return;
+                                                            }
+                                                            if (results.length == 0) {
+                                                                console.log("Empty DB")
+                                                                res.sendStatus(404);
+                                                                return;
+                                                            }
+                                                            res.send(results.map((c) => {
+                                                                delete c._id;
+                                                                return c;
+                                                            }));
+                                                        });
+
+                                                    }
+
+                                                    else {
+                                                        db.find({}).skip(offset).limit(limit).toArray((err, results) => {
+                                                            if (err) {
+                                                                console.error("Error accesing DB");
+                                                                res.sendStatus(500);
+                                                                return;
+                                                            }
+                                                            if (results.length == 0) {
+                                                                console.log("Empty DB")
+                                                                res.sendStatus(404);
+                                                                return;
+                                                            }
+                                                            res.send(results.map((c) => {
+                                                                delete c._id;
+                                                                return c;
+                                                            }));
+                                                        });
+                                                    }
                                                 }
-                                                res.send(results.map((c) => {
-                                                    delete c._id;
-                                                    return c;
-                                                }));
-                                            });
+
+                                            }
                                         }
                                     }
-
                                 }
                             }
                         }
@@ -447,13 +511,14 @@ studentsApi.register = function(app, db) {
     //ACTUALIZAR UN RECURSO CONCRETO
     app.put(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year
+        var year = Number(req.params.year)
         var gender = req.params.gender
         var student = req.body;
 
         console.log(Date() + " - PUT /students-an/" + province + "/" + year + "/" + gender);
 
-        if (province != student.province || year != student.year || gender != student.gender) {
+        if (province != student.province || year != student.year || gender != student.gender || isNaN(student.popilliterate) ||
+            isNaN(student.pophigheducation) || isNaN(student.popinuniversity)) {
             res.sendStatus(400);
             console.warn(Date() + "Invalid fields");
             return;
@@ -489,7 +554,7 @@ studentsApi.register = function(app, db) {
     //Borrar un subconjunto de recursos
     app.delete(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - DELETE /students-an/" + province + "/" + year)
 
         db.remove({ "province": province, "year": year });
@@ -500,7 +565,7 @@ studentsApi.register = function(app, db) {
     //Borrar un recurso concreto
     app.delete(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         var gender = req.params.gender;
         console.log(Date() + " - DELETE /students-an/" + province + "/" + year + "/" + gender);
 
@@ -527,7 +592,7 @@ studentsApi.register = function(app, db) {
 
     app.put(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year
+        var year = Number(req.params.year);
         console.log(Date() + " - PUT /students-an/" + province + "/" + year);
 
         res.sendStatus(405);
@@ -544,14 +609,14 @@ studentsApi.register = function(app, db) {
 
     app.post(BASE_API_PATH + "/students-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - POST /students-an/" + province + "/" + year);
         res.sendStatus(405);
     });
 
     app.post(BASE_API_PATH + "/students-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         var gender = req.params.gender;
         console.log(Date() + " - POST /students-an/" + province + "/" + year + "/" + gender);
         res.sendStatus(405);

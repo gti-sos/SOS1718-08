@@ -1,19 +1,36 @@
 /* global angular */
 
 angular
-    .module("ContactManagerApp")
-    .controller("EditCtrl", ["$scope","$http","$routeParams","$location", function($scope,$http,$routeParams,$location) {
+    .module("ManagerApp")
+    .controller("studentEditCtrl", ["$scope","$http","$routeParams","$location", function($scope,$http,$routeParams,$location) {
         console.log("Edit Ctrl initialized!");
-        var contactURL = "/api/v1/students-an/"+$routeParams.name;
+        var studentURL = "/api/v2/students-an/"+$routeParams.province+"/"+$routeParams.year+"/"+$routeParams.gender;
+        console.log(studentURL);
 
-        $http.get(contactURL).then(function (response){
-                $scope.updatedContact = response.data;
+        $http.get(studentURL).then(function (response){
+                $scope.updatedStudent = response.data[0];
+                console.log(response.data[0])
         });
         
-        $scope.updateContact = function (){
-            $http.put(contactURL,$scope.updatedContact).then(function (response){
+        $scope.updateStudent = function successCallback(){
+            $http.put(studentURL,$scope.updatedStudent).then(function (response){
                 $scope.status = "Status: " + response.status;
-                $location.path("/");
+                console.log($scope.status)
+                $location.path("/students-an");
+                $scope.error=""
+            }, function errorCallback(response){
+                console.log(response.status);
+                $scope.status = "Status: " + response.status;
+                 switch (response.status) {
+                    case 405:
+                        $scope.error = "The put method has to be done to a specific resource";
+                        break;
+                    case 400:
+                        $scope.error = "Invalid fields";
+                        break;
+                    default:
+                        $scope.error = "Ups, something was wrong. Try it later";
+                }
             });
         }
     }]);

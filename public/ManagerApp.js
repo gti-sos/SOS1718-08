@@ -11,7 +11,7 @@ angular
                 templateUrl: "studentList.html",
                 controller: "studentListCtrl"
             })
-            .when("/students-an/:province",{
+            .when("/students-an/:province/:year/:gender",{
                 templateUrl: "studentEdit.html",
                 controller: "studentEditCtrl"
             });
