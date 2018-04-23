@@ -1,6 +1,6 @@
     /* global angular */
     angular
-        .module("CrimesManagerApp")
+        .module("ManagerApp")
         .controller("EditCtrl", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams,$location) {
             console.log("Edit Controller initialited");
     
