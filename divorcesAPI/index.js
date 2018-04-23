@@ -98,7 +98,7 @@ divorcesAPI.register = function(app,db) {
                 dbo.collection("divorces").find({}).toArray(function(err, result) {
                     if (!err && !result.length) {
                         console.log("Not found");
-                       res.sendStatus(400);
+                       res.sendStatus(200);
                     }
                     else {
                         res.send(result.map((c) => {
