@@ -16,10 +16,10 @@
                 <td>{{updatedCrime.province}}</td>
                 <td>{{updatedCrime.year}}</td>
                 <td>{{updatedCrime.gender}}</td>
-                <td><input class="form-control" ng-model="updatedCrime.onecrime" /></td>
-                <td><input class="form-control" ng-model="updatedCrime.twocrime" /></td>
-                <td><input class="form-control" ng-model="updatedCrime.threecrime" /></td>
-                <td><input class="form-control" ng-model="updatedCrime.morethreecrime" /></td>
+                <td><input class="form-control" type="number" ng-model="updatedCrime.onecrime" /></td>
+                <td><input class="form-control" type="number" ng-model="updatedCrime.twocrime" /></td>
+                <td><input class="form-control" type="number"ng-model="updatedCrime.threecrime" /></td>
+                <td><input class="form-control"type="number"  ng-model="updatedCrime.morethreecrime" /></td>
                 <td><button class="button btn-primary" ng-click="updateCrime()">Update</button></td>
             </tr>
         </tbody>

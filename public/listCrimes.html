@@ -15,12 +15,12 @@
             <tbody>
                 <tr>
                     <td><input class="form-control" ng-model="newCrime.province" /></td>
-                    <td><input class="form-control" ng-model="newCrime.year" /></td>
+                    <td><input class="form-control" type="number"ng-model="newCrime.year" /></td>
                     <td><input class="form-control" ng-model="newCrime.gender" /></td>
-                    <td><input class="form-control" ng-model="newCrime.onecrime" /></td>
-                    <td><input class="form-control" ng-model="newCrime.twocrime" /></td>
-                    <td><input class="form-control" ng-model="newCrime.threecrime" /></td>
-                    <td><input class="form-control" ng-model="newCrime.morethreecrime" /></td>
+                    <td><input class="form-control" type="number"ng-model="newCrime.onecrime" /></td>
+                    <td><input class="form-control"type="number" ng-model="newCrime.twocrime" /></td>
+                    <td><input class="form-control"type="number" ng-model="newCrime.threecrime" /></td>
+                    <td><input class="form-control"type="number" ng-model="newCrime.morethreecrime" /></td>
                     <td><button class="button btn-primary" ng-click="addCrime()">Add</button></td>
                 </tr>
                 <tr ng-repeat="a in crimes">
