@@ -10,7 +10,7 @@
            
            
            $http.get(direccioncrimen).then(function (response){
-                $scope.updatedCrime = response.data[0];
+                $scope.updatedCrime = response.data;
                 console.log("Respuesta: " + response.data);
                 console.log("Respuesta 0: " + response.data[0]);
             });
