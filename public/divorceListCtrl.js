@@ -12,6 +12,7 @@ angular
         $scope.addDivorce = function() {
             $http.post(api, $scope.newDivorce).then(function successCallback(response) {
                 $scope.status = "Status: " + response.status;
+                window.alert("Creado con exito");
                 getDivorces();
                 $scope.error = "";
             }, function errorCallback(response) {
@@ -80,6 +81,8 @@ angular
                 $scope.status = "Status: " + response.status;
                 $scope.divorces = response.data;
                 $scope.error = "";
+                $scope.offset = $scope.offset;
+                $scope.limit= $scope.limit;
             }, function errorCallback(response) {
                 console.log(response.status);
                 $scope.status = "Status: " + response.status;
@@ -92,6 +95,21 @@ angular
                 }
             });
         }
+        $scope.getPage = function(limit, offset) {
+        $scope.offset = offset;
+        $scope.limit= limit;
+        
+        console.log($scope.offset);
+        $http.get(api+"/divorces-an?"+ "limit="+ $scope.limit + "&offset=" + $scope.offset).then(function(response) {
+            $scope.divorces = response.data;
+    
+        }, function errorCallback(response) {
+            console.log("Empty");
+            $scope.divorces = [];
+        });
+    };
+        
+        
 
         getDivorces();
 

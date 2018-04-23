@@ -78,7 +78,7 @@ divorcesAPI.register = function(app,db) {
                 dbo.collection("divorces").find({}).skip(offset).limit(limit).toArray(function(err, result) {
                     if (!err && !result.length) {
                         console.log("Not found");
-                        res.sendStatus(404);
+                       // res.sendStatus(404);
                     }
                     else {
                         res.send(result.map((c) => {
@@ -98,7 +98,7 @@ divorcesAPI.register = function(app,db) {
                 dbo.collection("divorces").find({}).toArray(function(err, result) {
                     if (!err && !result.length) {
                         console.log("Not found");
-                        res.sendStatus(404);
+                       res.sendStatus(400);
                     }
                     else {
                         res.send(result.map((c) => {
@@ -303,7 +303,7 @@ divorcesAPI.register = function(app,db) {
             }
              if (divorces.length == 0){
                 console.log("Not found");
-                res.sendStatus(404);
+               // res.sendStatus(404);
                 return;
             }
             
@@ -416,7 +416,7 @@ divorcesAPI.register = function(app,db) {
                 dbo.collection("divorces").find().toArray(function(err, result) {
                     if (!err && !result.length) {
                         console.log("Not found");
-                        res.sendStatus(404);
+                        //res.sendStatus(404);
                     }
                     else {
                         res.send(result.map((c) => {

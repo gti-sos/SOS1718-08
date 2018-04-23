@@ -15,6 +15,7 @@ angular
          $scope.updateDivorce = function successCallback(){
             $http.put(divorceURL,$scope.updatedDivorce).then(function (response){
                 $scope.status = "Status: " + response.status;
+                window.alert("Actualizado con exito");
                 console.log($scope.status)
                 $location.path("/divorces-an");
                 $scope.error=""
