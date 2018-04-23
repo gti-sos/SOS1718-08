@@ -14,13 +14,13 @@ angular
         
         $scope.updateStudent = function successCallback(){
             $http.put(studentURL,$scope.updatedStudent).then(function (response){
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "All is ok";
                 console.log($scope.status)
                 $location.path("/students-an");
                 $scope.error=""
             }, function errorCallback(response){
                 console.log(response.status);
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "Something fails";
                  switch (response.status) {
                     case 405:
                         $scope.error = "The put method has to be done to a specific resource";

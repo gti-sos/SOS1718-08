@@ -8,12 +8,12 @@ angular
 
         $scope.addStudent = function() {
             $http.post(api, $scope.newStudent).then(function successCallback(response) {
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "All is ok";
                 getStudents();
                 $scope.error = "";
             }, function errorCallback(response) {
                 console.log(response.status)
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "Something fails";
                 switch (response.status) {
                     case 405:
                         $scope.error = "The post method has to be done to a set of resources";
@@ -34,11 +34,11 @@ angular
             console.log("Student to be deleted: " + province + year + gender);
 
             $http.delete(api + "/" + province + "/" + year + "/" + gender).then(function successCallback(response) {
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "All is ok";
                 getStudents();
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "Something fails";
                 $scope.error = "Ups, something was wrong. Try it later";
 
             });
@@ -48,11 +48,11 @@ angular
         $scope.deleteAll = function() {
 
             $http.delete(api).then(function successCallback(response) {
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "All is ok";
                 getStudents();
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "Something fails";
                 $scope.error = "Ups, something was wrong. Try it later";
             });
 
@@ -61,12 +61,12 @@ angular
         $scope.fillTable = function() {
 
             $http.get(api + "/loadInitialData").then(function successCallback(response) {
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "All is ok";
                 getStudents();
                 $scope.error = ""
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "Something fails";
                 $scope.error = "Ups, something was wrong. Try it later";
             });
 
@@ -74,12 +74,12 @@ angular
 
         $scope.pagination = function(offset, limit) {
             $http.get(api + "?offset=" + offset + "&&limit=" + limit).then(function successCallback(response) {
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "All is ok";
                 $scope.page = response.data;
                 $scope.error = "";
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "Something fails";
                 switch (response.status) {
                     case 404:
                         $scope.error = "The table is empty. Fill it and try again";
@@ -96,12 +96,12 @@ angular
 
         function getStudents() {
             $http.get(api).then(function successCallback(response) {
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "All is ok";
                 $scope.students = response.data;
                 $scope.error = "";
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = "Status: " + response.status;
+                $scope.status = "Status: " + "Something fails";
                 switch (response.status) {
                     case 404:
                         $scope.error = "The table is empty. Fill it and try again";
