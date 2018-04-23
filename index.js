@@ -20,6 +20,8 @@ var mdbcrimes = "mongodb://josprimen:josprimen@ds231549.mlab.com:31549/sos1718-j
 
 var port = (process.env.PORT || 1607);
 var BASE_API_PATH = "/api/v2";
+var BASE_API_PATH1 = "/api/v1";
+
 //var dbCrimes = __dirname+"/contacts.db";//base de datos crimes (JOSE ENRIQUE)
 var dbFileName = __dirname + "/students.db";
 var dbDivorces = __dirname + "/divorces.db";
@@ -81,7 +83,7 @@ MongoClient.connect(mdbcrimes,{native_parser:true},(err,mlabs)=>{
     var db = database.collection("crimes-an");
     
     
-    crimesAPI.register(app, BASE_API_PATH, db);//le pasamos lo del express que esta en app al codigo que hemos movido a crimesAPI y el BASE_API_PATH
+    crimesAPI.register(app, BASE_API_PATH1, db);//le pasamos lo del express que esta en app al codigo que hemos movido a crimesAPI y el BASE_API_PATH
     
     app.listen(port, () => {
         console.log("Server ready on port " + port + "!");

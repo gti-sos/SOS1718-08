@@ -26,18 +26,18 @@ var initialCrimes = [
 
 /*#I2------------------------------INICIALIZADOR---------------------------*/
 
-crimesAPI.register = function(app, BASE_API_PATH, db) {
+crimesAPI.register = function(app, BASE_API_PATH1, db) {
 
     console.log("Llamada al objeto crimes-an");
 
     //Sección ayuda recurso crimes (JOSE ENRIQUE)
-    app.get(BASE_API_PATH + "/crimes-an/docs", (req, res) => {
+    app.get(BASE_API_PATH1 + "/crimes-an/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3950150/collection/RVnZgdc1");
     });
 
     //CARGAR DATOS INICIALES
 
-    app.get(BASE_API_PATH + "/crimes-an/loadInitialData", (req, res) => {
+    app.get(BASE_API_PATH1 + "/crimes-an/loadInitialData", (req, res) => {
         db.find({}, (err, crimes) => {
             if (err) {
                 console.error(" Error accesing DB");
@@ -65,7 +65,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     /*#GE-----------------------------------GETTERS---------------------------------*/
 
     //GET A TODOS LOS RECURSOS
-    app.get(BASE_API_PATH + "/crimes-an", (req, res) => {
+    app.get(BASE_API_PATH1 + "/crimes-an", (req, res) => {
         console.log(Date() + " - GET /crimes-an");
         var limit = parseInt(req.query.limit);
         var offset = parseInt(req.query.offset);
@@ -391,7 +391,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
 
 
     //GET A UN SUBCONJUNTO DE RECURSOS
-    app.get(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
+    app.get(BASE_API_PATH1 + "/crimes-an/:province", (req, res) => {
         var province = req.params.province;
         console.log(Date() + " - GET /crimes-an/" + province);
 
@@ -415,7 +415,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     });
 
     //GET A UN SUBCONJUNTO DE RECURSOS
-     app.get(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
+     app.get(BASE_API_PATH1 + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
         var year = Number(req.params.year);
         console.log(Date() + " - GET /crimes-an/" + province + "/" + year);
@@ -440,7 +440,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     });
     
     //GET A UN RECURSO CONCRETO
-    app.get(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
+    app.get(BASE_API_PATH1 + "/crimes-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
         var year = Number(req.params.year);
         var gender = req.params.gender;
@@ -468,7 +468,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     /*#PP------------------------------POST Y PUT PERMITIDOS---------------------------*/
 
     //CREAR UN NUEVO RECURSO
-     app.post(BASE_API_PATH + "/crimes-an", (req, res) => {
+     app.post(BASE_API_PATH1 + "/crimes-an", (req, res) => {
          console.log(Date() + " - POST / crimes-an");
          var crime = req.body;
          if (crime.province == null || crime.year == null || crime.gender == null) {
@@ -497,7 +497,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
      });
      
      //ACTUALIZAR UN RECURSO CONCRETO
-     app.put(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
+     app.put(BASE_API_PATH1 + "/crimes-an/:province/:year/:gender", (req, res) => {
          var province = req.params.province;
          var year = req.params.year;
          var gender = req.params.gender;
@@ -520,7 +520,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     /*#DE------------------------------DELETES---------------------------*/
 
     //BORRAR TODOS LOS RECURSOS
-     app.delete(BASE_API_PATH + "/crimes-an", (req, res) => {
+     app.delete(BASE_API_PATH1 + "/crimes-an", (req, res) => {
         console.log(Date() + " - DELETE / crimes-an");
 
         db.remove({});
@@ -529,7 +529,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     });
 
     //BORRAR UN SUBCONJUNTO DE RECURSOS
-     app.delete(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
+     app.delete(BASE_API_PATH1 + "/crimes-an/:province", (req, res) => {
         var province = req.params.province;
         console.log(Date() + " - DELETE /crimes-an/" + province);
 
@@ -539,7 +539,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     });
     
     //BORRAR UN SUBCONJUNTO DE RECURSOS
-    app.delete(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
+    app.delete(BASE_API_PATH1 + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
         var year = req.params.year;
         console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year);
@@ -550,7 +550,7 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     });
     
     //BORRAR UN RECURSO CONCRETO
-    app.delete(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
+    app.delete(BASE_API_PATH1 + "/crimes-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
         var year = req.params.year;
         var gender = req.params.gender;
@@ -565,18 +565,18 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
 
     /*#PU------------------------------PUTS---------------------------*/
 
-    app.put(BASE_API_PATH + "/crimes-an", (req, res) => {
+    app.put(BASE_API_PATH1 + "/crimes-an", (req, res) => {
         console.log(Date() + " - PUT / crimes-an");
         res.sendStatus(405);
     });
     
-    app.put(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
+    app.put(BASE_API_PATH1 + "/crimes-an/:province", (req, res) => {
         var province = req.params.province;
         console.log(Date() + " - PUT / crimes-an" + province);
         res.sendStatus(405);
     });
     
-     app.put(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
+     app.put(BASE_API_PATH1 + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
         var year = req.params.year;
         console.log(Date() + " - PUT / crimes-an" + province + "/" + year);
@@ -586,20 +586,20 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     /*#PO------------------------------POSTS---------------------------*/
 
 
-    app.post(BASE_API_PATH + "/crimes-an/:province", (req, res) => {
+    app.post(BASE_API_PATH1 + "/crimes-an/:province", (req, res) => {
         var province = req.params.province;
         console.log(Date() + " - POST / crimes-an" + province);
         res.sendStatus(405);
     });
     
-    app.post(BASE_API_PATH + "/crimes-an/:province/:year", (req, res) => {
+    app.post(BASE_API_PATH1 + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
         var year = req.params.year;
         console.log(Date() + " - POST / crimes-an" + province + "/" + year);
         res.sendStatus(405);
     });
 
-    app.post(BASE_API_PATH + "/crimes-an/:province/:year/:gender", (req, res) => {
+    app.post(BASE_API_PATH1 + "/crimes-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
         var year = req.params.year;
         var gender = req.params.gender;
