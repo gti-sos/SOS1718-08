@@ -18,7 +18,7 @@
            
             $scope.updateCrime = function successCallback(){
             $http.put(direccioncrimen,$scope.updatedCrime).then(function (response){
-                $scope.status = response.status;
+                $scope.status = "STATUS: " + response.status + "Done!";
                 $location.path("/crimes-an");
                 $scope.error = "";
             }, function errorCallback(response){
