@@ -499,7 +499,7 @@ crimesAPI.register = function(app, BASE_API_PATH1, db) {
      //ACTUALIZAR UN RECURSO CONCRETO
      app.put(BASE_API_PATH1 + "/crimes-an/:province/:year/:gender", (req, res) => {
          var province = req.params.province;
-         var year = req.params.year;
+         var year = Number(req.params.year);
          var gender = req.params.gender;
          var crime = req.body;
      
@@ -541,7 +541,7 @@ crimesAPI.register = function(app, BASE_API_PATH1, db) {
     //BORRAR UN SUBCONJUNTO DE RECURSOS
     app.delete(BASE_API_PATH1 + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year);
 
         db.remove({ "province": province, "year": year });
@@ -552,7 +552,7 @@ crimesAPI.register = function(app, BASE_API_PATH1, db) {
     //BORRAR UN RECURSO CONCRETO
     app.delete(BASE_API_PATH1 + "/crimes-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         var gender = req.params.gender;
         console.log(Date() + " - DELETE /crimes-an/" + province + "/" + year + "/" + gender);
 
@@ -578,7 +578,7 @@ crimesAPI.register = function(app, BASE_API_PATH1, db) {
     
      app.put(BASE_API_PATH1 + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - PUT / crimes-an" + province + "/" + year);
         res.sendStatus(405);
     });
@@ -594,14 +594,14 @@ crimesAPI.register = function(app, BASE_API_PATH1, db) {
     
     app.post(BASE_API_PATH1 + "/crimes-an/:province/:year", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         console.log(Date() + " - POST / crimes-an" + province + "/" + year);
         res.sendStatus(405);
     });
 
     app.post(BASE_API_PATH1 + "/crimes-an/:province/:year/:gender", (req, res) => {
         var province = req.params.province;
-        var year = req.params.year;
+        var year = Number(req.params.year);
         var gender = req.params.gender;
         console.log(Date() + " - POST / crimes-an" + province + "/" + year + "/" + gender);
         res.sendStatus(405);

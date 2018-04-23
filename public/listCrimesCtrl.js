@@ -12,7 +12,7 @@ angular
 
         $http.get(direccionapi).then(function successCallback(response) {
             $scope.crimes = response.data;
-            $scope.status = "STATUS: " + response.status + "Done!";
+            $scope.status = "STATUS code is: " + response.status + " That means it's all okey!";
             $scope.error = "";
         },function errorCallback(response) {
             console.log(response.status);
