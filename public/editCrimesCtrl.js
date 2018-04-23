@@ -5,7 +5,7 @@ angular
     .controller("EditCtrl", ["$scope","$http","$routeParams","$location", function($scope,$http,$routeParams,$location) {
         
         console.log("Edit Ctrl initialized!");
-        var direccioncrime = "/api/v1/students-an/"+$routeParams.province+"/"+$routeParams.year+"/"+$routeParams.gender;
+        var direccioncrime = "/api/v1/crimes-an/"+$routeParams.province+"/"+$routeParams.year+"/"+$routeParams.gender;
 
         $http.get(direccioncrime).then(function (response){
                 $scope.updatedCrime = response.data[0];
@@ -15,9 +15,9 @@ angular
         $scope.updateCrime = function successCallback(){
             $http.put(direccioncrime,$scope.updatedCrime).then(function (response){
                 $scope.status = response.status;
-                console.log($scope.status)
+                console.log($scope.status);
                 $location.path("/crimes-an");
-                $scope.error=""
+                $scope.error="";
             }, function errorCallback(response){
                 console.log(response.status);
                 $scope.status = response.status;
