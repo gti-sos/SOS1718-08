@@ -331,10 +331,11 @@ studentsApi.register = function(app, db) {
                                                                 res.sendStatus(500);
                                                                 return;
                                                             }
+                                                            /*DELETE ALL*/
                                                             if (results.length == 0) {
                                                                 console.log("Empty DB")
-                                                                res.sendStatus(404);
-                                                                return;
+                                                                res.sendStatus(200);
+                                                                return [];
                                                             }
                                                             res.send(results.map((c) => {
                                                                 delete c._id;
