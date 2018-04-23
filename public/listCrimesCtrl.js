@@ -1,6 +1,6 @@
 /* global angular */
 angular
-.module("CrimesManagerApp")
+.module("ManagerApp")
 .controller("ListCtrl", ["$scope", "$http", function($scope, $http) {
     console.log("List Controller initialited");
 
@@ -10,8 +10,20 @@ angular
     //Funcion que obtiene los crimenes, se lanza de inmediato
     function getCrimes() {
 
-        $http.get(direccionapi).then(function(response) {
+        $http.get(direccionapi).then(function successCallback(response) {
             $scope.crimes = response.data;
+            $scope.status = response.status;
+            $scope.error = "";
+        },function errorCallback(response) {
+            console.log(response.status);
+            $scope.status = response.status;
+            switch (response.status) {
+                case 404:
+                    $scope.error = "The table is empty. Fill it and try again";
+                    break;
+                default:
+                    $scope.error = "Ups, something was wrong. Try it later";
+            }
         });
 
     };
@@ -23,9 +35,27 @@ angular
     //Funcion que crea un contacto nuevo al darle al boton send
     $scope.addCrime = function(){
                    
-                    $http.post(direccionapi,$scope.newCrime).then(function(response){
+                    $http.post(direccionapi,$scope.newCrime).then(function successCallback(response){
                      $scope.status = response.status;
                      getCrimes();
+                     $scope.error = "";
+                     
+                 },function errorCallback(response) {
+                     console.log(response.status)
+                     $scope.status = response.status;
+                     switch (response.status) {
+                         case 405:
+                             $scope.error = "The post method has to be done to a set of resources";
+                             break;
+                         case 409:
+                             $scope.error = "The resource already exists";
+                             break;
+                         case 400:
+                             $scope.error = "Invalid fields";
+                             break;
+                         default:
+                             $scope.error = "Ups, something was wrong. Try it later";
+                     }
                  });  
                 
                  };
@@ -33,14 +63,49 @@ angular
                  
                  
     //Funcion que borra un crimen al darle al boton de delete             
-    $scope.deleteCrime = function(province, year, gender){
-                    console.log("Crimen a borrar:" + province + year + gender);
-                    $http.delete(direccionapi+"/"+province+"/"+year+"/"+gender).then(function(response){
-                     $scope.status = response.status;
-                     getCrimes();
-                 });  
-                
-                 };
+    $scope.deleteCrime = function(province, year, gender) {
+        console.log("Crimen a borrar:" + province + year + gender);
+        $http.delete(direccionapi + "/" + province + "/" + year + "/" + gender).then(function successCallback(response) {
+            $scope.status = response.status;
+            getCrimes();
+        }, function errorCallback(response) {
+            console.log(response.status);
+            $scope.status = response.status;
+            $scope.error = "Ups, something was wrong. Try it later";
+
+        });
+
+    };
+    
+    //Funcion que borra todos los crimenes
+    $scope.deleteAll = function() {
+    
+        $http.delete(direccionapi).then(function successCallback(response) {
+            $scope.status = response.status;
+            getCrimes();
+        }, function errorCallback(response) {
+            console.log(response.status);
+            $scope.status = response.status;
+            $scope.error = "Ups, something was wrong. Try it later";
+        });
+    
+    }
+    
+    
+    //Funcion de inserccion de datos iniciales
+    $scope.fillTable = function() {
+
+            $http.get(direccionapi + "/loadInitialData").then(function successCallback(response) {
+                $scope.status = response.status;
+                getCrimes();
+                $scope.error = ""
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+            });
+
+        }
     
 
 }]);

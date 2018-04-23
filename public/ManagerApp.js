@@ -22,6 +22,14 @@ angular
             .when("/divorces-an/:province/:year/",{
                 templateUrl: "divorceEdit.html",
                 controller: "divorceEditCtrl"
+            })
+            .when("/crimes-an",{
+                templateUrl: "listCrimes.html",
+                controller: "ListCtrl"
+            })
+            .when("/crimes-an/:province/:year/:gender",{
+                templateUrl: "editCrimes.html",
+                controller: "EditCtrl"
             });
             
     });
