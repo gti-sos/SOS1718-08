@@ -1,0 +1,30 @@
+<h1>Search Student</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>From</th>
+            <th>To</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input class="form-control" id="from" /></td>
+            <td><input class="form-control" id="to" /></td>
+            <td><button class="button btn-primary" ng-click="search()">
+                Buscar
+            </button></td>
+        </tr>
+         <tr ng-repeat="student in searchs">
+            <td>{{student.province}}</td>
+            <td>{{student.year}}</td>
+            <td>{{student.gender}}</td>
+            <td>{{student.popilliterate}}</td>
+            <td>{{student.pophigheducation}}</td>
+            <td>{{student.popinuniversity}}</td>
+            <td><button class="button btn-danger" ng-click="deleteStudent(student.province, student.year, student.gender)">Delete</button></td>
+        </tr> 
+    </tbody>
+</table>
+<hr/>
+<h8><i>{{status}}</i></h8>
+<h5><b>{{error}}</b></h5>

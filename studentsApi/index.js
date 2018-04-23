@@ -32,7 +32,7 @@ studentsApi.register = function(app, db) {
 
     console.log("Registering router for students API...")
     app.get(BASE_API_PATH + "/students-an/docs", (req, res) => {
-        res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-students-an/RVu5j8T1");
+        res.redirect("https://documenter.getpostman.com/view/3891289/sos1718-08-students-an/RW1XKMBs");
     });
 
     //CARGAR DATOS INICIALES
