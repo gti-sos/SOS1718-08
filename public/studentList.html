@@ -1,5 +1,10 @@
 <h1>Student list</h1>
 <table class="table">
+    <pagination 
+  total-items="100"
+  max-size="5"  
+  boundary-links="true">
+</pagination>
     <thead>
         <tr>
             <th>Province</th>
@@ -23,6 +28,8 @@
                 Add
             </button></td>
         </tr>
+        <!--<tr data-ng-repeat="i in nump"></tr> -->
+        
         <tr ng-repeat="student in students">
             <td><a href="/#!/students-an/{{student.province}}/{{student.year}}/{{student.gender}}">{{student.province}}</a></td>
             <td>{{student.year}}</td>
@@ -31,13 +38,20 @@
             <td>{{student.pophigheducation}}</td>
             <td>{{student.popinuniversity}}</td>
             <td><button class="button btn-danger" ng-click="deleteStudent(student.province, student.year, student.gender)">Delete</button></td>
-        </tr>
+        </tr> 
         <tr>
             <td><button class="button btn-danger" ng-click="deleteAll()">Delete All</button></td>
             <td><button class="button btn-primary" ng-click="fillTable()">Fill Table</button></td>
         </tr>
+        <tr><td><ul class="pagination">
+  <li><a href="#">Before</a></li>
+  <li>-</li>
+  <li><a href="#">Next</a></li>
+</ul></td></tr>
     </tbody>
 </table>
+
+
 <hr/>
 <h8><i>{{status}}</i></h8>
 <h5><b>{{error}}</b></h5>

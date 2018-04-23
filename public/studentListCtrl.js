@@ -40,7 +40,7 @@ angular
                 console.log(response.status);
                 $scope.status = "Status: " + response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
-            
+
             });
 
         }
@@ -72,6 +72,28 @@ angular
 
         }
 
+        $scope.pagination = function(offset, limit) {
+            $http.get(api + "?offset=" + offset + "&&limit=" + limit).then(function successCallback(response) {
+                $scope.status = "Status: " + response.status;
+                $scope.page = response.data;
+                $scope.error = "";
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = "Status: " + response.status;
+                switch (response.status) {
+                    case 404:
+                        $scope.error = "The table is empty. Fill it and try again";
+                        break;
+                    default:
+                        $scope.error = "Ups, something was wrong. Try it later";
+                }
+            });
+        }
+      
+        function numPages() {
+            $scope.nump = Math.ceil(getStudents().students.length / $scope.numPerPage);
+        };
+
         function getStudents() {
             $http.get(api).then(function successCallback(response) {
                 $scope.status = "Status: " + response.status;
@@ -85,7 +107,7 @@ angular
                         $scope.error = "The table is empty. Fill it and try again";
                         break;
                     default:
-                        $scope.error= "Ups, something was wrong. Try it later";
+                        $scope.error = "Ups, something was wrong. Try it later";
                 }
             });
         }

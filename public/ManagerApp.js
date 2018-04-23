@@ -14,6 +14,10 @@ angular
             .when("/students-an/:province/:year/:gender",{
                 templateUrl: "studentEdit.html",
                 controller: "studentEditCtrl"
+
+            }).when("/students-an/search",{
+                templateUrl: "studentSearch.html",
+                controller: "studentSearchCtrl"
             })
              .when("/divorces-an",{
                 templateUrl: "divorceList.html",
@@ -31,5 +35,4 @@ angular
                 templateUrl: "editCrimes.html",
                 controller: "EditCtrl"
             });
-            
     });
