@@ -1,0 +1,27 @@
+    <h1>Edit crimes </h1>
+    <table class="table table-striped">
+        <thread>
+            <tr>
+                <th>Provincia</th>
+                <th>Año</th>
+                <th>Género</th>
+                <th>Un crimen</th>
+                <th>Dos crímenes</th>
+                <th>Tres crímenes</th>
+                <th>Más de tres crímenes</th>
+            </tr>
+        </thread>
+        <tbody>
+            <tr>
+                <td>{{updatedCrime.province}}</td>
+                <td>{{updatedCrime.year}}</td>
+                <td>{{updatedCrime.gender}}</td>
+                <td><input class="form-control" ng-model="updatedCrime.onecrime" /></td>
+                <td><input class="form-control" ng-model="updatedCrime.twocrime" /></td>
+                <td><input class="form-control" ng-model="updatedCrime.threecrime" /></td>
+                <td><input class="form-control" ng-model="updatedCrime.morethreecrime" /></td>
+                <td><button class="button btn-primary" ng-click="updateCrime()">Update</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div> <b>STATUS: </b>{{status}} </div>

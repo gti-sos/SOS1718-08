@@ -1,0 +1,28 @@
+<h1>Edit Divorce</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Province</th>
+            <th>Year</th>
+            <th>Divorce</th>
+            <th>Break</th>
+            <th>Nullity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{updatedDivorce.province}}</td>
+            <td>{{updatedDivorce.year}}</td>
+            <td><input class="form-control" ng-model="updatedDivorce.divorce" /></td>
+            <td><input class="form-control" ng-model="updatedDivorce.break" /></td>
+            <td><input class="form-control" ng-model="updatedDivorce.nullity" /></td>
+            <td><button class="button btn-success" ng-click="updateDivorce()">
+                Update
+            </button></td>
+        </tr>
+    </tbody>
+</table>
+<hr/>
+<h8><i>{{status}}</i></h8>
+<h5><b>{{error}}</b></h5>
