@@ -109,8 +109,6 @@ angular
         
         
         //Funcion para paginar búsquedas
-        var offset = $scope.offset;
-        var limit = $scope.limit;
         
         $scope.paginacion = function() {
 
@@ -125,11 +123,11 @@ angular
             });
 
         }
-        
+        var nuevooffset = null;
         $scope.paginacion2 = function() {
-            //var nuevooffset = $scope.offset+$scope.limit
-            offset = offset + limit;
-            $http.get(direccionapi + "?limit="+limit+"&offset="+offset).then(function successCallback(response) {
+            nuevooffset = $scope.offset+$scope.limit;
+            console.log(nuevooffset);
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+nuevooffset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
@@ -142,9 +140,9 @@ angular
         }
         
         $scope.paginacion3 = function() {
-            offset = offset - limit;
-            //console.log(nuevooffset);
-            $http.get(direccionapi + "?limit="+limit+"&offset="+offset).then(function successCallback(response) {
+            nuevooffset = $scope.offset-$scope.limit;
+            console.log(nuevooffset);
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+nuevooffset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
