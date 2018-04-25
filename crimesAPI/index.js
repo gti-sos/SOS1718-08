@@ -356,11 +356,11 @@ crimesAPI.register = function(app, BASE_API_PATH1, db) {
                                                                     res.sendStatus(500);
                                                                     return;
                                                                 }
-                                                                if (results.length == 0) {
+                                                                /*if (results.length == 0) {
                                                                     console.log("Empty DB")
                                                                     res.sendStatus(404);
                                                                     return;
-                                                                }
+                                                                }*/ //Esto lo comentamos para que en frontend al hacer un deleteall devuelva al usuario la tabla vacía
                                                                 res.send(results.map((c) => {
                                                                     delete c._id;
                                                                     return c;
