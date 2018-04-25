@@ -124,6 +124,34 @@ angular
 
         }
         
+        $scope.paginacion2 = function() {
+            var nuevooffset = $scope.offset+$scope.limit
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+nuevooffset).then(function successCallback(response) {
+                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.crimes = response.data;
+                $scope.error = ""
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+            });
+
+        }
+        
+        $scope.paginacion3 = function() {
+            var nuevooffset = $scope.offset-$scope.limit
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+nuevooffset).then(function successCallback(response) {
+                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.crimes = response.data;
+                $scope.error = ""
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+            });
+
+        }
+        
         
         
     
