@@ -114,7 +114,7 @@ angular
 
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
-                getCrimes();
+                $scope.crimes = response.data;
                 $scope.error = ""
             }, function errorCallback(response) {
                 console.log(response.status);
