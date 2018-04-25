@@ -110,7 +110,7 @@ angular
         
         //Funcion para paginar búsquedas
         
-        $scope.paginacion = function() {
+        function paginacion() {
 
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
@@ -121,10 +121,10 @@ angular
                 $scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
-            getCrimes();
+            
         }
         
-        
+        paginacion();
         
     
 
