@@ -9,39 +9,26 @@ angular
 
     //Funcion que obtiene los crimenes, se lanza de inmediato
     function getCrimes() {
-        if ($scope.limit == null || $scope.offset == null) {
-            $http.get(direccionapi).then(function successCallback(response) {
-                $scope.crimes = response.data;
-                $scope.status = "STATUS code is: " + response.status + " That means it's all okey!";
-                $scope.error = "";
-            }, function errorCallback(response) {
-                console.log(response.status);
-                $scope.status = response.status;
-                switch (response.status) {
-                    case 404:
-                        $scope.error = "The table is empty. Fill it and try again";
-                        break;
-                    default:
-                        $scope.error = "Ups, something was wrong. Try it later";
-                }
-            });
-        }
-        else {
-             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
-                getCrimes();
-                $scope.error = ""
-            }, function errorCallback(response) {
-                console.log(response.status);
-                $scope.status = response.status;
-                $scope.error = "Ups, something was wrong. Try it later";
-            });
-        }
-    
-    
+
+        $http.get(direccionapi).then(function successCallback(response) {
+            $scope.crimes = response.data;
+            $scope.status = "STATUS code is: " + response.status + " That means it's all okey!";
+            $scope.error = "";
+        },function errorCallback(response) {
+            console.log(response.status);
+            $scope.status = response.status;
+            switch (response.status) {
+                case 404:
+                    $scope.error = "The table is empty. Fill it and try again";
+                    break;
+                default:
+                    $scope.error = "Ups, something was wrong. Try it later";
+            }
+        });
+        
     };
 
-    getCrimes();
+   // getCrimes();
     
     
     
@@ -70,7 +57,7 @@ angular
                     $scope.error = "Ups, something was wrong. Try it later";
             }
         });
-
+        getCrimes();
     };
                  
                  
@@ -87,7 +74,7 @@ angular
             $scope.error = "Ups, something was wrong. Try it later";
 
         });
-
+        getCrimes();
     };
     
     //Funcion que borra todos los crimenes
@@ -101,7 +88,7 @@ angular
             $scope.status = response.status;
             $scope.error = "Ups, something was wrong. Try it later";
         });
-    
+        getCrimes();
     }
     
     
@@ -117,17 +104,25 @@ angular
                 $scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
-
+            getCrimes();
         }
         
         
         //Funcion para paginar búsquedas
         
-        //$scope.paginacion = function() {
+        $scope.paginacion = function() {
 
-           
-
-        //}
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
+                $scope.status = "STATUS: " + response.status + "Done!";
+                getCrimes();
+                $scope.error = ""
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+            });
+            getCrimes();
+        }
         
         
         
