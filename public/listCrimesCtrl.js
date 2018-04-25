@@ -25,10 +25,10 @@ angular
                     $scope.error = "Ups, something was wrong. Try it later";
             }
         });
-        
+
     };
 
-   // getCrimes();
+    getCrimes();
     
     
     
@@ -57,7 +57,7 @@ angular
                     $scope.error = "Ups, something was wrong. Try it later";
             }
         });
-        getCrimes();
+
     };
                  
                  
@@ -74,7 +74,7 @@ angular
             $scope.error = "Ups, something was wrong. Try it later";
 
         });
-        getCrimes();
+
     };
     
     //Funcion que borra todos los crimenes
@@ -88,7 +88,7 @@ angular
             $scope.status = response.status;
             $scope.error = "Ups, something was wrong. Try it later";
         });
-        getCrimes();
+    
     }
     
     
@@ -104,13 +104,13 @@ angular
                 $scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
-            getCrimes();
+
         }
         
         
         //Funcion para paginar búsquedas
         
-        function paginacion() {
+        $scope.paginacion = function() {
 
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
@@ -121,10 +121,10 @@ angular
                 $scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
-            
+
         }
         
-        paginacion();
+        
         
     
 
