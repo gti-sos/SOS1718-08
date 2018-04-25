@@ -452,14 +452,15 @@ crimesAPI.register = function(app, BASE_API_PATH1, db) {
                 res.sendStatus(500);
                 return;
             }
-            if (crimes.length == 0){
+            /*if (crimes.length == 0){
                 console.log("Not found");
                 res.sendStatus(404);
                 return;
-            }
+            }*/ //Esto lo comentamos para que en frontend al hacer un deleteall devuelva al usuario la tabla vacía
             
             res.send(crimes.map((c) => {
                 delete c._id;
+                res.sendStatus(200);
                 return c;
             })[0]);
         });
