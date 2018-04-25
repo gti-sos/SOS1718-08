@@ -125,7 +125,7 @@ angular
         }
         var nuevooffset = null;
         $scope.paginacion2 = function() {
-            nuevooffset = $scope.offset+$scope.limit;
+            nuevooffset = Number($scope.offset)+Number($scope.limit);
             console.log(nuevooffset);
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+nuevooffset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
@@ -140,7 +140,7 @@ angular
         }
         
         $scope.paginacion3 = function() {
-            nuevooffset = $scope.offset-$scope.limit;
+            nuevooffset = Number($scope.offset)-Number($scope.limit);
             console.log(nuevooffset);
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+nuevooffset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
