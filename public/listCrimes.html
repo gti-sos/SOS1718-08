@@ -14,6 +14,11 @@
             </thread>
             <tbody>
                 <tr>
+                    <td><input name="limit" class="form-control" type="number" ng-model="limit"/>Introduzca limit</td>
+                    <td><input name="offset" class="form-control" type="number" ng-model="offset"/>Introduzca offset</td>
+                    <td><button class="button btn-primary" ng-click="paginacion()">Paginar</button></td>
+                </tr>
+                <tr>
                     <td><input class="form-control" ng-model="newCrime.province" /></td>
                     <td><input class="form-control" type="number"ng-model="newCrime.year" /></td>
                     <td><input class="form-control" ng-model="newCrime.gender" /></td>

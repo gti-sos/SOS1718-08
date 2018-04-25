@@ -106,6 +106,26 @@ angular
             });
 
         }
+        
+        
+        //Funcion para paginar búsquedas
+        
+        $scope.paginacion = function() {
+
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
+                $scope.status = "STATUS: " + response.status + "Done!";
+                getCrimes();
+                $scope.error = ""
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+            });
+
+        }
+        
+        
+        
     
 
 }]);
