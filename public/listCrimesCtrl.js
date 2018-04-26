@@ -126,11 +126,12 @@ angular
         
         
         
-        var nuevooffset = Number($scope.offset);
+        //var nuevooffset = Number($scope.offset);
         $scope.paginacion2 = function() {
-            nuevooffset = nuevooffset+Number($scope.limit);
-            console.log(nuevooffset);
-            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+nuevooffset).then(function successCallback(response) {
+            //nuevooffset = nuevooffset+Number($scope.limit);
+            console.log($scope.offset + $scope.limit);
+            console.log($scope.offset.typeof);
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+($scope.offset + $scope.limit)).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
@@ -143,9 +144,9 @@ angular
         }
         
         $scope.paginacion3 = function() {
-            nuevooffset = Number($scope.offset)-Number($scope.limit);
-            console.log(nuevooffset);
-            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+nuevooffset).then(function successCallback(response) {
+            //nuevooffset = Number($scope.offset)-Number($scope.limit);
+            //console.log(nuevooffset);
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+($scope.offset + $scope.limit)).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
