@@ -155,7 +155,7 @@ angular
         }
         
         
-        //Función para búsqueda
+        //Función para realizar búsquedas
         
          $scope.busqueda = function() {
             console.log(direccionapi + "?"+$scope.campo+"="+$scope.valor);
