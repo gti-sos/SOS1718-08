@@ -40,18 +40,18 @@
                     <td><button class="button btn-secondary" ng-click="paginacion3()">Anterior</button></td>
                     <td><button class="button btn-secondary" ng-click="paginacion2()">Siguiente</button></td>
                 </tr>
-                <!---></----><tr>
-                    <td><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-model="campo">Campo búsqueda
-                      <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">province</a></li>
-                            <li><a href="#">year</a></li>
-                            <li><a href="#">gender</a></li>
-                            <li><a href="#">onecrime</a></li>
-                            <li><a href="#">twocrime</a></li>
-                            <li><a href="#">threecrime</a></li>
-                            <li><a href="#">morethreecrime</a></li>
-                        </ul>
+                <tr>
+                    <td>
+                        <label for="sel1">Campo de la búsqueda</label>
+                        <select class="form-control" id="sel1">
+                                <option>province</option>
+                                <option>year</option>
+                                <option>gender</option>
+                                <option>onecrime</option>
+                                <option>twocrime</option>
+                                <option>threecrime</option>
+                                <option>morethreecrime</option>
+                              </select>
                     </td>
                     <td><input placeholder="valor" name="valor" class="form-control"  ng-model="valor"/></td>
                     <td><button class="button btn-primary" ng-click="busqueda()">Buscar</button></td>
