@@ -158,6 +158,7 @@ angular
         //Función para búsqueda
         
          $scope.busqueda = function() {
+            console.log(direccionapi + "?"+$scope.campo+"="+$scope.valor);
             $http.get(direccionapi + "?"+$scope.campo+"="+$scope.valor).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
                 $scope.crimes = response.data;
