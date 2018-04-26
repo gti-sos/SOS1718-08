@@ -129,9 +129,9 @@ angular
         //var nuevooffset = Number($scope.offset);
         $scope.paginacion2 = function() {
             //nuevooffset = nuevooffset+Number($scope.limit);
+            $scope.offset = $scope.offset + $scope.limit;
             console.log($scope.offset + $scope.limit);
-            console.log($scope.offset.typeof);
-            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+($scope.offset + $scope.limit)).then(function successCallback(response) {
+            $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
