@@ -123,7 +123,10 @@ angular
             });
 
         }
-        var nuevooffset = null;
+        
+        
+        
+        var nuevooffset = 0;
         $scope.paginacion2 = function() {
             nuevooffset = Number($scope.offset)+Number($scope.limit);
             console.log(nuevooffset);
