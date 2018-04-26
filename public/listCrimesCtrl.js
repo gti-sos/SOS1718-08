@@ -5,7 +5,7 @@ angular
     console.log("List Controller initialited");
 
     //$scope.url = "/api/v1/crimes-an";
-    var direccionapi = "/api/v1/crimes-an";
+    var direccionapi = "/api/v2/crimes-an";
 
     //Funcion que obtiene los crimenes, se lanza de inmediato
     function getCrimes() {

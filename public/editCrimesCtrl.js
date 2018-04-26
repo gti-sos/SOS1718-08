@@ -4,7 +4,7 @@
         .controller("EditCtrl", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams,$location) {
             console.log("Edit Controller initialited");
     
-            var direccioncrimen = "/api/v1/crimes-an/" + $routeParams.province + "/" + $routeParams.year + "/" + $routeParams.gender;
+            var direccioncrimen = "/api/v2/crimes-an/" + $routeParams.province + "/" + $routeParams.year + "/" + $routeParams.gender;
     
             //Funcion que crea un contacto nuevo al darle al boton send
            
