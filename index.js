@@ -82,7 +82,7 @@ MongoClient.connect(mdbcrimes,{native_parser:true},(err,mlabs)=>{
     var db = database.collection("crimes-an");
     
     
-    crimesAPI.register(app, BASE_API_PATH1, db);//le pasamos lo del express que esta en app al codigo que hemos movido a crimesAPI y el BASE_API_PATH
+    crimesAPI.register(app, BASE_API_PATH, db);//le pasamos lo del express que esta en app al codigo que hemos movido a crimesAPI y el BASE_API_PATH
     
     app.listen(port, () => {
         console.log("Server ready on port " + port + "!");
