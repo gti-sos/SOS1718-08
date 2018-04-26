@@ -43,17 +43,16 @@
                 <tr>
                     <td>
                         
-                        <select class="form-control" >
+                        <select class="form-control" ng-model="campo" ng-init="campo='province'">
                                 <option value="" disabled selected>Campo Búsqueda</option>
-                                <option ng-model="campo" value="province">province</option>
+                                <option value="province">province</option>
                                 <option value="year">year</option>
-                                <option ng-model="campo" value="gender">gender</option>
+                                <option value="gender">gender</option>
                                 <option value="onecrime">onecrime</option>
                                 <option value="twocrime">twocrime</option>
                                 <option value="threecrime">threecrime</option>
                                 <option value="morethreecrime">morethreecrime</option>
                               </select>
-                              {{campo}}
                     </td>
                     <td><input placeholder="valor" name="valor" class="form-control"  ng-model="valor"/></td>
                     <td><button class="button btn-primary" ng-click="busqueda()">Buscar</button></td>
