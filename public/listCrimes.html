@@ -34,8 +34,8 @@
                     <td><button class="button btn-warning" ng-click="deleteCrime(a.province, a.year, a.gender)">Delete</button></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="limit"name="limit" class="form-control" type="number" ng-model="limit"/></td>
-                    <td><input placeholder="offset" name="offset" class="form-control" type="number" ng-model="offset"/></td>
+                    <td><input placeholder="limit"name="limit" class="form-control" type="number" ng-model="limit" ng-init="limit='10'"/></td>
+                    <td><input placeholder="offset" name="offset" class="form-control" type="number" ng-model="offset" ng-init="offset='0'"/></td>
                     <td><button class="button btn-primary" ng-click="paginacion()">Paginar</button></td>
                     <td><button class="button btn-secondary" ng-click="paginacion3()">Anterior</button></td>
                     <td><button class="button btn-secondary" ng-click="paginacion2()">Siguiente</button></td>
