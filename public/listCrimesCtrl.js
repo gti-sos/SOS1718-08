@@ -144,7 +144,7 @@ angular
         
         $scope.paginacion3 = function() {
             $scope.offset = $scope.offset - $scope.limit;
-            console.log("Nuevo offset: " + $scope.offset);
+            console.log("Nuevo offset: "$scope.offset + $scope.limit);
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
                 $scope.crimes = response.data;
