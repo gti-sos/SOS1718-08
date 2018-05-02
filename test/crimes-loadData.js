@@ -10,7 +10,7 @@ describe('data is loaded', function() {
 
     it('should show some crimes', function() {
         browser
-            .get()
+            .get('https://sos171808jepm-sandbox-sos171808jepm.c9users.io/#!/crimes-an')
             .then(function() {
                 element
                     .all(by.repeater('a in crimes'))
@@ -18,7 +18,7 @@ describe('data is loaded', function() {
                         browser
                             .takeScreenshot()
                             .then(function(png){
-                                var stream = fs.createWriteStream(path.join(process.cwd(),'test','output','captura1.png'));
+                                var stream = fs.createWriteStream(path.join(process.cwd(),'test','outputcrimes','captura1.png'));
                                 stream.write(new Buffer(png,'base64'));
                                 stream.end();
                             });
