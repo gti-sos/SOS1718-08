@@ -30,25 +30,41 @@
             <td><button class="button btn-danger" ng-click="deleteDivorce(divorce.province, divorce.year)">Delete</button></td>
         </tr>
         <tr>
+            <td><button class="button btn-info" ng-click="getPageBack()">Back</button></td>
+            <td><button class="button btn-info" ng-click="getPageNext()">Next</button></td>
             <td><button class="button btn-danger" ng-click="deleteAll()">Delete All</button></td>
             <td><button class="button btn-primary" ng-click="fillTable()">Fill Table</button></td>
         </tr>
-        <tr>
-            <td>Paginacion</td>
-        </tr>
-        <tr>
-            <td>Limit</td>
-            <td><input class="form-control" ng-class={"limit"} /></td>
-        </tr>
-        <tr>
-            <td>Offset</td>
-            <td><input class="form-control" ng-class={"offset"} /></td>
-        </tr>
-        <tr>
-            <td><button class="button btn-warning" ng-click="getPage()">Page</button></td>
-        </tr>
+            
+       
+       
     </tbody>
 </table>
+<h2>Search</h2>
+<table class="table table-bordered table-hover">
+     <tr><thead>
+        <tr>
+            <th>Province</th>
+            <th>Field</th>
+            <th>Valor</th>
+            
+        </tr>
+    </thead>
+                    <td><input placeholder="province" name="province" class="form-control"  ng-model="province"/></td>
+                    <td>
+                        <select class="form-control" ng-model="campo" ng-init="campo='province'">
+                                <option value="" disabled selected></option>
+                                <option value="year">year</option>
+                                <option value="divorce">divorce</option>
+                                <option value="break">break</option>
+                                <option value="nullity">nullity</option>
+                              </select>
+                    </td>
+                    
+                    <td><input placeholder="valor" name="valor" class="form-control"  ng-model="valor"/></td>
+                    <td><button class="button btn-primary" ng-click="getBusqueda()">Buscar</button></td>
+                </tr>
+    </table>
 <hr/>
 <h8><i>{{status}}</i></h8>
 <h5><b>{{error}}</b></h5>

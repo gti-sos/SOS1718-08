@@ -77,11 +77,11 @@ angular
         }
 
         function getDivorces() {
-            $http.get(api).then(function successCallback(response) {
+            $http.get(api+"?limit=10&offset=0").then(function successCallback(response) {
                 $scope.status = "Status: " + response.status;
                 $scope.divorces = response.data;
                 $scope.error = "";
-                $scope.offset = $scope.offset;
+                $scope.offset =0;
                 $scope.limit= $scope.limit;
             }, function errorCallback(response) {
                 console.log(response.status);
@@ -95,24 +95,71 @@ angular
                 }
             });
         }
-        $scope.getPage = function(limit, offset) {
-        $scope.offset = offset;
-        $scope.limit= limit;
+      
         
-        console.log($scope.offset);
-        $http.get(api+"/divorces-an?"+ "limit="+ $scope.limit + "&offset=" + $scope.offset).then(function(response) {
-            $scope.divorces = response.data;
-    
-        }, function errorCallback(response) {
-            console.log("Empty");
-            $scope.divorces = [];
-        });
-    };
+             $scope.getBusqueda = function() {
+            console.log(api +"/"+$scope.province + "?"+$scope.campo+"="+$scope.valor);
+            $http.get(api +"/"+$scope.province+ "?"+$scope.campo+"="+$scope.valor).then(function successCallback(response) {
+                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.divorces = response.data;
+                $scope.error = ""
+                
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+                $scope.empty= getDivorces();
+            });
+                
+        }
         
         
+      /*   $scope.getPage = function() {
+
+            $http.get(api + "?limit=10"+"&offset=0").then(function successCallback(response) {
+                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.divorces = response.data;
+                $scope.error = ""
+                $scope.offset=0;
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+            });
+
+        }*/
+        
+        
+        
+        $scope.getPageNext = function() {
+            $scope.offset = $scope.offset +10;
+            $http.get(api + "?limit=10"+"&offset="+$scope.offset).then(function successCallback(response) {
+                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.divorces = response.data;
+                $scope.error = ""
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+            });
+
+        }
+        
+        $scope.getPageBack = function() {
+            $scope.offset = $scope.offset - 10;
+            $http.get(api + "?limit=10"+"&offset="+$scope.offset).then(function successCallback(response) {
+                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.divorces = response.data;
+                $scope.error = ""
+            }, function errorCallback(response) {
+                console.log(response.status);
+                $scope.status = response.status;
+                $scope.error = "Ups, something was wrong. Try it later";
+            });
+
+        }
 
         getDivorces();
-
 
 
     }]);

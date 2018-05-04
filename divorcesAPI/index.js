@@ -70,7 +70,7 @@ divorcesAPI.register = function(app,db) {
     app.get(BASE_API_PATH+"/divorces-an", (req, res) => {
         var limit = Number(req.query.limit);
         var offset = Number(req.query.offset);
-        if (limit > 0 & offset > 0) {
+        if (limit > 0 & offset >= 0) {
             MongoClient.connect(urljurado, function(err, db) {
                 if (err) throw err;
                 var dbo = db.db("sos1718-jmja-sandbox");
