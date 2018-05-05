@@ -158,6 +158,8 @@ angular
             });
 
         }
+        
+        
 
         getDivorces();
 
