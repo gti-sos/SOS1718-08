@@ -13,14 +13,21 @@ divorcesAPI.register = function(app,db) {
 
     var initialDivorces  = [
     { "province": "sevilla", "year": 2016, "divorce": 3973, "break": 203, "nullity": 1 },
+    { "province": "sevilla", "year": 2015, "divorce": 3987, "break": 189, "nullity": 7 },
     { "province": "cadiz", "year": 2016, "divorce": 2249, "break": 138, "nullity": 0 },
+    { "province": "cadiz", "year": 2015, "divorce": 2334, "break": 134, "nullity": 5 },
     { "province": "almeria", "year": 2016, "divorce": 1405, "break": 42, "nullity": 1 },
+    { "province": "almeria", "year": 2015, "divorce": 1392, "break": 56, "nullity": 3 },
     { "province": "cordoba", "year": 2016, "divorce": 1447, "break": 115, "nullity": 1 },
+    { "province": "cordoba", "year": 2015, "divorce": 1618, "break": 117, "nullity": 0 },
     { "province": "granada", "year": 2016, "divorce": 1904, "break": 104, "nullity": 2 },
+    { "province": "granada", "year": 2015, "divorce": 1855, "break": 106, "nullity": 3 },
     { "province": "huelva", "year": 2016, "divorce": 1036, "break": 49, "nullity": 3 },
+    { "province": "huelva", "year": 2015, "divorce": 1012, "break": 41, "nullity": 3 },
     { "province": "jaen", "year": 2016, "divorce": 1109, "break": 73, "nullity": 1 },
+    { "province": "jaen", "year": 2015, "divorce": 1193, "break": 81, "nullity": 0 },
     { "province": "malaga", "year": 2016, "divorce": 3606, "break": 171, "nullity": 3 },
-    { "province": "malaga", "year": 2015, "divorce": 36, "break": 17, "nullity": 3 }
+    { "province": "malaga", "year": 2015, "divorce": 3522, "break": 173, "nullity": 8 }
 /*
  { "province": "sevilla", "year": "2016", "divorce": "3973", "break": "203", "nullity": "1" },
     { "province": "cadiz", "year": "2016", "divorce": "2249", "break": "138", "nullity": "0" },
@@ -77,8 +84,8 @@ divorcesAPI.register = function(app,db) {
                 if (err) throw err;
                 dbo.collection("divorces").find({}).skip(offset).limit(limit).toArray(function(err, result) {
                     if (!err && !result.length) {
-                        console.log("Not found");
-                       // res.sendStatus(404);
+                        console.log("Not found 1");
+                        res.sendStatus(200);
                     }
                     else {
                         res.send(result.map((c) => {
@@ -97,7 +104,7 @@ divorcesAPI.register = function(app,db) {
                 if (err) throw err;
                 dbo.collection("divorces").find({}).toArray(function(err, result) {
                     if (!err && !result.length) {
-                        console.log("Not found");
+                        console.log("Not found 2");
                        res.sendStatus(200);
                     }
                     else {
