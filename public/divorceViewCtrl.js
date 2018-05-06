@@ -93,8 +93,8 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
            var myConfig = {
   type: "hbar",
   title: {
-    align: "left",
-    text: "Expenditures in Tech",
+    align: "center",
+    text: "Divorces, breaks and nullity for province in years",
     fontColor: "#555",
     fontSize: 30,
     fontFamily: "Roboto",
@@ -176,7 +176,7 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
  	scaleY: {
  	  label:{
  	    offsetY: 5,
- 	    text: "Investment in Billions (USD)",
+ 	    text: "",
  	    fontColor: "#777",
  	    fontSize: 14,
  	    fontFamily: "Roboto",
@@ -304,7 +304,7 @@ zingchart.render({
            //                                  //
            //////////////////////////////////////
              
-            
+               $scope.searchWidget = function(){
              google.charts.load('current', {'packages': ['geochart'],
        // Note: you will need to get a mapsApiKey for your project.
        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
@@ -312,18 +312,31 @@ zingchart.render({
      });
              
              google.charts.setOnLoadCallback(drawMarkersMap);
+             
+             
 
       function drawMarkersMap() {
       var data = google.visualization.arrayToDataTable([
-        ['City',   'Population', 'Area'],
-        ['Sevilla',      2761477,    1285.31],
-        ['Cadiz',     1324110,    181.76],
-        ['Almeria',    959574,     117.27],
-        ['Cordoba',     907563,     130.17],
-        ['Granada',   655875,     158.9],
-        ['Huelva',     607906,     243.60],
-        ['Jaen',   380181,     140.7],
-        ['Malaga',  371282,     102.41],
+        ['City',   'Divorce', 'Break'],
+        ['Sevilla', parseFloat(response.data.filter(d => d.province == "sevilla" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Cadiz', parseFloat(response.data.filter(d => d.province == "cadiz" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Almeria', parseFloat(response.data.filter(d => d.province == "almeria" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Cordoba', parseFloat(response.data.filter(d => d.province == "cordoba" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Granada', parseFloat(response.data.filter(d => d.province == "granada" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Huelva', parseFloat(response.data.filter(d => d.province == "huelva" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Jaen', parseFloat(response.data.filter(d => d.province == "jaen" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Malaga', parseFloat(response.data.filter(d => d.province == "malaga" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+       
+        
+        
       ]);
 
       var options = {
@@ -335,6 +348,7 @@ zingchart.render({
       var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     };
+               };
          });
         
    }]);
