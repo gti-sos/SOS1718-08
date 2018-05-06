@@ -1,6 +1,8 @@
 /*global angular*/
 /*global Highcharts*/
 /*global zingchart*/
+/*global google*/
+
 
 angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("View Ctrl initialized!");
@@ -8,6 +10,13 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
         
          $http.get("/api/v1/divorces-an").then(function(response){
              
+             
+           //////////////////////////////////////
+           //                                  //
+           //            Highcharts            //
+           //                                  //
+           //                                  //
+           //////////////////////////////////////
              
                Highcharts.chart('divorcegraphic', {
             chart: {
@@ -71,7 +80,14 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
         
         });
              
-           //Zingchart
+             
+        
+           //////////////////////////////////////
+           //                                  //
+           //            Zingchart             //
+           //                                  //
+           //                                  //
+           //////////////////////////////////////
            
            
            var myConfig = {
@@ -280,6 +296,45 @@ zingchart.render({
 	width: 1000 
 });
          
+              
+           //////////////////////////////////////
+           //                                  //
+           //          GOOGLE MAPS             //
+           //                                  //
+           //                                  //
+           //////////////////////////////////////
+             
+            
+             google.charts.load('current', {'packages': ['geochart'],
+       // Note: you will need to get a mapsApiKey for your project.
+       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+       'mapsApiKey': 'AIzaSyBePfYoBL0sHvka8e0Y-cMhu9zWG-7TpIQ'
+     });
+             
+             google.charts.setOnLoadCallback(drawMarkersMap);
+
+      function drawMarkersMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['City',   'Population', 'Area'],
+        ['Sevilla',      2761477,    1285.31],
+        ['Cadiz',     1324110,    181.76],
+        ['Almeria',    959574,     117.27],
+        ['Cordoba',     907563,     130.17],
+        ['Granada',   655875,     158.9],
+        ['Huelva',     607906,     243.60],
+        ['Jaen',   380181,     140.7],
+        ['Malaga',  371282,     102.41],
+      ]);
+
+      var options = {
+        region: 'ES',
+        displayMode: 'markers',
+        colorAxis: {colors: ['red', 'blue']}
+      };
+
+      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    };
          });
         
    }]);
