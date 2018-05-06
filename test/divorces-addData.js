@@ -1,7 +1,7 @@
 /*global browser*/ /*global element*/ /*global expect*/ /*global by*/
 describe('Add divorces', function(){
    
-   it('should add a new crime', function(){
+   it('should add a new divorce', function(){
       browser
       .get('https://sos171803jmja-sandbox-sos171803jmja.c9users.io/#!/divorces-an')
       .then(function(){
