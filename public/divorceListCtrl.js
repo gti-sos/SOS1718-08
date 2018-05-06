@@ -3,9 +3,7 @@
 
 
 
-angular
-    .module("ManagerApp")
-    .controller("divorceListCtrl", ["$scope", "$http", function($scope, $http) {
+angular.module("ManagerApp").controller("divorceListCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("List Ctrl initialized!");
         var api = "/api/v1/divorces-an";
 
@@ -160,8 +158,18 @@ angular
         }
         
         
+        
+        
+        
+        
+        
+        
 
         getDivorces();
+        
+        
+        
+        
 
 
     }]);

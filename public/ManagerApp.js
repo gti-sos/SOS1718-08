@@ -27,6 +27,11 @@ angular
                 templateUrl: "divorceEdit.html",
                 controller: "divorceEditCtrl"
             })
+            
+            .when("/divorces-an/stadistics",{
+                templateUrl: "divorceView.html",
+                controller: "divorceViewtCtrl"
+            })
             .when("/crimes-an",{
                 templateUrl: "listCrimes.html",
                 controller: "ListCtrl"

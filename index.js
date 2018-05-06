@@ -44,7 +44,7 @@ var initialCrimes = [
 ];
 
 
-var divorces = [
+var initialDivorces = [
     { "province": "sevilla", "year": 2016, "divorce": 3973, "break": 203, "nullity": 1 },
     { "province": "cadiz", "year": 2016, "divorce": 2249, "break": 138, "nullity": 0 },
     { "province": "almeria", "year": 2016, "divorce": 1405, "break": 42, "nullity": 1 },
