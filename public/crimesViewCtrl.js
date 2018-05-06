@@ -21,7 +21,7 @@
                     text: 'Source: <a href="https://www.juntadeandalucia.es/institutodeestadisticaycartografia/indsoc/indicadores/1070.htm">juntadeandalucia</a>'
                 },
                 xAxis: {
-                    categories: response.data.filter(function(m) {return m.gender=="female"}).map(function (d) {return d.province})
+                    categories: response.data.filter(function(m) {return m.gender=="female"}).filter(function(y) {return y.year==$scope.widget}).map(function (d) {return d.province})
                 },
                 yAxis: {
                         min: 0,
@@ -93,7 +93,7 @@
                     text: 'Source: <a href="https://www.juntadeandalucia.es/institutodeestadisticaycartografia/indsoc/indicadores/1070.htm">juntadeandalucia</a>'
                 },
                 xAxis: {
-                    categories: response.data.filter(function(m) {return m.gender=="male"}).map(function (d) {return d.province})
+                    categories: response.data.filter(function(m) {return m.gender=="male"}).filter(function(y) {return y.year==$scope.widget}).map(function (d) {return d.province})
                 },
                 yAxis: {
                         min: 0,
