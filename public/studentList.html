@@ -1,10 +1,7 @@
 <h1>Student list</h1>
 <table class="table">
-    <pagination 
-  total-items="100"
-  max-size="5"  
-  boundary-links="true">
-</pagination>
+    <pagination total-items="100" max-size="5" boundary-links="true">
+    </pagination>
     <thead>
         <tr>
             <th>Province</th>
@@ -29,7 +26,7 @@
             </button></td>
         </tr>
         <!--<tr data-ng-repeat="i in nump"></tr> -->
-        
+
         <tr ng-repeat="student in students">
             <td><a href="/#!/students-an/{{student.province}}/{{student.year}}/{{student.gender}}">{{student.province}}</a></td>
             <td>{{student.year}}</td>
@@ -38,17 +35,35 @@
             <td>{{student.pophigheducation}}</td>
             <td>{{student.popinuniversity}}</td>
             <td><button class="button btn-danger" ng-click="deleteStudent(student.province, student.year, student.gender)">Delete</button></td>
-        </tr> 
+        </tr>
         <tr>
             <td><button class="button btn-danger" ng-click="deleteAll()">Delete All</button></td>
             <td><button class="button btn-primary" ng-click="fillTable()">Fill Table</button></td>
             <td><a href="https://sos171808msd-sos171808msd.c9users.io/#!/students-an/search"><button class="button btn-primary">Search</button></a></td>
         </tr>
-        <tr><td><ul class="pagination">
-  <li><a href="#">Before</a></li>
-  <li>-</li>
-  <li><a href="#">Next</a></li>
-</ul></td></tr>
+        <tr>
+            <td><input placeholder="limit" name="limit" class="form-control" type="number" ng-model="limit" ng-init="limit='10'" /></td>
+            <td><input placeholder="offset" name="offset" class="form-control" type="number" ng-model="offset" ng-init="offset='0'" /></td>
+            <td><button class="button btn-primary" ng-click="paginacion()">Paginar</button></td>
+            <td><button class="button btn-secondary" ng-click="paginacion3()">Anterior</button></td>
+            <td><button class="button btn-secondary" ng-click="paginacion2()">Siguiente</button></td>
+        </tr>
+        <tr>
+            <td>
+
+                <select class="form-control" ng-model="campo" ng-init="campo='province'">
+                                <option value="" disabled selected>Campo Búsqueda</option>
+                                <option value="province">province</option>
+                                <option value="year">year</option>
+                                <option value="gender">gender</option>
+                                <option value="popilliterate">popilliterate</option>
+                                <option value="pophigheducation">pophigheducation</option>
+                                <option value="popinuniversity">popinuniversity</option>
+                              </select>
+            </td>
+            <td><input placeholder="valor" name="valor" class="form-control" ng-model="valor" /></td>
+            <td><button class="button btn-primary" ng-click="busqueda()">Buscar</button></td>
+        </tr>
     </tbody>
 </table>
 
