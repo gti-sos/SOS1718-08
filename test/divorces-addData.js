@@ -3,7 +3,7 @@ describe('Add divorces', function(){
    
    it('should add a new divorce', function(){
       browser
-      .get('https://sos171803jmja-sandbox-sos171803jmja.c9users.io/#!/divorces-an')
+      .get('https://sos1718-08.herokuapp.com/#!/divorces-an')
       .then(function(){
           element
             .all(by.repeater('a in divorces'))

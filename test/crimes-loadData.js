@@ -10,7 +10,7 @@ describe('data is loaded', function() {
 
     it('should show some crimes', function() {
         browser
-            .get('https://sos171808jepm-sandbox-sos171808jepm.c9users.io/#!/crimes-an')
+            .get('https://sos1718-08.herokuapp.com/#!/crimes-an')
             .then(function() {
                 element
                     .all(by.repeater('a in crimes'))
