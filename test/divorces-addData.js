@@ -9,10 +9,10 @@ describe('Add divorces', function(){
             .all(by.repeater('a in divorces'))
             .then(function(initialDivorces){
                 //browser.driver.sleep(2000);
-                element(by.model('newDivorce.province')).sendKeys('sevilla');
+                element(by.model('newDivorce.province')).sendKeys('prueba');
                 element(by.model('newDivorce.year')).sendKeys(2010);
                 element(by.model('newDivorce.divorce')).sendKeys(1);
-                element(by.model('newDivorce.breaj')).sendKeys(1);
+                element(by.model('newDivorce.break')).sendKeys(1);
                 element(by.model('newDivorce.nullity')).sendKeys(1);
                 
                 element(by.buttonText('Add')).click().then(function(){
