@@ -18,12 +18,12 @@
            
             $scope.updateCrime = function successCallback(){
             $http.put(direccioncrimen,$scope.updatedCrime).then(function (response){
-                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.status = "STATUS: " + "Done!";
                 $location.path("/crimes-an");
                 $scope.error = "";
             }, function errorCallback(response){
                 console.log(response.status);
-                $scope.status = "Status: " + response.status;
+                //$scope.status = "Status: " + response.status;
                  switch (response.status) {
                     case 405:
                         $scope.error = "The put method has to be done to a specific resource";

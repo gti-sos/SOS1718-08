@@ -12,7 +12,7 @@ angular
 
         $http.get(direccionapi).then(function successCallback(response) {
             $scope.crimes = response.data;
-            $scope.status = "STATUS code is: " + response.status + " That means it's all okey!";
+            $scope.status = "it's all okey!";
             $scope.error = "";
         },function errorCallback(response) {
             console.log(response.status);
@@ -36,7 +36,7 @@ angular
     $scope.addCrime = function() {
 
         $http.post(direccionapi, $scope.newCrime).then(function successCallback(response) {
-            $scope.status = "STATUS: " + response.status + "Done!";
+            $scope.status = "STATUS: " + "Done!";
             getCrimes();
             $scope.error = "";
 
@@ -66,11 +66,11 @@ angular
     $scope.deleteCrime = function(province, year, gender) {
         console.log("Crimen a borrar:" + province + year + gender);
         $http.delete(direccionapi + "/" + province + "/" + year + "/" + gender).then(function successCallback(response) {
-            $scope.status = "STATUS: " + response.status + "Done!";
+            $scope.status = "STATUS: " + "Done!";
             getCrimes();
         }, function errorCallback(response) {
             console.log(response.status);
-            $scope.status = response.status;
+           // $scope.status = response.status;
             $scope.error = "Ups, something was wrong. Try it later";
 
         });
@@ -81,11 +81,11 @@ angular
     $scope.deleteAll = function() {
     
         $http.delete(direccionapi).then(function successCallback(response) {
-            $scope.status = "STATUS: " + response.status + "Done!";
+            $scope.status = "STATUS: " + "Done!";
             getCrimes();
         }, function errorCallback(response) {
             console.log(response.status);
-            $scope.status = response.status;
+            //$scope.status = response.status;
             $scope.error = "Ups, something was wrong. Try it later";
         });
     
@@ -96,12 +96,12 @@ angular
     $scope.fillTable = function() {
 
             $http.get(direccionapi + "/loadInitialData").then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.status = "STATUS: " + "Done!";
                 getCrimes();
                 $scope.error = ""
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = response.status;
+                //$scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
 
@@ -113,12 +113,12 @@ angular
         $scope.paginacion = function() {
 
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.status = "STATUS: " +  "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = response.status;
+               // $scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
 
@@ -129,12 +129,12 @@ angular
         $scope.paginacion2 = function() {
             $scope.offset = $scope.offset + $scope.limit;
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.status = "STATUS: " +  "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = response.status;
+               // $scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
 
@@ -143,12 +143,12 @@ angular
         $scope.paginacion3 = function() {
             $scope.offset = $scope.offset - $scope.limit;
             $http.get(direccionapi + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.status = "STATUS: " +  "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = response.status;
+                //$scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
 
@@ -160,12 +160,12 @@ angular
          $scope.busqueda = function() {
             console.log(direccionapi + "?"+$scope.campo+"="+$scope.valor);
             $http.get(direccionapi + "?"+$scope.campo+"="+$scope.valor).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.status = "STATUS: " + "Done!";
                 $scope.crimes = response.data;
                 $scope.error = ""
             }, function errorCallback(response) {
                 console.log(response.status);
-                $scope.status = response.status;
+                //$scope.status = response.status;
                 $scope.error = "Ups, something was wrong. Try it later";
             });
 
