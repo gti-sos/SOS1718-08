@@ -11,6 +11,10 @@ angular
                 templateUrl: "studentList.html",
                 controller: "studentListCtrl"
             })
+            .when("/students-an/stadistics",{
+                templateUrl: "studentView.html",
+                controller: "studentViewCtrl"
+            })
             .when("/students-an/:province/:year/:gender",{
                 templateUrl: "studentEdit.html",
                 controller: "studentEditCtrl"
@@ -19,11 +23,7 @@ angular
                 templateUrl: "studentSearch.html",
                 controller: "studentSearchCtrl"
                 
-            }).when("/students-an/stadistics",{
-                templateUrl: "studentView.html",
-                controller: "studentViewCtrl"
             })
-            
              .when("/divorces-an",{
                 templateUrl: "divorceList.html",
                 controller: "divorceListCtrl"
