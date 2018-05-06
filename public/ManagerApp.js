@@ -39,5 +39,9 @@ angular
             .when("/crimes-an/:province/:year/:gender",{
                 templateUrl: "editCrimes.html",
                 controller: "EditCtrl"
+            })
+            .when("/crimesView",{
+                templateUrl: "crimesView.html",
+                controller: "ViewCtrl"
             });
     });
