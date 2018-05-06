@@ -73,10 +73,11 @@ angular
         }
 
         function getStudents() {
-            $http.get(api).then(function successCallback(response) {
+            $http.get(api+"?limit=10&offset=0").then(function successCallback(response) {
                 $scope.status = "Status: " + "All is ok";
                 $scope.students = response.data;
                 $scope.error = "";
+                $scope.offset = 0;
             }, function errorCallback(response) {
                 console.log(response.status);
                 $scope.status = "Status: " + "Something fails";
@@ -91,13 +92,20 @@ angular
         }
 
         getStudents();
-        
-                //Funcion para paginar búsquedas
-        
-        $scope.paginacion = function() {
 
-            $http.get(api + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
+        //Funcion para paginar búsquedas
+
+
+
+        $scope.next = function() {
+            if($scope.offset>$scope.students.length){
+                
+            }else{
+            $scope.offset = $scope.offset + 10;
+            }
+            console.log($scope.offset);
+            $http.get(api + "?limit=10" + "&offset=" + $scope.offset).then(function successCallback(response) {
+                $scope.status = "Status: All is ok";
                 $scope.students = response.data;
                 $scope.error = ""
             }, function errorCallback(response) {
@@ -107,13 +115,17 @@ angular
             });
 
         }
-        
-        
-        
-        $scope.paginacion2 = function() {
-            $scope.offset = $scope.offset + $scope.limit;
-            $http.get(api + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
+
+        $scope.back = function() {
+            if ($scope.offset < 10) {
+                $scope.offset = 0;
+            }
+            else {
+                $scope.offset = $scope.offset - 10;
+            }
+            console.log($scope.offset);
+            $http.get(api + "?limit=10" + "&offset=" + $scope.offset).then(function successCallback(response) {
+                $scope.status = "Status: All is ok";
                 $scope.students = response.data;
                 $scope.error = ""
             }, function errorCallback(response) {
@@ -122,28 +134,15 @@ angular
                 $scope.error = "Ups, something was wrong. Try it later";
             });
 
-        }
-        
-        $scope.paginacion3 = function() {
-            $scope.offset = $scope.offset - $scope.limit;
-            $http.get(api + "?limit="+$scope.limit+"&offset="+$scope.offset).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
-                $scope.students = response.data;
-                $scope.error = ""
-            }, function errorCallback(response) {
-                console.log(response.status);
-                $scope.status = response.status;
-                $scope.error = "Ups, something was wrong. Try it later";
-            });
 
         }
-        
-        
+
+
         //Función para realizar búsquedas
-        
-         $scope.busqueda = function() {
-            console.log(api + "?"+$scope.campo+"="+$scope.valor);
-            $http.get(api + "?"+$scope.campo+"="+$scope.valor).then(function successCallback(response) {
+
+        $scope.busqueda = function() {
+            console.log(api + "?" + $scope.campo + "=" + $scope.valor);
+            $http.get(api + "?" + $scope.campo + "=" + $scope.valor).then(function successCallback(response) {
                 $scope.status = "STATUS: " + response.status + "Done!";
                 $scope.students = response.data;
                 $scope.error = ""
@@ -154,7 +153,7 @@ angular
             });
 
         }
-        
+
 
 
 

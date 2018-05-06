@@ -42,11 +42,8 @@
             <td><a href="https://sos171808msd-sos171808msd.c9users.io/#!/students-an/search"><button class="button btn-primary">Search</button></a></td>
         </tr>
         <tr>
-            <td><input placeholder="limit" name="limit" class="form-control" type="number" ng-model="limit" ng-init="limit='10'" /></td>
-            <td><input placeholder="offset" name="offset" class="form-control" type="number" ng-model="offset" ng-init="offset='0'" /></td>
-            <td><button class="button btn-primary" ng-click="paginacion()">Paginar</button></td>
-            <td><button class="button btn-secondary" ng-click="paginacion3()">Anterior</button></td>
-            <td><button class="button btn-secondary" ng-click="paginacion2()">Siguiente</button></td>
+            <td><button class="button btn-secondary" ng-click="back()">Anterior</button></td>
+            <td><button class="button btn-secondary" ng-click="next()">Siguiente</button></td>
         </tr>
         <tr>
             <td>
@@ -69,5 +66,5 @@
 
 
 <hr/>
-<h8><i>{{status}}</i></h8>
-<h5><b>{{error}}</b></h5>
+<div class="alert alert-success"> {{status}} </div>
+<div class="alert alert-danger"> {{error}} </div>

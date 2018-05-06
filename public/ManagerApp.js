@@ -18,7 +18,12 @@ angular
             }).when("/students-an/search",{
                 templateUrl: "studentSearch.html",
                 controller: "studentSearchCtrl"
+                
+            }).when("/students-an/stadistics",{
+                templateUrl: "studentView.html",
+                controller: "studentViewCtrl"
             })
+            
              .when("/divorces-an",{
                 templateUrl: "divorceList.html",
                 controller: "divorceListCtrl"
