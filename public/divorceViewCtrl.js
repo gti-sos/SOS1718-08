@@ -1,6 +1,8 @@
 /*global angular*/
 /*global Highcharts*/
 /*global zingchart*/
+/*global google*/
+
 
 angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("View Ctrl initialized!");
@@ -8,6 +10,13 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
         
          $http.get("/api/v1/divorces-an").then(function(response){
              
+             
+           //////////////////////////////////////
+           //                                  //
+           //            Highcharts            //
+           //                                  //
+           //                                  //
+           //////////////////////////////////////
              
                Highcharts.chart('divorcegraphic', {
             chart: {
@@ -71,14 +80,21 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
         
         });
              
-           //Zingchart
+             
+        
+           //////////////////////////////////////
+           //                                  //
+           //            Zingchart             //
+           //                                  //
+           //                                  //
+           //////////////////////////////////////
            
            
            var myConfig = {
   type: "hbar",
   title: {
-    align: "left",
-    text: "Expenditures in Tech",
+    align: "center",
+    text: "Divorces, breaks and nullity for province in years",
     fontColor: "#555",
     fontSize: 30,
     fontFamily: "Roboto",
@@ -160,7 +176,7 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
  	scaleY: {
  	  label:{
  	    offsetY: 5,
- 	    text: "Investment in Billions (USD)",
+ 	    text: "",
  	    fontColor: "#777",
  	    fontSize: 14,
  	    fontFamily: "Roboto",
@@ -280,6 +296,59 @@ zingchart.render({
 	width: 1000 
 });
          
+              
+           //////////////////////////////////////
+           //                                  //
+           //          GOOGLE MAPS             //
+           //                                  //
+           //                                  //
+           //////////////////////////////////////
+             
+               $scope.searchWidget = function(){
+             google.charts.load('current', {'packages': ['geochart'],
+       // Note: you will need to get a mapsApiKey for your project.
+       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+       'mapsApiKey': 'AIzaSyBePfYoBL0sHvka8e0Y-cMhu9zWG-7TpIQ'
+     });
+             
+             google.charts.setOnLoadCallback(drawMarkersMap);
+             
+             
+
+      function drawMarkersMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['City',   'Divorce', 'Break'],
+        ['Sevilla', parseFloat(response.data.filter(d => d.province == "sevilla" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Cadiz', parseFloat(response.data.filter(d => d.province == "cadiz" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Almeria', parseFloat(response.data.filter(d => d.province == "almeria" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Cordoba', parseFloat(response.data.filter(d => d.province == "cordoba" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Granada', parseFloat(response.data.filter(d => d.province == "granada" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Huelva', parseFloat(response.data.filter(d => d.province == "huelva" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Jaen', parseFloat(response.data.filter(d => d.province == "jaen" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+        ['Malaga', parseFloat(response.data.filter(d => d.province == "malaga" && d.year == $scope.widget).map(divorce => { return divorce['divorce'] }))   ,  parseFloat(response.data.filter(divorce => divorce.province == "sevilla" && divorce.year == $scope.widget).map(d => { return d['break'] })) ],
+        
+       
+        
+        
+      ]);
+
+      var options = {
+        region: 'ES',
+        displayMode: 'markers',
+        colorAxis: {colors: ['red', 'blue']}
+      };
+
+      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    };
+               };
          });
         
    }]);
