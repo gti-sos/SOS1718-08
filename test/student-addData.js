@@ -27,9 +27,9 @@ describe('Add student', function() {
                 element(by.model('newStudent.province')).sendKeys(provincias[randomprov]);
                 element(by.model('newStudent.year')).sendKeys(Math.floor(Math.random() * (2019 - 1990)) + 1990);
                 element(by.model('newStudent.gender')).sendKeys(genero[randomgen]);
-                element(by.model('newStudent.popilliterate')).sendKeys((Math.random() * (100 - 10)) + 10);
+                element(by.model('newStudent.popilliterate')).sendKeys((Math.random() * (500 - 50)) + 50);
                 element(by.model('newStudent.pophigheducation')).sendKeys((Math.random() * (500 - 50)) + 50);
-                element(by.model('newStudent.popinuniversity')).sendKeys((Math.random() * (50000 - 5000)) + 5000);
+                element(by.model('newStudent.popinuniversity')).sendKeys((Math.random() * (5000 - 50)) + 50);
 
 
 
