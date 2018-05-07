@@ -4,6 +4,65 @@
      .controller("ViewCtrl", ["$scope", "$http", function($scope, $http) {
          console.log("View Controller initialited");
          
+         
+         $http.get("/api/v2/crimes-an/").then(function (response){
+               console.log("Datos: " + response.data);
+               Highcharts.chart('vista', {
+            
+                title: {
+                    text: 'Crímenes en Andalucía'
+                },
+            
+                subtitle: {
+                    text: 'Source: juntadeandalucia.es'
+                },
+            
+                yAxis: {
+                    title: {
+                        text: 'Valor'
+                    }
+                },
+                xAxis: {
+                    categories: response.data.map(function (d) {return d.year})
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+            
+                plotOptions: {
+                    series: {
+                        label: {
+                            connectorAllowed: true
+                        }
+                    }
+                },
+            
+                series: [{
+                    name: 'OneCrime',
+                    data: response.data.map(function(d) {return d.onecrime})
+                    }, 
+                    {
+                    name: 'TwoCrime',
+                    data: response.data.map(function(d) { return d.twocrime })
+                    }, 
+                    {
+                    name: 'ThreeCrime',
+                    data: response.data.map(function(d) { return d.threecrime })
+                    }, 
+                    {
+                    name: 'MoreThreeCrime',
+                    data: response.data.map(function (d) {return d.morethreecrime})
+                    }]
+            
+                
+            
+            });
+               
+            });
+         
+         
          //############################################################
          
          $scope.searchWidget = function(){
