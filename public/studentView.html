@@ -1,4 +1,47 @@
-<div id="container" style="min-width: 310px;
-	max-width: 800px;
-	height: 600px;
+<body>
+	<h1>Population's education</h1>
+
+	<div id="container" style="min-width: 310px;
+	max-width: 1900px;
+	height: 500px;
 	margin: 0 auto"></div>
+
+	<h1>High education and Illiterate in map</h1>
+	
+	<table>
+		<tr>
+	<td><input class="form-control" type="number" ng-model="widget.year" placeholder="Introduzca un año"/></td>
+	
+	 <td><select class="form-control" ng-model="widget.gender" ng-init="campo='both'">
+                                <option value="" disabled selected>Introduzca genero</option>
+                                <option value="male">male</option>
+                                <option value="female">female</option>
+                                <option value="both">both</option>
+                              </select></td>
+    <td><button class="button btn-primary" ng-click="searchWidget()">Search</button></td>
+    </tr>
+    </table>
+                          
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<div id="regions_div" style="width: 900px; height: 500px;"></div>
+	
+	<h1>High education, Illiterate and University in bar graph</h1>
+	<table>
+		<tr>
+	<td><input class="form-control" type="number" ng-model="widget1.year" placeholder="Introduzca un año"/></td>
+	
+	 <td><select class="form-control" ng-model="widget1.gender" ng-init="campo='both'">
+                                <option value="" disabled selected>Introduzca genero</option>
+                                <option value="male">male</option>
+                                <option value="female">female</option>
+                                <option value="both">both</option>
+                              </select></td>
+    <td><button class="button btn-primary" ng-click="searchWidget1()">Search</button></td>
+    </tr>
+    </table>
+    
+    <div id="myDiv"></div>
+	
+	
+</body>
