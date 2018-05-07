@@ -1,7 +1,7 @@
 /*global browser*/ /*global element*/ /*global expect*/ /*global by*/
 describe('Add student', function() {
     it('should add a new student', function() {
-        browser.get('https://sos171808msd-sos171808msd.c9users.io/#!/students-an');
+        browser.get('https://sos1718-08.herokuapp.com/#!/students-an');
         element(by.buttonText('Siguiente')).click().then(function() {
             element.all(by.repeater('student in students')).then(function(initialstudents) {
 

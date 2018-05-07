@@ -4,7 +4,7 @@ var path = require("path");
 describe('Data is loaded',function (){
     it('should show some students', function (){
         browser
-            .get('https://sos171808msd-sos171808msd.c9users.io/#!/students-an')
+            .get('https://sos1718-08.herokuapp.com/#!/students-an')
             .then(function (){
                 element
                     .all(by.repeater('student in students'))
