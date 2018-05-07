@@ -103,7 +103,7 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
   },
     subtitle: {
     offsetY: 15,
-    text: "R&D costs from 2013-2015",
+    text: "",
     fontFamily: "Roboto",
     fontSize: 16,
     align: 'left',
