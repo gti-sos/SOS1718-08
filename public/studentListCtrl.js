@@ -143,7 +143,7 @@ angular
         $scope.busqueda = function() {
             console.log(api + "?" + $scope.campo + "=" + $scope.valor);
             $http.get(api + "?" + $scope.campo + "=" + $scope.valor).then(function successCallback(response) {
-                $scope.status = "STATUS: " + response.status + "Done!";
+                $scope.status = "Status: All is ok";
                 $scope.students = response.data;
                 $scope.error = ""
             }, function errorCallback(response) {
