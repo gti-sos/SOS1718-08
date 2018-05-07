@@ -7,6 +7,9 @@ angular
             .when("/",{
                 templateUrl: "oldindex.html"
             })
+            .when("/analytics",{
+                templateUrl: "analytics.html"
+            })
             .when("/students-an",{
                 templateUrl: "studentList.html",
                 controller: "studentListCtrl"
