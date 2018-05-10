@@ -21,16 +21,27 @@ var initialCrimes = [
     { "province": "jaen", "year": 2007, "gender": "male", "onecrime": 0.91, "twocrime": 0.07, "threecrime": 0.02, "morethreecrime": 0.01 },
     { "province": "sevilla", "year": 2007, "gender": "male", "onecrime": 6.07, "twocrime": 1.05, "threecrime": 0.24, "morethreecrime": 0.15 },
     { "province": "huelva", "year": 2007, "gender": "male", "onecrime": 1.02, "twocrime": 0.10, "threecrime": 0.01, "morethreecrime": 0.02 },
+    { "province": "cordoba", "year": 2007, "gender": "male", "onecrime": 1.32, "twocrime": 0.11, "threecrime": 0.08, "morethreecrime": 0.01 },
+    { "province": "granada", "year": 2007, "gender": "male", "onecrime": 1.42, "twocrime": 0.12, "threecrime": 0.09, "morethreecrime": 0.03 },
     { "province": "almeria", "year": 2007, "gender": "female", "onecrime": 4.01, "twocrime": 0.88, "threecrime": 0.15, "morethreecrime": 0.10 },
     { "province": "malaga", "year": 2007, "gender": "female", "onecrime": 3.61, "twocrime": 1.10, "threecrime": 0.21, "morethreecrime": 0.10 },
     { "province": "cadiz", "year": 2007, "gender": "female", "onecrime": 2.44, "twocrime": 1.18, "threecrime": 0.41, "morethreecrime": 0.20 },
     { "province": "jaen", "year": 2007, "gender": "female", "onecrime": 0.31, "twocrime": 0.17, "threecrime": 0.02, "morethreecrime": 0.01 },
     { "province": "sevilla", "year": 2007, "gender": "female", "onecrime": 3.07, "twocrime": 1.01, "threecrime": 0.20, "morethreecrime": 0.05 },
     { "province": "huelva", "year": 2007, "gender": "female", "onecrime": 0.82, "twocrime": 0.15, "threecrime": 0.09, "morethreecrime": 0.01 },
+    { "province": "cordoba", "year": 2007, "gender": "female", "onecrime": 0.89, "twocrime": 0.09, "threecrime": 0.01, "morethreecrime": 0.00 },
+    { "province": "granada", "year": 2007, "gender": "female", "onecrime": 0.90, "twocrime": 0.10, "threecrime": 0.02, "morethreecrime": 0.01 },
     { "province": "sevilla", "year": 2008, "gender": "male", "onecrime": 3.17, "twocrime": 1.21, "threecrime": 0.23, "morethreecrime": 0.06 },
     { "province": "sevilla", "year": 2009, "gender": "male", "onecrime": 2.87, "twocrime": 1.51, "threecrime": 0.33, "morethreecrime": 0.17 },
     { "province": "sevilla", "year": 2010, "gender": "male", "onecrime": 4.42, "twocrime": 1.91, "threecrime": 0.63, "morethreecrime": 0.46 },
     { "province": "sevilla", "year": 2011, "gender": "male", "onecrime": 6.17, "twocrime": 1.31, "threecrime": 0.13, "morethreecrime": 0.00 },
+    { "province": "sevilla", "year": 2012, "gender": "male", "onecrime": 4.27, "twocrime": 1.20, "threecrime": 0.23, "morethreecrime": 0.07 },
+    { "province": "sevilla", "year": 2013, "gender": "male", "onecrime": 5.32, "twocrime": 1.41, "threecrime": 0.15, "morethreecrime": 0.02 },
+    { "province": "sevilla", "year": 2014, "gender": "male", "onecrime": 4.29, "twocrime": 2.11, "threecrime": 0.53, "morethreecrime": 0.21 },
+    { "province": "sevilla", "year": 2015, "gender": "male", "onecrime": 3.67, "twocrime": 1.81, "threecrime": 0.28, "morethreecrime": 0.08 },
+    { "province": "sevilla", "year": 2016, "gender": "male", "onecrime": 3.38, "twocrime": 0.82, "threecrime": 0.09, "morethreecrime": 0.00 },
+    { "province": "sevilla", "year": 2017, "gender": "male", "onecrime": 5.07, "twocrime": 1.91, "threecrime": 0.52, "morethreecrime": 0.28 },
+    { "province": "sevilla", "year": 2018, "gender": "male", "onecrime": 1.57, "twocrime": 0.31, "threecrime": 0.04, "morethreecrime": 0.01 }
     
 
 ];

@@ -22,7 +22,7 @@
                 }
             },
             xAxis: {
-                categories: response.data.map(function(d) { return d.year,d.province })
+                categories: response.data.map(function(d) {return d.year + " " + d.province + " " + d.gender})
             },
             tooltip: {
                 pointFormat: '{series.name} had stockpiled <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
