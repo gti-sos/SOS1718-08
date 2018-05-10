@@ -29,7 +29,7 @@
             },
             plotOptions: {
                 area: {
-                    pointStart: 1940,
+                    //pointStart: 1940,
                     marker: {
                         enabled: false,
                         symbol: 'circle',
