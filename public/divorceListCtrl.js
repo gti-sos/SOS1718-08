@@ -37,6 +37,7 @@ angular.module("ManagerApp").controller("divorceListCtrl", ["$scope", "$http", f
 
             $http.delete(api + "/" + province + "/" + year).then(function successCallback(response) {
                 $scope.status = "Status: " + response.status;
+                window.alert("Eliminado con exito");
                 getDivorces();
             }, function errorCallback(response) {
                 console.log(response.status);
@@ -51,6 +52,7 @@ angular.module("ManagerApp").controller("divorceListCtrl", ["$scope", "$http", f
 
             $http.delete(api).then(function successCallback(response) {
                 $scope.status = "Status: " + response.status;
+                window.alert("Eliminados con exito");
                 getDivorces();
             }, function errorCallback(response) {
                 console.log(response.status);
