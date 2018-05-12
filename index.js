@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var DataStore = require("nedb");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
+var cors = require("cors");
 
 var students = require("./studentsApi");
 var crimesAPI = require("./crimesAPI");
@@ -31,6 +32,7 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname + "/public")));
+app.use(cors());
 
 
 var initialCrimes = [
