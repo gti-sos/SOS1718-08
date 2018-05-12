@@ -4,6 +4,7 @@ var DataStore = require("nedb");
 var MongoClient = require("mongodb").MongoClient;
 var path = require("path");
 var cors = require("cors");
+var request = require('request');
 
 var students = require("./studentsApi");
 var crimesAPI = require("./crimesAPI");
