@@ -12,6 +12,7 @@ module.exports = crimesAPI;
 #MN -----> METODOS NO PERMITIDOS
 #PU -----> PUTS NO PERMITIDOS
 #PO -----> POST NO PERMITIDOS
+#PR -----> PROXY
 */
 
 var initialCrimes = [
@@ -83,6 +84,16 @@ crimesAPI.register = function(app, BASE_API_PATH, db) {
     });
     /*#MP------------------------------METODOS PERMITIDOS---------------------------*/
 
+
+    /*#PR-----------------------------------PROXY---------------------------------*/
+    var paths='/proxy/global-terrorism-data';
+    var apiServerHost = 'https://sos1718-07.herokuapp.com/api/v1/global-terrorism-data/';
+    
+    app.use(paths, function(req, res) {
+      var url = apiServerHost + req.url;
+      console.log('piped PROXY: '+req.baseUrl + req.url);
+      req.pipe(request(url)).pipe(res);
+    });
 
     /*#GE-----------------------------------GETTERS---------------------------------*/
 
