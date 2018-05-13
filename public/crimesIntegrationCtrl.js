@@ -34,7 +34,7 @@
                
                 Highcharts.chart('integracion', {
                     title: {
-                        text: 'Combination chart'
+                        text: 'Combination chart Terrorism-Crimes'
                     },
                     xAxis: {
                         categories: responseCrimes.data.map(function(d) {return d.year + " " + d.province + " " + d.gender})
@@ -118,7 +118,7 @@
                     },
                 
                     title: {
-                        text: 'Budget vs spending',
+                        text: 'Polar spider Crimes-Tvfees',
                         x: -80
                     },
                 
