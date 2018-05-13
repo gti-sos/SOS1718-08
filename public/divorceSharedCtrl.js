@@ -105,7 +105,7 @@ angular
                  
                  Highcharts.chart('container', {
     chart: {
-        type: 'colum'
+        type: 'column'
     },
     title: {
         text: 'Divorces and Graduation rate'
