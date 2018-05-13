@@ -11,7 +11,7 @@ angular
         var salaried=[];
         var divorce=[];
        
-        
+        // API G02 Employments
         
         $http.get("https://sos1718-02.herokuapp.com/api/v2/employments").then(function doneFilter(responseEmp){
              $http.get("https://sos1718-08.herokuapp.com/api/v1/divorces-an/").then(function doneFilter(responseDiv){
@@ -76,7 +76,7 @@ angular
 });
 });
         
-        
+        // API G04 Graduation rates
         
     
 }]);

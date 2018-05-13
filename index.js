@@ -38,6 +38,14 @@ app.use("/proxyJE", function(req, res) {
   req.pipe(request(url)).pipe(res);
 });
 
+//PROXY JOSE MANUEL JURADO ALVAREZ
+app.use("/proxyJA", function(req, res) {
+  var url = "https://sos1718-04.herokuapp.com" + req.url;
+  console.log('piped: '+req.baseUrl + req.url);
+  req.pipe(request(url)).pipe(res);
+});
+
+
 
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname + "/public")));
