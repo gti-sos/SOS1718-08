@@ -105,5 +105,72 @@
             
             
             
+            $http.get("/api/v2/crimes-an/").then(function (responseCrimes){
+               
+               $http.get("https://sos1718-01.herokuapp.com/api/v1/tvfees-stats").then(function (responseTvfees){
+                   
+
+                Highcharts.chart('integracion2', {
+                
+                    chart: {
+                        polar: true,
+                        type: 'line'
+                    },
+                
+                    title: {
+                        text: 'Budget vs spending',
+                        x: -80
+                    },
+                
+                    pane: {
+                        size: '80%'
+                    },
+                
+                    xAxis: {
+                        categories: responseCrimes.data.map(function(d) {return d.year + " " + d.province + " " + d.gender}),
+                        tickmarkPlacement: 'on',
+                        lineWidth: 0
+                    },
+                
+                    yAxis: {
+                        gridLineInterpolation: 'polygon',
+                        lineWidth: 0,
+                        min: 0
+                    },
+                
+                    tooltip: {
+                        shared: true,
+                        pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+                    },
+                
+                    legend: {
+                        align: 'right',
+                        verticalAlign: 'top',
+                        y: 70,
+                        layout: 'vertical'
+                    },
+                
+                    series: [{
+                        name: 'Capacity',
+                        data: responseTvfees.data.map(function(d) { return d["capacity"] }),
+                        pointPlacement: 'on'
+                    }, {
+                        name: 'Attotal',
+                        data: responseTvfees.data.map(function(d) { return d["attotal"] }),
+                        pointPlacement: 'on'
+                    }]
+                
+                });
+               
+               
+
+               
+            });
+               
+               
+            });
+            
+            
+            
 
             }]);
