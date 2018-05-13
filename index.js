@@ -31,6 +31,14 @@ var BASE_API_PATH_DIVORCES = "/api/v1/divorces-an";
 var app = express();
 
 
+//PROXY JOSE ENRIQUE PRIETO MENACHO
+app.use("/proxyJE", function(req, res) {
+  var url = "https://sos1718-07.herokuapp.com" + req.url;
+  console.log('piped: '+req.baseUrl + req.url);
+  req.pipe(request(url)).pipe(res);
+});
+
+
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname + "/public")));
 app.use(cors());
