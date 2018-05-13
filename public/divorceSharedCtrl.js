@@ -19,26 +19,17 @@ angular
                  
                  for (var i = 0; i < responseEmp.data.length; i++) {
                     dataPlace.push(responseEmp.data[i].country + " " + parseInt(responseEmp.data[i].year));
+                    salaried.push(responseEmp.data[i].totalsalaried);
+                    divorce.push("");
                 }
                 
                  for (var i = 0; i < responseDiv.data.length; i++) {
                     dataPlace.push(responseDiv.data[i].province + " " + parseInt(responseDiv.data[i].year));
-                }
-                
-                for (var i = 0; i < responseEmp.data.length; i++) {
-                    salaried.push(responseEmp.data[i].totalsalaried);
-                }
-                
-                 for (var i = 0; i < responseDiv.data.length; i++) {
                     salaried.push("");
-                }
-                
-                for (var i = 0; i < responseEmp.data.length; i++) {
-                    divorce.push("");
-                }
-                for (var i = 0; i < responseDiv.data.length; i++) {
                     divorce.push(responseDiv.data[i].divorce);
                 }
+                
+               
                 
                 
                 
