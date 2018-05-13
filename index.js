@@ -265,7 +265,8 @@ MongoClient.connect(mdbURL, { native_parser: true }, (err, mlabs) => {
         console.error("Error accesing DB");
         process.exit(1);
     }
-
+gcloud config set project [YOUR_PROJECT_ID]
+g
     if (results.length == 0) {
         console.log("Empty DB");
         db.insert(students-an);
