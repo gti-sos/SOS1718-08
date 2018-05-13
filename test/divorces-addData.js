@@ -16,9 +16,11 @@ describe('Add divorces', function(){
                 element(by.model('newDivorce.nullity')).sendKeys(1);
                 
                 element(by.buttonText('Add')).click().then(function(){
-                   element.all(by.repeater('a in divorces')).then(function(divorces){
-                       expect(divorces.length).toEqual(initialDivorces.length+1);
+                    element(by.buttonText('Next')).click().then(function() {
+                        element.all(by.repeater('a in divorces')).then(function(divorces){
+                            expect(divorces.length).toEqual(initialDivorces.length+1);
                    }); 
+                    }); 
                 });
             });
       });

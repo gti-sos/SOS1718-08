@@ -40,6 +40,10 @@ angular
                 templateUrl: "divorceView.html",
                 controller: "divorceViewtCtrl"
             })
+            .when("/divorces-an/shared",{
+                templateUrl: "divorceShared.html",
+                controller: "divorceSharedCtrl"
+            })
             .when("/crimes-an",{
                 templateUrl: "listCrimes.html",
                 controller: "ListCtrl"

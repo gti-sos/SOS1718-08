@@ -3,12 +3,6 @@ var fs = require("fs");
 var path = require("path");
 
 describe('data is loaded', function() {
-
-    it('should be the same number', function() {
-        //código del test (comprueba que 1=1)
-        expect(1).toEqual(1);
-    });
-
     it('should show some divorces', function() {
         browser
             .get('https://sos1718-08.herokuapp.com/#!/divorces-an')
