@@ -63,5 +63,9 @@ angular
             .when("/crimesView3",{
                 templateUrl: "crimesView3.html",
                 controller: "ViewCtrl3"
+            })
+            .when("/crimesIntegration",{
+                templateUrl: "crimesIntegration.html",
+                controller: "ViewCtrl4"
             });
     });
