@@ -38,9 +38,16 @@ app.use("/proxyJE", function(req, res) {
   req.pipe(request(url)).pipe(res);
 });
 
-//PROXY JOSE MANUEL JURADO ALVAREZ
+//PROXY JOSE MANUEL JURADO ALVAREZ                            
 app.use("/proxyJA", function(req, res) {
   var url = "https://sos1718-04.herokuapp.com" + req.url;
+  console.log('piped: '+req.baseUrl + req.url);
+  req.pipe(request(url)).pipe(res);
+});
+
+//PROXY MARIA SOLIS DIAGO                          
+app.use("/proxyMS", function(req, res) {
+  var url = "https://sos1718-09.herokuapp.com" + req.url;
   console.log('piped: '+req.baseUrl + req.url);
   req.pipe(request(url)).pipe(res);
 });

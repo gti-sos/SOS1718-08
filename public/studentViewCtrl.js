@@ -315,9 +315,7 @@ angular
                     chart.draw(data, options);
                 }
             };
-            
-            
-                /*PLOTLY*/
+            /*PLOTLY*/
 
 
             $scope.searchWidget1 = function() {

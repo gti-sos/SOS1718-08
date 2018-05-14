@@ -26,6 +26,10 @@ angular
                 templateUrl: "studentSearch.html",
                 controller: "studentSearchCtrl"
                 
+            }).when("/students-an/partner",{
+                templateUrl: "studentPartner.html",
+                controller: "studentPartnerCtrl"
+                
             })
              .when("/divorces-an",{
                 templateUrl: "divorceList.html",
