@@ -46,7 +46,7 @@ divorcesAPI.register = function(app,db) {
 
 ];
     //Para acceder a esto, es necesario poner el token en "Authorization en postman"
-    app.post(BASE_API_PATH+"/divorces-an/datos", verifyToken, (req, res) => {
+    app.post(BASE_API_PATH+"/divorces-an/verify", verifyToken, (req, res) => {
         console.log("JWT");
         jwt.verify(req.token, 'secretkey', (err, authData) => {
             if (err) {
