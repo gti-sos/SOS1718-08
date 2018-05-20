@@ -2,6 +2,9 @@ var divorcesAPI = {};
 module.exports = divorcesAPI;
 var BASE_API_PATH = "/api/v1";
 var MongoClient = require('mongodb').MongoClient;
+var jwt = require('jsonwebtoken');
+
+
 
 var urljurado="mongodb://jurado:jurado@ds231549.mlab.com:31549/sos1718-jmja-sandbox"
 
@@ -42,6 +45,61 @@ divorcesAPI.register = function(app,db) {
 
 
 ];
+    //Para acceder a esto, es necesario poner el token en "Authorization en postman"
+    app.post(BASE_API_PATH+"/divorces-an/datos", verifyToken, (req, res) => {
+        console.log("JWT");
+        jwt.verify(req.token, 'secretkey', (err, authData) => {
+            if (err) {
+                res.sendStatus(403);
+            }
+            else {
+                res.json({
+                    authData,
+                    initialDivorces
+                    
+                });
+            }
+        });
+    });
+
+       app.get(BASE_API_PATH+"/divorces-an/token", (req, res) => {
+           console.log("Token");
+        const user = {
+            
+            id: 1,
+            username: 'jurado',
+            email: 'jurado910@gmail.com'
+            
+        }
+
+        jwt.sign({ user }, 'secretkey', { expiresIn: '30000s' }, (err, token) => {
+            res.json({
+                token
+            });
+        });
+    });
+    
+    
+    // Verify Token
+    function verifyToken(req, res, next) {
+        // Get auth header value
+        const bearerHeader = req.headers['authorization'];
+        // Check if bearer is undefined
+        if (typeof bearerHeader !== 'undefined') {
+            // Split at the space
+            
+            // Set the token
+            req.token = bearerHeader;
+            // Next middleware
+            next();
+        }
+        else {
+            // Forbidden
+            res.sendStatus(403);
+        }
+
+    }
+    
 
     console.log("Registering router for divorces API...")
     app.get(BASE_API_PATH + "/divorces-an/docs", (req, res) => {
@@ -446,6 +504,11 @@ divorcesAPI.register = function(app,db) {
     
     
     //
+    
+     //Autentificacion
+    
+
+ 
     
     
     

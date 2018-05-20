@@ -15,7 +15,6 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
            //                                  //
            //            Highcharts            //
            //                                  //
-           //                                  //
            //////////////////////////////////////
              
                Highcharts.chart('divorcegraphic', {
@@ -85,7 +84,6 @@ angular.module("ManagerApp").controller("divorceViewtCtrl", ["$scope", "$http", 
            //////////////////////////////////////
            //                                  //
            //            Zingchart             //
-           //                                  //
            //                                  //
            //////////////////////////////////////
            
@@ -300,7 +298,6 @@ zingchart.render({
            //////////////////////////////////////
            //                                  //
            //          GOOGLE MAPS             //
-           //                                  //
            //                                  //
            //////////////////////////////////////
              

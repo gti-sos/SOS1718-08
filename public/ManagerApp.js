@@ -48,6 +48,8 @@ angular
                 templateUrl: "divorceShared.html",
                 controller: "divorceSharedCtrl"
             })
+            
+            
             .when("/crimes-an",{
                 templateUrl: "listCrimes.html",
                 controller: "ListCtrl"

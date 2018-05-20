@@ -6,6 +6,7 @@ var path = require("path");
 var cors = require("cors");
 var request = require('request');
 
+
 var students = require("./studentsApi");
 var crimesAPI = require("./crimesAPI");
 var divorcesAPI = require("./divorcesAPI");
@@ -222,6 +223,18 @@ MongoClient.connect(juradomdbURL, { native_parser: true }, (err, mlabs) => {
         console.log("Server NOT READY:" + e);
     });
 });
+
+
+
+//Auth0//
+
+
+
+
+
+
+
+
 
 //###########################################################################################################################//
 
