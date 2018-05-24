@@ -1,5 +1,6 @@
 var fs = require("fs");
 var path = require("path");
+var config = require("./config");
 
 describe('data is loaded', function() {
 
@@ -10,7 +11,7 @@ describe('data is loaded', function() {
 
     it('should show some crimes', function() {
         browser
-            .get('https://sos1718-08.herokuapp.com/#!/crimes-an')
+            .get(config.getAppUrl())
             .then(function() {
                 element
                     .all(by.repeater('a in crimes'))

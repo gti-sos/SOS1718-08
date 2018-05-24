@@ -4,7 +4,9 @@
   "description": "módulo del grupo 8",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretest": "test/runPhantomjs.sh",
+    "test": "protractor test/config.js",
+    "posttest": "killall phantomjs",
     "start": "node index.js"
   },
   "repository": {

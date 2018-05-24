@@ -1,8 +1,12 @@
+var config = require("./config");
+
+
+
 describe('Add crime', function(){
    
    it('should add a new crime', function(){
       browser
-      .get('https://sos1718-08.herokuapp.com/#!/crimes-an')
+      .get(config.getAppUrl())
       .then(function(){
           element
             .all(by.repeater('a in crimes'))
