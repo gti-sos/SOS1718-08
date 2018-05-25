@@ -9,6 +9,8 @@ var secret_id="";
 var farm="";
 var server="";
 var urlfinal="";
+var urlimg="";
+var imagenes=[];
 
 
 angular
@@ -28,27 +30,22 @@ angular
        
        $http.get(FlickrURL+$scope.widget+"&format=json&nojsoncallback=1").then(function(response){
            console.log("get")
-           photos=response.data;
+           photos=response.data.photos.photo;
            console.log(photos)
-            for (var j = 0; j < photos.length; j++) {
-                this.photo=photos.photo[j]
-                
-                for (var i = 0; i < this.photo.length; i++) {
-               
-                    
-                id=photo.id[i]
-                farm=photo.farm[i]
-                secret_id=photo.secret[i]
-                server=photo.server[i]
+            for (var i = 0; i < photos.length; i++) {
+                id=photos[i].id
+                console.log(id)
+                farm=photos[i].farm
+                secret_id=photos[i].secret
+                server=photos[i].server
                 urlfinal="http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret_id+".jpg"
-                return "<img src="+urlfinal+">"
-                    
-                
+                urlimg="<img src="+urlfinal+">"
+                imagenes.push(urlimg);
                
-                
             }
-                
-            }
+            console.log(imagenes)
+        
+            return imagenes
            
            
         });
