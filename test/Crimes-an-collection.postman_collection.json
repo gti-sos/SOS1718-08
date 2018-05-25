@@ -1,0 +1,450 @@
+{
+	"info": {
+		"_postman_id": "c5c9f473-531f-42c3-9a68-7172131dfefc",
+		"name": "Crimes-an-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "972c8dc7-5a92-4053-98c1-e61a39704014",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201 tras el loadInitialData\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"granada\",\n    \"year\": 2008,\n    \"gender\": \"both\",\n    \"onecrime\": 0.81,\n    \"twocrime\": 1.48,\n    \"threecrime\": 0.35,\n    \"morethreecrime\": 0.15\n}"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/loadInitialData"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bccb7b3a-7866-43eb-ae2d-e113f8894c75",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"comprobación de número de objetos inicial\"] = (jsonData.length == 6);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "07db394d-51d4-4fff-9cf7-863d4ce52870",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a7b99ea-3e86-4906-9848-220a593cb587",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"comprobación de número de objetos inicial\"] = (jsonData.length == 7);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an/barcelona",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea26ef75-ed5b-43c8-b377-6c6f7f495f31",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"provin\": \"barcelona\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/barcelona/2015/male"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an/barcelona Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea26ef75-ed5b-43c8-b377-6c6f7f495f31",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"barna\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/barcelona/2015/male"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an/barcelona",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54de19db-c1d8-4ecd-a2d7-04bbb4134b9c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"almeria\",\n        \"year\": 2007,\n        \"gender\": \"male\",\n        \"onecrime\": 5.01,\n        \"twocrime\": 8.48,\n        \"threecrime\": 0.35,\n        \"morethreecrime\": 0.15\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/almeria/2007/male"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b5cde6c4-3db3-4cf3-b4b4-0869ddc536c7",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2005,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an/province",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ca75079e-ff92-45b9-b2c7-2f3674c64a21",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 409 post a un recurso existente\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"almeria\",\n        \"year\": 2007,\n        \"gender\": \"male\",\n        \"onecrime\": 7.01,\n        \"twocrime\": 1.48,\n        \"threecrime\": 0.35,\n        \"morethreecrime\": 0.15\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an/province Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9cb05db7-a228-4375-9f80-af18137e295a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"almeria\",\n        \"year\": 2007,\n        \"gender\": \"male\",\n        \"onecrime\": 7.01,\n        \"twocrime\": 1.48,\n        \"threecrime\": 0.35,\n        \"morethreecrime\": 0.15\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/province"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an/barcelona",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "894b7adc-925e-4363-b02a-9615d08c6aa0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"almeria\",\n        \"year\": 2007,\n        \"gender\": \"male\",\n        \"onecrime\": 5.01,\n        \"twocrime\": 5.48,\n        \"threecrime\": 0.35,\n        \"morethreecrime\": 0.15\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/barcelona/2015/male"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ebcc37c1-4ef7-495f-a018-06b1d6736a50",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"comprobación de número de objetos inicial\"] = (jsonData.length == 6);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2005,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4542ac9a-bbb2-4a68-ab1a-2a02689c2a78",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404 not found\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2005,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/almeria/2050/male"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171808jepm-sandbox-sos171808jepm.c9users.io/api/v1/crimes-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f25a825b-002a-4dde-b3f8-5a02c8c97d25",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2005,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+			},
+			"response": []
+		}
+	]
+}
