@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "7f7f7222-cb6b-47cc-9c2a-903ee57682c8",
+		"name": "divorces-an",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15f79475-bdbe-46d8-9f55-a2fcafdeff3b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"province\" : \"sevilla\", \"year\" : 2016 , \"divorce\":2222 , \"break\": 18, \"nullity\":  2}"
+				},
+				"url": {
+					"raw": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an",
+					"protocol": "https",
+					"host": [
+						"sos171803jmja-sandbox-sos171803jmja",
+						"c9users",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"divorces-an"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15f79475-bdbe-46d8-9f55-a2fcafdeff3b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"province\" : \"sevilla\", \"year\" : 2016 , \"divorce\":2222 , \"break\": 18, \"nullity\":  2}"
+				},
+				"url": {
+					"raw": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an",
+					"protocol": "https",
+					"host": [
+						"sos171803jmja-sandbox-sos171803jmja",
+						"c9users",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"divorces-an"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15f79475-bdbe-46d8-9f55-a2fcafdeff3b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"province\" : \"sevilla\", \"year\" : 2016 , \"divorce\":2222 , \"break\": 18, \"nullity\":  2}"
+				},
+				"url": {
+					"raw": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an",
+					"protocol": "https",
+					"host": [
+						"sos171803jmja-sandbox-sos171803jmja",
+						"c9users",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"divorces-an"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15f79475-bdbe-46d8-9f55-a2fcafdeff3b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"province\" : \"sevilla\", \"year\" : 2016 , \"divorce\":2222 , \"break\": 18, \"nullity\":  2}"
+				},
+				"url": {
+					"raw": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an",
+					"protocol": "https",
+					"host": [
+						"sos171803jmja-sandbox-sos171803jmja",
+						"c9users",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"divorces-an"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an/sevilla",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 2016,\n    \"divorce\": 3,\n    \"break\": 3,\n    \"nullity\": 1\n}"
+				},
+				"url": {
+					"raw": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an/sevilla",
+					"protocol": "https",
+					"host": [
+						"sos171803jmja-sandbox-sos171803jmja",
+						"c9users",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"divorces-an",
+						"sevilla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an/sevilla",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 2016,\n    \"divorce\": 3,\n    \"break\": 3,\n    \"nullity\": 1\n}"
+				},
+				"url": {
+					"raw": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an/sevilla",
+					"protocol": "https",
+					"host": [
+						"sos171803jmja-sandbox-sos171803jmja",
+						"c9users",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"divorces-an",
+						"sevilla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an/sevilla",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 2016,\n    \"divorce\": 3,\n    \"break\": 3,\n    \"nullity\": 1\n}"
+				},
+				"url": {
+					"raw": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an/sevilla",
+					"protocol": "https",
+					"host": [
+						"sos171803jmja-sandbox-sos171803jmja",
+						"c9users",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"divorces-an",
+						"sevilla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an/sevilla",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"province\": \"sevilla\",\n    \"year\": 2016,\n    \"divorce\": 3,\n    \"break\": 3,\n    \"nullity\": 1\n}"
+				},
+				"url": {
+					"raw": "https://sos171803jmja-sandbox-sos171803jmja.c9users.io/api/v1/divorces-an/sevilla",
+					"protocol": "https",
+					"host": [
+						"sos171803jmja-sandbox-sos171803jmja",
+						"c9users",
+						"io"
+					],
+					"path": [
+						"api",
+						"v1",
+						"divorces-an",
+						"sevilla"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
