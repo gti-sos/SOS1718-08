@@ -1,7 +1,7 @@
 /* global angular */
 /*global Highcharts*/
 
-var FlickrURL="https://api.flickr.com/services/rest/?method=flickr.tags.getClusterPhotos&api_key=61f4f111be70d75000aec635d1c7f5ed&tag="
+var FlickrURL="https://api.flickr.com/services/rest/?method=flickr.tags.getClusterPhotos&api_key=f10b03e8ec48d7871cebf065e6153645&tag="
 var photos;
 var photo;
 var id="";
@@ -39,18 +39,30 @@ angular
                 secret_id=photos[i].secret
                 server=photos[i].server
                 urlfinal="http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret_id+".jpg"
-                urlimg="<img src="+urlfinal+">"
-                imagenes.push(urlimg);
+                urlimg=urlfinal
+                imagenes=urlfinal;
+                $scope.imagenes=imagenes;
+                
                
             }
+            
             console.log(imagenes)
+           
+            
         
-            return imagenes
+            
            
            
         });
+        
+        
+        
      
         }
         
         
+       
+        
     }]);
+    
+    
