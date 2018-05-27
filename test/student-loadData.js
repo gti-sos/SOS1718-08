@@ -1,10 +1,11 @@
 var fs = require("fs");
 var path = require("path");
+var config = require("./config");
 
 describe('Data is loaded',function (){
     it('should show some students', function (){
         browser
-            .get('https://sos1718-08.herokuapp.com/#!/students-an')
+            .get(config.getAppUrl())
             .then(function (){
                 element
                     .all(by.repeater('student in students'))

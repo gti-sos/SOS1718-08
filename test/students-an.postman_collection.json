@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "8d605aad-be3c-4e9b-a95a-507e45e778d2",
+		"name": "Students-final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "65c11bd0-7d91-486a-93f8-11ebb35a2425",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Debe de haber 18 elementos\"] = (jsonData.length === 18);",
+							"tests[\"El código es 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Se ha creado el recurso correctamente\"] = responseCode.code === 201;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"province\":\"sevilla\",\"year\":\"2010\",\"gender\":\"male\",\"popilliterate\":\"16.32\",\"pophigheducation\":\"182.9\",\"popinuniversity\":\"30493\"}"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2008/male",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Debe de haber 1 elemento\"] = (jsonData.length === 1);",
+							"tests[\"El código es 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"province\":\"sevilla\",\"year\":\"2010\",\"gender\":\"male\",\"pop-illiterate\":\"16.32\",\"pop-high-education\":\"182.9\",\"pop-in-university\":\"30493\"}"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2008/male"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2008/male",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"El código es 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/granada/2011/female"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2008/male",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Post erróneo a un recurso concreto\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"province\":\"sevilla\",\"year\":\"2008\",\"gender\":\"male\",\"popilliterate\":\"16.32\",\"pophigheducation\":\"182.9\",\"popinuniversity\":\"30493\"}"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2008/male"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Put erróneo a una colección\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"province\":\"sevilla\",\"year\":\"2008\",\"gender\":\"male\",\"popilliterate\":\"16.32\",\"pophigheducation\":\"182.9\",\"popinuniversity\":\"30493\"}"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"El código es 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Se ha añadido la colección\"] = responseCode.code === 201 ||responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/loadInitialData"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"El recurso ya existe\"] = responseCode.code === 409;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"province\": \"cadiz\", \"year\": 2008, \"gender\": \"female\", \"popilliterate\": \"28.70\", \"pophigheducation\": \"97.06\", \"popinuniversity\": \"10766\" }"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2016/male",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Elemento no encontrado\"] = responseCode.code === 404;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"province\":\"sevilla\",\"year\":\"2010\",\"gender\":\"male\",\"pop-illiterate\":\"16.32\",\"pop-high-education\":\"182.9\",\"pop-in-university\":\"30493\"}"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2016/male"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2008/both",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"El id es incorrecto\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"provinca\": \"sevilla\",\r\n    \"year\": \"2008\",\r\n    \"gender\": \"both\",\r\n    \"popilliterate\": \"56.53\",\r\n    \"pophigheducation\": \"378.78\",\r\n    \"popinuniversity\": \"76325\"\r\n}"
+				},
+				"url": "https://sos1718-08.herokuapp.com/api/v2/students-an/sevilla/2008/both"
+			},
+			"response": []
+		}
+	]
+}

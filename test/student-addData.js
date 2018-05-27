@@ -1,7 +1,12 @@
 /*global browser*/ /*global element*/ /*global expect*/ /*global by*/
+
+
+var config = require("./config");
+var path = require("path");
+
 describe('Add student', function() {
     it('should add a new student', function() {
-        browser.get('https://sos1718-08.herokuapp.com/#!/students-an');
+        browser.get(config.getAppUrl());
         element(by.buttonText('Siguiente')).click().then(function() {
             element.all(by.repeater('student in students')).then(function(initialstudents) {
 
