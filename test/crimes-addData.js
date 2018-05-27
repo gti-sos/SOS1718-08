@@ -1,5 +1,5 @@
 var config = require("./config");
-
+var path = require("path");
 
 
 describe('Add crime', function(){
