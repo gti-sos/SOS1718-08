@@ -34,7 +34,7 @@
 					"mode": "raw",
 					"raw": "{\n    \"province\": \"granada\",\n    \"year\": 2008,\n    \"gender\": \"both\",\n    \"onecrime\": 0.81,\n    \"twocrime\": 1.48,\n    \"threecrime\": 0.35,\n    \"morethreecrime\": 0.15\n}"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/loadInitialData"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an/loadInitialData"
 			},
 			"response": []
 		},
@@ -60,7 +60,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an"
 			},
 			"response": []
 		},
@@ -92,7 +92,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an"
 			},
 			"response": []
 		},
@@ -123,7 +123,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an"
 			},
 			"response": []
 		},
@@ -155,7 +155,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"provin\": \"barcelona\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/barcelona/2015/male"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an/barcelona/2015/male"
 			},
 			"response": []
 		},
@@ -187,7 +187,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"barna\",\n        \"year\": 2015,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/barcelona/2015/male"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an/barcelona/2015/male"
 			},
 			"response": []
 		},
@@ -219,7 +219,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"almeria\",\n        \"year\": 2007,\n        \"gender\": \"male\",\n        \"onecrime\": 5.01,\n        \"twocrime\": 8.48,\n        \"threecrime\": 0.35,\n        \"morethreecrime\": 0.15\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/almeria/2007/male"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an/almeria/2007/male"
 			},
 			"response": []
 		},
@@ -251,7 +251,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2005,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an"
 			},
 			"response": []
 		},
@@ -283,7 +283,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"almeria\",\n        \"year\": 2007,\n        \"gender\": \"male\",\n        \"onecrime\": 7.01,\n        \"twocrime\": 1.48,\n        \"threecrime\": 0.35,\n        \"morethreecrime\": 0.15\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an/"
 			},
 			"response": []
 		},
@@ -315,7 +315,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"almeria\",\n        \"year\": 2007,\n        \"gender\": \"male\",\n        \"onecrime\": 7.01,\n        \"twocrime\": 1.48,\n        \"threecrime\": 0.35,\n        \"morethreecrime\": 0.15\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/province"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an/province"
 			},
 			"response": []
 		},
@@ -347,7 +347,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"almeria\",\n        \"year\": 2007,\n        \"gender\": \"male\",\n        \"onecrime\": 5.01,\n        \"twocrime\": 5.48,\n        \"threecrime\": 0.35,\n        \"morethreecrime\": 0.15\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/barcelona/2015/male"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an/barcelona/2015/male"
 			},
 			"response": []
 		},
@@ -378,7 +378,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2005,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an"
 			},
 			"response": []
 		},
@@ -410,7 +410,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2005,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an/almeria/2050/male"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an/almeria/2050/male"
 			},
 			"response": []
 		},
@@ -442,7 +442,7 @@
 					"mode": "raw",
 					"raw": "{\n        \"province\": \"barcelona\",\n        \"year\": 2005,\n        \"gender\": \"male\",\n        \"onecrime\": 7.21,\n        \"twocrime\": 1.38,\n        \"threecrime\": 0.33,\n        \"morethreecrime\": 0.12\n    }"
 				},
-				"url": "https://sos1718-08.herokuapp.com/api/v1/crimes-an"
+				"url": "https://sos1718-08.herokuapp.com/api/v2/crimes-an"
 			},
 			"response": []
 		}
