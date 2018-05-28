@@ -3,6 +3,40 @@
 var apikey="f10b03e8ec48d7871cebf065e6153645"
 
 var FlickrURL="https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key="+apikey+"&user_id=&tags="
+
+
+
+
+angular
+    .module("ManagerApp")
+    .controller("divorceExterna", ["$scope","$http", function($scope,$http) {
+        console.log("Flickr Api Ctrl initialized!");
+        console.log("entrando")
+        
+       
+       
+      ///////////////////////
+      //                   //
+      //      Flickr       //
+      //                   //
+      ///////////////////////
+       
+       
+        $scope.searchImage = function(){
+        //province=$scope.widget;
+        console.log("pulso")
+       
+       
+       
+       
+       $http.get("https://sos1718-08.herokuapp.com/api/v1/divorces-an/"+$scope.widget).then(function(responsedivorces){
+        $http.get(FlickrURL+$scope.widget+"&format=json&nojsoncallback=1").then(function(response){
+            
+var div=[]
+var br=[]
+var nullity=[]
+var dataPlace=[]
+var divorcios;
 var photos;
 var photo;
 var id="";
@@ -20,36 +54,12 @@ var imagen2="";
 
 var imagenfinal1='';
 
-
-
-angular
-    .module("ManagerApp")
-    .controller("divorceExterna", ["$scope","$http", function($scope,$http) {
-        console.log("Flickr Api Ctrl initialized!");
-        console.log("entrando")
-        
-       
-        $scope.searchImage = function(){
-        //province=$scope.widget;
-        console.log("pulso")
-       
-       
-       
-       
-       $http.get("https://sos1718-08.herokuapp.com/api/v1/divorces-an/"+$scope.widget).then(function(responsedivorces){
-        $http.get(FlickrURL+$scope.widget+"&format=json&nojsoncallback=1").then(function(response){
-            
-            var div=[]
-var br=[]
-var nullity=[]
-var dataPlace=[]
-var divorcios;
            
            photos=response.data.photos.photo;
            $scope.fotos=photos
            
            console.log(photos)
-            for (var i = 0; i < photos.length; i++) {
+            for (var i = 0; i < 8; i++) {
                 id=photos[i].id
                 farm=photos[i].farm
                 secret_id=photos[i].secret
@@ -226,8 +236,9 @@ zingchart.render({
         
      
         }
-        
-        
+        ////////////////
+        // FIN FLICKR //
+        ////////////////
        
         
     }]);
