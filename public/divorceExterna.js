@@ -11,11 +11,6 @@ var farm="";
 var server="";
 var urlfinal="";
 
-var id2="";
-var secret_id2="";
-var farm2="";
-var server2="";
-var urlfinal2="";
 
 
 var urlimg="";
@@ -55,19 +50,12 @@ angular
                 secret_id=photos[i].secret
                 server=photos[i].server
                 urlfinal="http://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret_id+".jpg"
+                
                 urlimg=urlfinal
-                imagenes=urlfinal;
+                imagenes.push(urlimg);
                 $scope.imagenes=imagenes;
-                
-                id2=photos[2].id
-                farm2=photos[2].farm
-                secret_id2=photos[2].secret
-                server2=photos[2].server
-                urlfinal2="http://farm"+farm2+".staticflickr.com/"+server2+"/"+id2+"_"+secret_id2+".jpg"
-                $scope.imagen2=urlfinal2
-                
-                
-               
+                imagen1="http://farm"+photos[i].farm+".staticflickr.com/"+photos[i].server+"/"+photos[i].id+"_"+photos[i].secret+".jpg"
+                $scope.imagen1=imagen1;
             }
             
             console.log(imagenes)

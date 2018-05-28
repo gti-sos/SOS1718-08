@@ -7,12 +7,15 @@
     <br/>
     <button class="button btn-primary" ng-click="searchImage()">Search</button>
    <br>
-    <img src="{{imagenes}}">
-    <img src="{{imagen2}}">
+    <body ng-app="ManagerApp" ng-controller="divorceExterna">
+    <img src="{{imagen1}}">
+    
+    
+    <element ng-repeat="x in imagenes"><img src="{{x}}"></element>
    
    <img src="http://farm{{imagenes.farm}}.staticflickr.com/{{imgenes.server}}/{{imagenes.id}}_{{imagenes.secret_id}}.jpg">
    
-     
+    
 
   
    
