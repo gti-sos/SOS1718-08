@@ -102,7 +102,7 @@ var myConfig =
             "border-radius-bottom-right": 10,
             "border-radius-bottom-left": 10,
             "title": {
-                "text": "PRODUCTION REPORT",
+                "text": "Divorces data province",
                 "align": "right",
                 "background-color": "#f7f7f7 #e3e3e9",
                 "font-family": "Passion One",
@@ -239,6 +239,8 @@ zingchart.render({
         ////////////////
         // FIN FLICKR //
         ////////////////
+        
+        
        
         
     }]);
