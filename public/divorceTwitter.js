@@ -12,13 +12,15 @@ angular
         //  TWITTER   //
         //            //
         ////////////////
-        //NO FUNCIONA //
-         $scope.searchTweet = function(){
-             var tweet;
         
-         $http.get("https://publish.twitter.com/oembed?url=https://twitter.com/"+$scope.widget+"?").then(function(response){
+         $scope.searchTweet = function(){
+             var tweet=[];
+        
+         $http.get("proxyTwitter/oembed?url=https://twitter.com/"+$scope.widget).then(function(response){
              
-             tweet= response.data.html
+             tweet.push(response.data.html)
+             console.log(tweet)
+             $scope.tweet=tweet
              
              
         
@@ -26,8 +28,12 @@ angular
          
          }
          
+         
+         
+         
+         
          twttr.widgets.createTweet(
-  '20',
+  '1001640191214440449',
   document.getElementById('container'),
   {
     theme: 'ligth'
@@ -35,7 +41,7 @@ angular
 );
 
 twttr.widgets.load(
-  document.getElementById("container2")
+  document.getElementById("twit")
 );
         
         
