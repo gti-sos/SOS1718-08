@@ -48,9 +48,13 @@ angular
                 templateUrl: "divorceShared.html",
                 controller: "divorceSharedCtrl"
             })
-            .when("/divorces-an/externa",{
+            .when("/divorces-an/flickr",{
                 templateUrl: "divorceExterna.html",
                 controller: "divorceExterna"
+            })
+            .when("/divorces-an/twitter",{
+                templateUrl: "divorceTwitter.html",
+                controller: "divorceTwitter"
             })
             
             
