@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module("ManagerApp")
-    .controller("divorceTwitter", ["$scope","$http", function($scope,$http) {
+    .controller("divorceTwitter", ["$scope","$http",'$sce', function($scope,$http,$sce) {
         console.log("Twitter Api Ctrl initialized!");
         console.log("entrando")
         
@@ -12,19 +12,37 @@ angular
         //  TWITTER   //
         //            //
         ////////////////
+             twttr.widgets.load(
+  document.getElementById('show')
+);
+        
+            var tweet="";
+            var tweetfinal="";
+            var cuenta=""
         
          $scope.searchTweet = function(){
-             var tweet=[];
+           
         
          $http.get("proxyTwitter/oembed?url=https://twitter.com/"+$scope.widget).then(function(response){
-             
-             tweet.push(response.data.html)
+             tweet=(response.data.html)
              console.log(tweet)
-             $scope.tweet=tweet
+             tweetfinal= "<twitter-timeline>"+tweet+"<twitter-timeline>"
+             $scope.tweetfinal=$sce.trustAsHtml(tweetfinal);
+             $scope.tweet=$sce.trustAsHtml(tweet);
+             
+           
              
              
         
          });
+     /*   $scope.renderHtml = function (htmlCode) {
+            return $sce.trustAsHtml(htmlCode);
+        };*/
+
+
+
+         
+    
          
          }
          
@@ -40,9 +58,7 @@ angular
   }
 );
 
-twttr.widgets.load(
-  document.getElementById("twit")
-);
+
         
         
     }]);

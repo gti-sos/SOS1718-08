@@ -1,22 +1,89 @@
-</html>
-<h1>Twitter</h1>
+
+<html>
+     <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Heroic Features - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/heroic-features.css" rel="stylesheet">
+
+  </head>
+    
+    <body>
+        
+                    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Welcome to our API</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    
+    <center>
+        </br>
+<img src="http://brooklynpride.org/wp-content/uploads/2017/01/twitter-logo-button.png"></img>
+</br>
 <!-- TWITTER -->
+</br>
+<div id="container"></div>
+</br>
   <input class="form-control" ng-model="widget" placeholder="Introduzca una cuenta de twitter" />
     <br/>
     <button class="button btn-primary" ng-click="searchTweet()">Search</button>
    <br>
     <body ng-app="ManagerApp" ng-controller="divorceTwitter">
     <hr/>
-<div id="container"></div>
+
 <body ng-app="ManagerApp" ng-controller="divorceExterna">
+    
  
- 
- <element ng-repeat="x in tweet"><div id="twit">{{x}}</div> </element>   
+  
+  <twitter-timeline> 
+   <div ng-bind-html="tweet" ></div> </twitter-timeline>
+    
+   <div ng-bind-html="tweet" ></div> 
+   </body>
 
-
-
-
-</body>
 
  <!-- FIN TWITTER -->
+ 
+ </center>
+ 
+ 
+ 
+ <br>
+ <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; My API 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+   </html>
  <html>
