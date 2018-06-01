@@ -1,7 +1,7 @@
  /* global angular */
  angular
-     .module("CrimesManagerApp")
-     .controller("ViewCtrlFinal", ["$scope", "$http", function($scope, $http) {
+     .module("ManagerApp")
+     .controller("ViewCtrlSoundCloud", ["$scope", "$http", function($scope, $http) {
          console.log("View Controller initialited");
 
        $scope.playMusic = function(){
@@ -89,7 +89,7 @@
         });
         */
         
-         $http.get("/api/v1/crimes-an/").then(function(response) {
+         $http.get("/api/v2/crimes-an/").then(function(response) {
              SC.get('/tracks', { q: "Bad Bunny"}, function(tracks) {
                 
                 var cri = Number(response.data.filter(function(m) {return m.year==2017}).filter(function(g) {return g.province=="sevilla"}).filter(function(h) {return h.gender=="male"}).map(function(d) { return d.onecrime })[0]);
