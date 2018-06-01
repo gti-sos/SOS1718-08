@@ -85,5 +85,9 @@ angular
             .when("/crimesExternaNasa",{
                 templateUrl: "crimesExternaNasa.html",
                 controller: "ViewCtrlNasa"
+            })
+            .when("/crimesExternaSoundCloud",{
+                templateUrl: "crimesExternaSoundCloud.html",
+                controller: "ViewCtrlSoundCloud"
             });
     });
