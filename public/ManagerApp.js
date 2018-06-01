@@ -81,5 +81,9 @@ angular
             .when("/crimesIntegration",{
                 templateUrl: "crimesIntegration.html",
                 controller: "ViewCtrl4"
+            })
+            .when("/crimesExternaNasa",{
+                templateUrl: "crimesExternaNasa.html",
+                controller: "ViewCtrlNasa"
             });
     });
