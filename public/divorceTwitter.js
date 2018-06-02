@@ -18,17 +18,19 @@ angular
         
             var tweet="";
             var tweetfinal="";
-            var cuenta=""
+            var url=""
         
          $scope.searchTweet = function(){
            
         
          $http.get("proxyTwitter/oembed?url=https://twitter.com/"+$scope.widget).then(function(response){
              tweet=(response.data.html)
+             url=response.data.url
              console.log(tweet)
              tweetfinal= "<twitter-timeline>"+tweet+"<twitter-timeline>"
              $scope.tweetfinal=$sce.trustAsHtml(tweetfinal);
              $scope.tweet=$sce.trustAsHtml(tweet);
+             $scope.url=$sce.trustAsHtml(url);
              
            
              

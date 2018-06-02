@@ -56,6 +56,10 @@ angular
                 templateUrl: "divorceTwitter.html",
                 controller: "divorceTwitter"
             })
+            .when("/divorces-an/ine",{
+                templateUrl: "divorceINE.html",
+                controller: "divorceINE"
+            })
             
             
             .when("/crimes-an",{
