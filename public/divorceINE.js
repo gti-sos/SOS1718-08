@@ -46,7 +46,46 @@ angular
              
              
              
-             
+             var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "funnel",
+  "theme": "light",
+  "dataProvider": [ {
+    "title": "Divorces Sevilla",
+    "value": 300
+  }, {
+    "title": "Divorces Cadiz",
+    "value": 123
+  }, {
+    "title": "Requested price list",
+    "value": 98
+  }, {
+    "title": "Contaced for more info",
+    "value": 72
+  }, {
+    "title": "Purchased",
+    "value": 35
+  }, {
+    "title": "Contacted for support",
+    "value": 15
+  }, {
+    "title": "Purchased additional products",
+    "value": 8
+  } ],
+  "balloon": {
+    "fixedPosition": true
+  },
+  "valueField": "value",
+  "titleField": "title",
+  "marginRight": 240,
+  "marginLeft": 50,
+  "startX": -500,
+  "rotate": true,
+  "labelPosition": "right",
+  "balloonText": "[[title]]: [[value]]n[[description]]",
+  "export": {
+    "enabled": true
+  }
+} );
              
             });
          });
