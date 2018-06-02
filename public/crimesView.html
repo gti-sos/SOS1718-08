@@ -38,23 +38,45 @@
         </div>
     </nav>
 
+
+<!--AQUI EMPIEZA EL HTML, LO DEMÁS ES PLANTILLA-->
+
+
+
+
  <h1>Crimes View </h1>
  
+ <!--HIGHCHAR-->
  
  <div id='contenedor'></div>
- 
- 
  <div>
-     
-<input class="form-control" type="number" ng-model="widget" placeholder="Introduzca un año" ng-init="widget='2007'"/>
-<br/>
-<button class="button btn-primary" ng-click="searchWidget()">Search</button>
-     
+    <input class="form-control" type="number" ng-model="widget" placeholder="Introduzca un año" ng-init="widget='2007'"/>
+    <br/>
+    <button class="button btn-primary" ng-click="searchWidget()">Search</button>
  </div>
-  
  <div id='malecontainer'></div>
- 
  <div id='femalecontainer'></div>
+ <!------------------->
+ 
+ <!--GOOGLE CHAR-->
+ <h1>Crimes View Google </h1>
+ <div>
+     <input class="form-control" type="number" ng-model="widgetGoogle" placeholder="Introduzca un año" ng-init="widgetGoogle='2007'"/>
+    <br/>
+    <button class="button btn-primary" ng-click="searchWidgetGoogle()">Search</button>
+ </div>
+<div id="regions_div"></div>
+  <!------------------->
+  
+  
+  <!--VIS CHAR-->
+ <h1>Vis </h1>
+ <h2>Evolución tasa de hombres que cometen un crimen en Sevilla</h2>
+ <div id="mynetwork"></div>
+   <!------------------->
+ 
+ 
+ <!--AQUI TERMINA EL HTML, LO DEMAS ES PLANTILLA-->
  
  </body>
 
