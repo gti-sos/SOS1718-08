@@ -74,14 +74,6 @@ angular
                 templateUrl: "crimesView.html",
                 controller: "ViewCtrl"
             })
-            .when("/crimesView2",{
-                templateUrl: "crimesView2.html",
-                controller: "ViewCtrl2"
-            })
-            .when("/crimesView3",{
-                templateUrl: "crimesView3.html",
-                controller: "ViewCtrl3"
-            })
             .when("/crimesIntegration",{
                 templateUrl: "crimesIntegration.html",
                 controller: "ViewCtrl4"
