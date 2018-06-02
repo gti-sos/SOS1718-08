@@ -38,6 +38,12 @@ app.use("/proxyJE", function(req, res) {
   console.log('piped: '+req.baseUrl + req.url);
   req.pipe(request(url)).pipe(res);
 });
+//PROXY JOSE ENRIQUE PRIETO MENACHO POKEMON
+app.use("/proxyPokemons", function(req, res) {
+  var url = "http://pokeapi.co" + req.url;
+  console.log('piped: '+req.baseUrl + req.url);
+  req.pipe(request(url)).pipe(res);
+});
 
 //PROXY JOSE MANUEL JURADO ALVAREZ                            
 app.use("/proxyJA", function(req, res) {

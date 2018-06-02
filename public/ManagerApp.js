@@ -85,5 +85,9 @@ angular
             .when("/crimesExternaSoundCloud",{
                 templateUrl: "crimesExternaSoundCloud.html",
                 controller: "ViewCtrlSoundCloud"
+            })
+            .when("/crimesExternaPokemon",{
+                templateUrl: "crimesExternaPokemon.html",
+                controller: "ViewCtrlPokemon"
             });
     });
