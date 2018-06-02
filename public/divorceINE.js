@@ -21,11 +21,13 @@ angular
         var nombre=[]
         var valor=[]
         var year=[]
+        var andalucia
          $http.get("https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/6529?nult=1").then(function(responseine){
               $http.get("/api/v1/divorces-an").then(function(responsediv){
                   
               ine=responseine.data
               div=responsediv.data
+              andalucia=responseine.data[1].Data[0].Valor
               
               for (var i = 0; i < responseine.data.length; i++) {
                   nombre.push(responseine.data[i].Nombre)
@@ -49,27 +51,33 @@ angular
              var chart = AmCharts.makeChart( "chartdiv", {
   "type": "funnel",
   "theme": "light",
-  "dataProvider": [ {
+  "dataProvider": [  {
+    "title": "Marriage Andalucia",
+    "value": andalucia
+  },{
     "title": "Divorces Sevilla",
-    "value": 300
+    "value":  parseFloat(responsediv.data.filter(d => d.province == "sevilla" && d.year == 2016).map(divorce => { return divorce['divorce'] })) 
   }, {
     "title": "Divorces Cadiz",
-    "value": 123
+    "value": parseFloat(responsediv.data.filter(d => d.province == "cadiz" && d.year == 2016).map(divorce => { return divorce['divorce'] }))
   }, {
-    "title": "Requested price list",
-    "value": 98
+    "title": "Divorces Almeria",
+    "value": parseFloat(responsediv.data.filter(d => d.province == "almeria" && d.year == 2016).map(divorce => { return divorce['divorce'] }))
   }, {
-    "title": "Contaced for more info",
-    "value": 72
+    "title": "Divorces Cordoba",
+    "value": parseFloat(responsediv.data.filter(d => d.province == "cordoba" && d.year == 2016).map(divorce => { return divorce['divorce'] }))
   }, {
-    "title": "Purchased",
-    "value": 35
+    "title": "Divorces Granada",
+    "value": parseFloat(responsediv.data.filter(d => d.province == "granada" && d.year == 2016).map(divorce => { return divorce['divorce'] }))
   }, {
-    "title": "Contacted for support",
-    "value": 15
+    "title": "Divorces Huelva",
+    "value": parseFloat(responsediv.data.filter(d => d.province == "huelva" && d.year == 2016).map(divorce => { return divorce['divorce'] }))
   }, {
-    "title": "Purchased additional products",
-    "value": 8
+    "title": "Divorces Jaen",
+    "value": parseFloat(responsediv.data.filter(d => d.province == "jaen" && d.year == 2016).map(divorce => { return divorce['divorce'] }))
+  }, {
+    "title": "Divorces Malaga",
+    "value": parseFloat(responsediv.data.filter(d => d.province == "malaga" && d.year == 2016).map(divorce => { return divorce['divorce'] }))
   } ],
   "balloon": {
     "fixedPosition": true
