@@ -40,7 +40,7 @@ angular
                 controller: "divorceEditCtrl"
             })
             
-            .when("/divorces-an/stadistics",{
+            .when("/divorces-an/view",{
                 templateUrl: "divorceView.html",
                 controller: "divorceViewtCtrl"
             })
