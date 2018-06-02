@@ -1,0 +1,29 @@
+<html>
+    <h1>INE</h1>
+     <body ng-app="ManagerApp" ng-controller="divorceTwitter">
+    
+    
+    <table class="table table-bordered table-striped sortable" id=divtab>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Año</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            <tr ng-repeat="ine in ine">
+            <td>{{ine.Nombre}}</a></td>
+            <td>{{ine.Data[0].Anyo}}</td>
+            <td>{{ine.Data[0].Valor}}</td>
+           
+               </tr>
+        
+            
+       
+       
+    </tbody>
+</table>
+    </body>
+</html>
