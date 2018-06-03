@@ -18,6 +18,10 @@ angular
                 templateUrl: "integrations.html"
             })
             
+            .when("/students-an/robot",{
+                templateUrl: "studentRobot.html",
+                controller: "studentRobotCtrl"
+            })
             .when("/students-an/bike",{
                 templateUrl: "studentBike.html",
                 controller: "studentBikeCtrl"
