@@ -67,7 +67,7 @@
                     }, {
                         type: 'spline',
                         name: 'Numero de divorcios',
-                        data: responseDivorces.data.map(function(d) { return d.divorces }),
+                        data: responseDivorces.data.map(function(divorce){return divorce["divorce"]}),
                         marker: {
                             lineWidth: 2,
                             lineColor: Highcharts.getOptions().colors[3],
