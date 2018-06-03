@@ -32,8 +32,8 @@
                    suma3 = suma3 + cosaaa[i];
                }
                console.log("Suma crimen3: "+suma3);
-               console.loc("Divorcios: " + responseDivorces.data.map(function(d) { return d.divorces }));
-               console.loc("Divorcios: " + responseDivorces.data.map(function(d) { return Number(d.divorces)/1000 }));
+               console.log("Divorcios: " + responseDivorces.data.map(function(d) { return d.divorces }));
+               console.log("Divorcios: " + responseDivorces.data.map(function(d) { return Number(d.divorces)/1000 }));
                
                 Highcharts.chart('integracion', {
                     title: {
