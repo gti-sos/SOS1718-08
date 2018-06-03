@@ -17,13 +17,17 @@ angular
             .when("/integrations",{
                 templateUrl: "integrations.html"
             })
-            .when("/students-an/imgur",{
-                templateUrl: "studentOauthImgur.html",
-            })
             
             .when("/students-an/bike",{
                 templateUrl: "studentBike.html",
                 controller: "studentBikeCtrl"
+            })
+            .when("/students-an/meme",{
+                templateUrl: "studentMeme.html",
+                controller: "studentMemeCtrl"
+            })
+            .when("/students-an/imgur",{
+                templateUrl: "studentOauthImgur.html",
             })
             .when("/students-an/imgurlogin",{
                 templateUrl: "studentImgur.html",
