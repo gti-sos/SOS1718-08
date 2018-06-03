@@ -8,7 +8,14 @@ angular
                 templateUrl: "oldindex.html"
             })
             .when("/analytics",{
-                templateUrl: "analytics.html"
+                templateUrl: "analytics.html",
+                controller: "ViewCtrlFull"
+            })
+            .when("/about",{
+                templateUrl: "about.html"
+            })
+            .when("/integrations",{
+                templateUrl: "integrations.html"
             })
             .when("/students-an/imgur",{
                 templateUrl: "studentOauthImgur.html",
@@ -77,6 +84,10 @@ angular
             .when("/divorces-an/ine",{
                 templateUrl: "divorceINE.html",
                 controller: "divorceINE"
+            })
+            .when("/divorces-an/eurostats",{
+                templateUrl: "divorceEuro.html",
+                controller: "divorceEuro"
             })
             
             
