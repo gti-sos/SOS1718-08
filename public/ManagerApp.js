@@ -10,6 +10,22 @@ angular
             .when("/analytics",{
                 templateUrl: "analytics.html"
             })
+            .when("/students-an/imgur",{
+                templateUrl: "studentOauthImgur.html",
+            })
+            
+            .when("/students-an/bike",{
+                templateUrl: "studentBike.html",
+                controller: "studentBikeCtrl"
+            })
+            .when("/students-an/imgurlogin",{
+                templateUrl: "studentImgur.html",
+                controller: "studentImgurCtrl"
+            })
+            .when("/students-an/imgursecure",{
+                templateUrl: "studentImgurSecure.html",
+                controller: "studentImgurSecureCtrl"
+            })
             .when("/students-an",{
                 templateUrl: "studentList.html",
                 controller: "studentListCtrl"
@@ -31,6 +47,8 @@ angular
                 controller: "studentPartnerCtrl"
                 
             })
+            
+            
              .when("/divorces-an",{
                 templateUrl: "divorceList.html",
                 controller: "divorceListCtrl"
@@ -89,5 +107,6 @@ angular
             .when("/crimesExternaPokemon",{
                 templateUrl: "crimesExternaPokemon.html",
                 controller: "ViewCtrlPokemon"
-            });
+            })
+            ;
     });
