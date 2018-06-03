@@ -64,14 +64,7 @@
                     //pointBorderWidth: [222,222,222,222,222,222,222,222],
                     //pointHitRadius: [222,222,222,222,222,222,222,222]
                     },
-                    options: {
-                        scales: {
-                            xAxes: [{
-                                type: 'linear',
-                                position: 'bottom'
-                            }]
-                        }
-                    }
+                    
                 });
                 
                 
