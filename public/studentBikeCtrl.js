@@ -27,7 +27,6 @@ angular
                 var provincesBi = ["Huelva", "Sevilla", "Cordoba", "Jaen", "Cadiz", "Malaga", "Granada", "Almeria"];
                 for (var i=0; i<a.length; i++){
                     //console.log(a[i].location.latitude);
-                    
                     for(var x=0;x<provinces.length;x++){
                         //console.log(b.filter(student => student.province==provinces[x]));
                         if(a[i].location.city==provincesBi[x] && b.filter(student => student.province==provinces[x])){
