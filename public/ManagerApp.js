@@ -8,7 +8,8 @@ angular
                 templateUrl: "oldindex.html"
             })
             .when("/analytics",{
-                templateUrl: "analytics.html"
+                templateUrl: "analytics.html",
+                controller: "ViewCtrlFull"
             })
             .when("/about",{
                 templateUrl: "about.html"
