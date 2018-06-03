@@ -19,7 +19,7 @@ angular
 
 
         $http.get(proxy).then(function(responseMe) {
-            $http.get(proxy2 + "?fields=location").then(function(responsePa) {
+            $http.get(api2 + "?fields=location").then(function(responsePa) {
                 var a = responsePa.data.networks;
                 var b = responseMe.data;
                 var datau=[]
