@@ -66,6 +66,13 @@ app.use("/proxyMS", function(req, res) {
   req.pipe(request(url)).pipe(res);
 });
 
+//PROXY MARIA SOLIS DIAGO BICIS                       
+app.use("/proxyBI", function(req, res) {
+  var url = "http://api.citybik.es/v2/" + req.url;
+  console.log('piped: '+req.baseUrl + req.url);
+  req.pipe(request(url)).pipe(res);
+});
+
 
 
 app.use(bodyParser.json());
@@ -137,19 +144,16 @@ MongoClient.connect(mdbcrimes,{native_parser:true},(err,mlabs)=>{
 
 //--------------------Jurado--------------------//
 /*
-
 app.get(BASE_API_PATH + "/divorces-an", (req, res) => {
     console.log(Date() + " - GET / divorces-an");
     res.send(divorces);
 });
-
 app.post(BASE_API_PATH + "/divorces-an", (req, res) => {
     console.log(Date() + " - POST / divorces-an");
     var divorce = req.body;
     divorces.push(divorce);
     res.sendStatus(201);
 });
-
 //n
 app.put(BASE_API_PATH + "/divorces-an", (req, res) => {
     console.log(Date() + " - PUT / divorces-an");
@@ -161,12 +165,10 @@ app.delete(BASE_API_PATH + "/divorces-an", (req, res) => {
     divorces = [];
     res.sendStatus(200);
 });
-
 //n a recurso concreto
 app.get(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
     var province = req.params.province;
     console.log(Date() + " - GET /divorces-an/" + province);
-
     res.send(divorces.filter((c) => {
         return (c.province == province);
     })[0]); //
@@ -175,11 +177,9 @@ app.get(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
 app.delete(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
     var province = req.params.province;
     console.log(Date() + " - DELETE /divorces-an/" + province);
-
     divorces = divorces.filter((c) => {
         return (c.province != province);
     });
-
     res.sendStatus(200);
 });
 //n a recurso concreto
@@ -193,13 +193,11 @@ app.put(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
     var province = req.params.province;
     var divorce = req.body;
     console.log(Date() + " - PUT /divorces-an/" + province);
-
     if (province != divorce.province) {
         res.sendStatus(409);
         console.warn(Date() + " -Hacking attempt!");
         return;
     }
-
     divorces = divorces.map((c) => {
         if (c.province == divorces.province)
             return divorces;
@@ -207,11 +205,7 @@ app.put(BASE_API_PATH + "/divorces-an/:province", (req, res) => {
             return c;
     });
     res.sendStatus(200);
-
-
 });
-
-
 */
 
 
@@ -254,10 +248,8 @@ MongoClient.connect(juradomdbURL, { native_parser: true }, (err, mlabs) => {
 //--------------------Maria--------------------//
 
 /*var db = new DataStore({
-
     filename: dbFileName,
     autoload: true
-
 });
 */
 MongoClient.connect(mdbURL, { native_parser: true }, (err, mlabs) => {
@@ -285,9 +277,7 @@ MongoClient.connect(mdbURL, { native_parser: true }, (err, mlabs) => {
     if (students.length == 0) {
         console.log("Empty DB");
         db.insert(initialStudents);
-
     }
-
     else {
         console.log("DB initialized with " + students.length + " students")
     }

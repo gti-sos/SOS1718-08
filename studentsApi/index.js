@@ -2,6 +2,7 @@ var studentsApi = {}
 var BASE_API_PATH = "/api/v2";
 module.exports = studentsApi;
 
+
 /*INDICE PARA EL BUSCADOR. PULSAR CTR + F Y ESCRIBIR EL DIMINUTIVO A LA IZQUIERDA*/
 /* 
 #I1 -----> INSERCION INICIAL
@@ -40,9 +41,23 @@ var initialStudents = [{ "province": "sevilla", "year": 2008, "gender": "male", 
 
 ];
 
-/*#I2------------------------------INICIALIZADOR---------------------------*/
 
+
+
+console.log("a");
 studentsApi.register = function(app, db) {
+
+console.log("b");
+
+/*#---OAUTH---
+    app.get(BASE_API_PATH + "/students-an/imgur", (req, res) => {
+        console.log("get");
+        var token = req.params.access_token;
+        console.log(token);
+        res.sendStatus(200);
+        
+    });*/
+/*#I2------------------------------INICIALIZADOR---------------------------*/
 
     console.log("Registering router for students API...")
     app.get(BASE_API_PATH + "/students-an/docs", (req, res) => {
@@ -51,13 +66,16 @@ studentsApi.register = function(app, db) {
 
     //CARGAR DATOS INICIALES
     app.get(BASE_API_PATH + "/students-an/loadInitialData", (req, res) => {
+console.log("c");
         db.find({}, (err, students) => {
+            console.log("d");
             if (err) {
                 console.error(" Error accesing DB");
                 process.exit(1);
                 return;
             }
             db.find({}).toArray((err, students) => {
+                console.log("e");
                 if (students.length == 0) {
                     console.log("Empty DB");
                     db.insert(initialStudents);
@@ -68,10 +86,13 @@ studentsApi.register = function(app, db) {
                     console.log("DB initialized with " + students.length + " students");
                     res.sendStatus(200);
                 }
-
+console.log("f");
             });
+            console.log("g");
         });
+console.log("h");
     });
+console.log("i");
     /*#MP------------------------------METODOS PERMITIDOS---------------------------*/
 
 
