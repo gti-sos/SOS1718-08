@@ -67,6 +67,10 @@ angular
                 templateUrl: "divorceINE.html",
                 controller: "divorceINE"
             })
+            .when("/divorces-an/eurostats",{
+                templateUrl: "divorceEuro.html",
+                controller: "divorceEuro"
+            })
             
             
             .when("/crimes-an",{

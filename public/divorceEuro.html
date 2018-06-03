@@ -1,0 +1,25 @@
+<htm>
+    
+     <body ng-app="ManagerApp" ng-controller="divorceEuro">
+         <h1>Eurostats</h1>
+         
+         <!-- Eurostat-->
+    <table class="table table-bordered table-striped sortable" id=divtab>
+    <thead>
+        <tr>
+            <th>Pais</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr ng-repeat="pais in pais">
+            <td>{{pais}}</a></td>
+             
+            <td> {{valor[$index]}}</td>
+           </tr>
+    </tbody>
+</table>
+    </body>
+    
+    <!-- FIN Eurostat-->
+</htm>
