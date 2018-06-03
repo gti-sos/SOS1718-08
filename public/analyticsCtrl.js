@@ -32,7 +32,8 @@
                    suma3 = suma3 + cosaaa[i];
                }
                console.log("Suma crimen3: "+suma3);
-               
+               console.loc("Divorcios: " + responseDivorces.data.map(function(d) { return d.divorces }));
+               console.loc("Divorcios: " + responseDivorces.data.map(function(d) { return Number(d.divorces)/1000 }));
                
                 Highcharts.chart('integracion', {
                     title: {
@@ -65,7 +66,7 @@
                         data: responseStudents.data.map(function(d) { return d.popinuniversity })
                     }, {
                         type: 'spline',
-                        name: 'Numero de fallecidos',
+                        name: 'Numero de divorcios',
                         data: responseDivorces.data.map(function(d) { return d.divorces }),
                         marker: {
                             lineWidth: 2,
