@@ -118,6 +118,8 @@ angular
             .when("/crimesExternaPokemon",{
                 templateUrl: "crimesExternaPokemon.html",
                 controller: "ViewCtrlPokemon"
-            })
-            ;
+            }).when("/crimesExternaStarWars",{
+                templateUrl: "crimesExternaStarWars.html",
+                controller: "ViewCtrlStarWars"
+            });
     });
